@@ -17,11 +17,11 @@
             <Button fx:id="editData" text="Izmeni podatke" onAction="#loadEditData" />
          </children>
          <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="240.0" />
          </padding>
       </HBox>
    </children>
    <padding>
-      <Insets bottom="150.0" left="20.0" right="20.0" top="70.0" />
+      <Insets bottom="150.0" left="20.0" right="20.0" top="20.0" />
    </padding>
 </VBox>
