@@ -20,6 +20,7 @@ public class App extends Application
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setTitle("Majmuneee");
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
     }
 
