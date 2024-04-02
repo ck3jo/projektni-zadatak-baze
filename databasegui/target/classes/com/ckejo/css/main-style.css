@@ -1,0 +1,20 @@
+#mainLabel
+{
+    -fx-font-size: 72px;
+    -fx-alignment: top-center;
+}
+
+#addData
+{
+    -fx-font-size: 36px;
+}
+
+#editData
+{
+    -fx-font-size: 36px;
+}
+
+#deleteData
+{
+    -fx-font-size: 36px;
+}

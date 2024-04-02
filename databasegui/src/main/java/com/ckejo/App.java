@@ -10,15 +10,14 @@ import java.io.IOException;
 
 public class App extends Application 
 {
-
     private static Scene scene;
 
     @SuppressWarnings("exports")
     @Override
     public void start(Stage stage) throws IOException 
     {
-        scene = new Scene(loadFXML("primary"), 640, 480);
-        stage.setTitle("Majmuneee");
+        scene = new Scene(loadFXML("main"), 640, 480);
+        stage.setTitle("Aplikacija za evidentiranje profesionalnih CS2 utakmica");
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
