@@ -10,4 +10,21 @@ public class AddController
     {
         MainWindow.setRoot("main-window");
     }
+
+    /*
+    public void openAddForm(String table) throws IOException
+    {
+        switch (table)
+        {
+            case "matches":
+            case "matches":
+            case "matches":
+            case "matches":
+            case "matches":
+            case "matches":
+            case "matches":
+            case "matches":
+        }
+    }
+    */
 }

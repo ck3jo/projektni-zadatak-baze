@@ -29,7 +29,7 @@
 
     <Region VBox.vgrow="ALWAYS" />
 
-    <Button alignment="BOTTOM_CENTER" onAction="#exitApp" styleClass="exit-button">
+    <Button alignment="BOTTOM_CENTER" text="Izađite iz programa" textAlignment="RIGHT" onAction="#exitApp" styleClass="exit-button">
         <graphic>
             <FontIcon iconLiteral="mdsal-exit_to_app:24:BLACK"/>
         </graphic>

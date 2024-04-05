@@ -9,7 +9,16 @@
 
 .exit-button
 {
-    -fx-effect: dropshadow(three-pass-box, black, 5, 0.175, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0.1, 0, 0);
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.table-button
+{
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0.1, 0, 0);
+    -fx-font-size: 24px;
+    -fx-pref-width: 750px;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
 }
