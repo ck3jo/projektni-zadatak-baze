@@ -1,0 +1,15 @@
+#main-window
+{
+    -fx-background-image: url("https://cdn2.steamgriddb.com/hero/2b1ec9ecde3fcfa54840a68765c3f647.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: auto;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
+.exit-button
+{
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0.175, 0, 0);
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
