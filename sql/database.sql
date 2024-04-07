@@ -37,7 +37,7 @@ CREATE TABLE Igraci (
     Prezime VARCHAR(45) NOT NULL,
     DatumRodjenja DATE,
     IDTima INT,
-    Rejting DECIMAL(1, 2),
+    Rejting DECIMAL(10, 2),
     MajorTrofeji INT,
     MajorMVP INT,
     FOREIGN KEY (IDTima) REFERENCES Timovi(IDTima)
@@ -76,7 +76,7 @@ CREATE TABLE Treneri (
     Nadimak VARCHAR(45) NOT NULL,
     Prezime VARCHAR(45) NOT NULL,
     IDTima INT,
-    FOREIGN KEY (IDTima) REFERENCES Timovi(ID)
+    FOREIGN KEY (IDTima) REFERENCES Timovi(IDTima)
     ON UPDATE CASCADE
     ON DELETE NO ACTION
 ) ENGINE=INNODB;
@@ -96,7 +96,7 @@ CREATE TABLE Autori (
     Ime VARCHAR(45) NOT NULL,
     Nadimak VARCHAR(45) NOT NULL,
     Prezime VARCHAR(45) NOT NULL
-) ENGINEE=INNODB;
+) ENGINE=INNODB;
 
 INSERT INTO Igraci(Ime, Nadimak, Prezime, DatumRodjenja, IDTima, Rejting, MajorTrofeji, MajorMVP) VALUES
 (),
