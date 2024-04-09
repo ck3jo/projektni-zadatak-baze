@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import org.kordamp.ikonli.javafx.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import java.net.URL?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.Region?>
 
-<VBox id="main-window"
-      spacing="20.0"
+<VBox spacing="20.0"
       xmlns="http://javafx.com/javafx/17.0.2-ea"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="project.databasegui.DeleteController">
+      fx:controller="project.databasegui.DeleteController"
+      id="main-window">
 
     <Button onAction="#returnToMain" styleClass="exit-button">
         <graphic>
@@ -18,39 +24,39 @@
         </graphic>
     </Button>
 
-    <Region VBox.vgrow="ALWAYS" />
+    <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        <Tab text="Autori">
 
-    <VBox alignment="CENTER"
-          spacing="20.0"
-          xmlns="http://javafx.com/javafx/8.0.171"
-          xmlns:fx="http://javafx.com/fxml">
+        </Tab>
 
-        <Button onAction="#testSQLConnectivity"
-                styleClass="table-button"
-                text="Izbrišite podatke u tabeli &quot;Mečevi&quot;" />
-        <Button onAction="#testSQLConnectivity"
-                styleClass="table-button"
-                text="Izbrišite podatke u tabeli &quot;Turniri&quot;" />
-        <Button onAction="#testSQLConnectivity"
-                styleClass="table-button"
-                text="Izbrišite podatke u tabeli &quot;Igrači&quot;" />
-        <Button onAction="#testSQLConnectivity"
-                styleClass="table-button"
-                text="Izbrišite podatke u tabeli &quot;Transferi&quot;" />
-        <Button onAction="#testSQLConnectivity"
-                styleClass="table-button"
-                text="Izbrišite podatke u tabeli &quot;Timovi&quot;" />
-        <Button onAction="#testSQLConnectivity"
-                styleClass="table-button"
-                text="Izbrišite podatke u tabeli &quot;Treneri&quot;" />
-        <Button onAction="#testSQLConnectivity"
-                styleClass="table-button"
-                text="Izbrišite podatke u tabeli &quot;Vesti&quot;" />
-        <Button onAction="#testSQLConnectivity"
-                styleClass="table-button"
-                text="Izbrišite podatke u tabeli &quot;Autori&quot;" />
+        <Tab text="Igrači">
 
-    </VBox>
+        </Tab>
+
+        <Tab text="Mečevi">
+
+        </Tab>
+
+        <Tab text="Timovi">
+
+        </Tab>
+
+        <Tab text="Transferi">
+
+        </Tab>
+
+        <Tab text="Treneri">
+
+        </Tab>
+
+        <Tab text="Turniri">
+
+        </Tab>
+
+        <Tab text="Vesti">
+
+        </Tab>
+    </TabPane>
 
     <padding>
         <Insets bottom="160.0"

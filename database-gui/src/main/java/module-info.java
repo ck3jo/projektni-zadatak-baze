@@ -1,4 +1,5 @@
-module project.databasegui {
+module project.databasegui
+{
     requires java.sql;
 
     requires javafx.controls;
@@ -12,6 +13,7 @@ module project.databasegui {
     requires org.kordamp.ikonli.material2;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires mysql.connector.j;
 
     opens project.databasegui to javafx.fxml;
     exports project.databasegui;
