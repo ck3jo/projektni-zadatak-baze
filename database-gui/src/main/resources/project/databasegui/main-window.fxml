@@ -29,11 +29,30 @@
 
     <Region VBox.vgrow="ALWAYS" />
 
-    <Button alignment="BOTTOM_CENTER" text="Izađite iz programa" textAlignment="RIGHT" onAction="#exitApp" styleClass="exit-button">
-        <graphic>
-            <FontIcon iconLiteral="mdsal-exit_to_app:24:BLACK"/>
-        </graphic>
-    </Button>
+    <HBox alignment="CENTER"
+          spacing="20.0"
+          xmlns="http://javafx.com/javafx/8.0.171"
+          xmlns:fx="http://javafx.com/fxml">
+        <Button alignment="BOTTOM_CENTER"
+                text="Podešavanja"
+                textAlignment="RIGHT"
+                onAction="#goToSettings"
+                styleClass="settings-button">
+            <graphic>
+                <FontIcon iconLiteral="mdmz-settings:24:BLACK" />
+            </graphic>
+        </Button>
+
+        <Button alignment="BOTTOM_CENTER"
+                text="Izađite iz programa"
+                textAlignment="RIGHT"
+                onAction="#exitApp"
+                styleClass="exit-button">
+            <graphic>
+                <FontIcon iconLiteral="mdsal-exit_to_app:24:BLACK"/>
+            </graphic>
+        </Button>
+    </HBox>
 
     <padding>
         <Insets bottom="55.0"

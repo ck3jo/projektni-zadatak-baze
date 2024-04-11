@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import java.net.URL?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+
+<VBox spacing="20.0"
+      xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="project.databasegui.SettingsController"
+      id="main-window">
+
+    <Button onAction="#returnToMain" styleClass="exit-button">
+        <graphic>
+            <FontIcon iconLiteral="mdsal-exit_to_app:24:BLACK" />
+        </graphic>
+    </Button>
+
+    <Label text="URL baze podatka" styleClass="main-label" alignment="BASELINE_LEFT"/>
+    <TextField styleClass="input-field"
+               promptText="Unesite URL baze podataka..."
+               fx:id="inputDatabaseURL"/>
+
+    <Label text="Korisničko ime" styleClass="main-label" alignment="BASELINE_LEFT"/>
+    <TextField styleClass="input-field"
+               promptText="Unesite korisničko ime za bazu podataka..."
+               fx:id="inputDatabaseUsername"/>
+
+    <Label text="Lozinka" styleClass="main-label" alignment="BASELINE_LEFT"/>
+    <TextField styleClass="input-field"
+               promptText="Unesite lozinku za baze podataka..."
+               fx:id="inputDatabasePassword"/>
+
+    <padding>
+        <Insets bottom="20.0"
+                left="20.0"
+                right="20.0"
+                top="20.0" />
+    </padding>
+
+    <stylesheets>
+        <URL value="@css/settings-window.css"/>
+    </stylesheets>
+</VBox>

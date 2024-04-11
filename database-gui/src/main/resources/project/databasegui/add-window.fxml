@@ -25,7 +25,7 @@
         </graphic>
     </Button>
 
-    <TabPane tabClosingPolicy="UNAVAILABLE">
+    <TabPane tabClosingPolicy="UNAVAILABLE" styleClass="tab-pane">
         <Tab text="Autori">
             <VBox styleClass="table-background">
                 <Label styleClass="field-label" text="Ime"/>

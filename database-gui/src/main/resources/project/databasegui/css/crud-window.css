@@ -42,3 +42,8 @@
 {
 
 }
+
+.tab-pane
+{
+    -fx-min-height: 575px;
+}

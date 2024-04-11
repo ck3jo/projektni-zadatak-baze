@@ -24,40 +24,6 @@
         </graphic>
     </Button>
 
-    <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-        <Tab text="Autori">
-
-        </Tab>
-
-        <Tab text="Igrači">
-
-        </Tab>
-
-        <Tab text="Mečevi">
-
-        </Tab>
-
-        <Tab text="Timovi">
-
-        </Tab>
-
-        <Tab text="Transferi">
-
-        </Tab>
-
-        <Tab text="Treneri">
-
-        </Tab>
-
-        <Tab text="Turniri">
-
-        </Tab>
-
-        <Tab text="Vesti">
-
-        </Tab>
-    </TabPane>
-
     <padding>
         <Insets bottom="160.0"
                 left="20.0"

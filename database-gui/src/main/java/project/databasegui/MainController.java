@@ -16,4 +16,7 @@ public class MainController
 
     @FXML
     public void goToDelete() throws IOException { MainWindow.setRoot("delete-window"); }
+
+    @FXML
+    public void goToSettings() throws IOException { MainWindow.setRoot("settings-window"); }
 }
