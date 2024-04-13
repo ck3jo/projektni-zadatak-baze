@@ -12,6 +12,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Separator?>
 
 <VBox spacing="20.0"
       xmlns="http://javafx.com/javafx/8.0.171"
@@ -33,10 +34,14 @@
                            promptText="Unesite ime autora..."
                            fx:id="inputAuthorName"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Nadimak"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite nadimak autora..."
                            fx:id="inputAuthorNick"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
 
                 <Label styleClass="field-label" text="Prezime"/>
                 <TextField styleClass="input-field"
@@ -63,35 +68,49 @@
                            promptText="Unesite ime igrača..."
                            fx:id="inputPlayerName"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Nadimak"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite nadimak igrača..."
                            fx:id="inputPlayerNick"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
 
                 <Label styleClass="field-label" text="Prezime"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite prezime igrača..."
                            fx:id="inputPlayerSurname"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Datum rođenja"/>
                 <DatePicker styleClass="date-input"
                             promptText="Unesite datum rođenja..."
                             fx:id="inputPlayerBirthDate"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
 
                 <Label styleClass="field-label" text="Tim"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite ime tima..."
                            fx:id="inputPlayerTeamName"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Rejting"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite rejting..."
                            fx:id="inputPlayerRating"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Major trofeji"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite broj major trofeja..."
                            fx:id="inputPlayerMajorTrophies"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
 
                 <Label styleClass="field-label" text="Major MVP medalje"/>
                 <TextField styleClass="input-field"
@@ -118,25 +137,35 @@
                            promptText="Unesite ime prvog tima..."
                            fx:id="inputMatchFirstTeamName"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Ime drugog tima"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite ime drugog tima..."
                            fx:id="inputMatchSecondTeamName"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
 
                 <Label styleClass="field-label" text="Ime turnira"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite ime turnira..."
                            fx:id="inputMatchTournamentName"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Broj mapa"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite broj mapa..."
                            fx:id="inputMatchNumMaps"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Rezultat"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite rezultat..."
                            fx:id="inputMatchScore"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
 
                 <Label styleClass="field-label" text="Datum meča"/>
                 <DatePicker styleClass="date-input"
@@ -163,10 +192,14 @@
                            promptText="Unesite ime tima..."
                            fx:id="inputTeamName"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Logo"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite link od logotipa tima..."
                            fx:id="inputTeamLogo"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
 
                 <Label styleClass="field-label" text="Ranking pozicija"/>
                 <TextField styleClass="input-field"
@@ -193,15 +226,21 @@
                            promptText="Unesite nadimak igrača..."
                            fx:id="inputTransferPlayerNick"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Ime starog tima"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite ime starog tima..."
                            fx:id="inputTransferOldTeamName"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Ime novog tima"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite ime novog tima..."
                            fx:id="inputTransferNewTeamName"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
 
                 <Label styleClass="field-label" text="Datum transfera"/>
                 <DatePicker styleClass="date-input"
@@ -228,15 +267,21 @@
                            promptText="Unesite ime trenera..."
                            fx:id="inputCoachName"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Nadimak"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite nadimak trenera..."
                            fx:id="inputCoachNick"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Prezime"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite prezime trenera..."
                            fx:id="inputCoachSurname"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
 
                 <Label styleClass="field-label" text="Ime tima"/>
                 <TextField styleClass="input-field"
@@ -263,25 +308,35 @@
                            promptText="Unesite ime turnira..."
                            fx:id="inputTournamentName"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Datum početka"/>
                 <DatePicker styleClass="date-input"
                             promptText="Unesite datum početka..."
                             fx:id="inputTournamentStartDate"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
 
                 <Label styleClass="field-label" text="Datum završetka"/>
                 <DatePicker styleClass="date-input"
                             promptText="Unesite datum završetka..."
                             fx:id="inputTournamentEndDate"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Mesto igranja"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite mesto igranja..."
                            fx:id="inputTournamentLocation"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Nagradni fond"/>
                 <TextField styleClass="input-field"
                            promptText="Unesite nagradni fond..."
                            fx:id="inputTournamentPrizePool"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
 
                 <Label styleClass="field-label" text="Veći turnir?"/>
                 <CheckBox styleClass="input-field" fx:id="inputTournamentSizeYesNo"/>
@@ -306,10 +361,14 @@
                            promptText="Unesite naslov artikla..."
                            fx:id="inputNewsTitle"/>
 
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
                 <Label styleClass="field-label" text="Datum objavljivanja"/>
                 <DatePicker styleClass="date-input"
                             promptText="Unesite datum objavljivanja..."
                             fx:id="inputNewsDate"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
 
                 <Label styleClass="field-label" text="Ime autora"/>
                 <TextField styleClass="input-field"
