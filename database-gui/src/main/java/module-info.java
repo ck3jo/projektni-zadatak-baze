@@ -14,7 +14,10 @@ module project.databasegui
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires mysql.connector.j;
+    requires annotations;
 
     opens project.databasegui to javafx.fxml;
+    opens project.databasegui.tableitems to javafx.fxml;
     exports project.databasegui;
+    exports project.databasegui.tableitems;
 }

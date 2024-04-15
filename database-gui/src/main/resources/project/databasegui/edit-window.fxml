@@ -71,25 +71,25 @@
 
                     <TableColumn text="Datum rođenja" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="birth-date"/>
+                            <PropertyValueFactory property="birthDate"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Ime tima" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="team-name"/>
+                            <PropertyValueFactory property="teamName"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Major trofeji" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="major-trophies"/>
+                            <PropertyValueFactory property="majorTrophies"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Major MVP medalje" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="major-mvps"/>
+                            <PropertyValueFactory property="majorMVPs"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -101,37 +101,37 @@
                 <columns>
                     <TableColumn text="Ime prvog tima" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="first-team-name"/>
+                            <PropertyValueFactory property="firstTeamName"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Ime drugog tima" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="second-team-name"/>
+                            <PropertyValueFactory property="secondTeamName"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Ime turnira" resizable="" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="tournament-name"/>
+                            <PropertyValueFactory property="tournamentName"/>
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Datum rođenja" resizable="false" reorderable="false">
+                    <TableColumn text="Broj mapa" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="birth-date"/>
+                            <PropertyValueFactory property="numberOfMaps"/>
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Datum rođenja" resizable="false" reorderable="false">
+                    <TableColumn text="Rezultat" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="birth-date"/>
+                            <PropertyValueFactory property="score"/>
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Datum rođenja" resizable="false" reorderable="false">
+                    <TableColumn text="Datum meča" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="birth-date"/>
+                            <PropertyValueFactory property="matchDate"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -143,19 +143,19 @@
                 <columns>
                     <TableColumn text="Ime" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="team-name"/>
+                            <PropertyValueFactory property="name"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Logo" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="team-logo"/>
+                            <PropertyValueFactory property="logo"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Ranking" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="team-ranking"/>
+                            <PropertyValueFactory property="ranking"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -167,25 +167,25 @@
                 <columns>
                     <TableColumn text="Ime igrača" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="transfer-player-name"/>
+                            <PropertyValueFactory property="playerName"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Ime starog tima" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="transfer-old-team"/>
+                            <PropertyValueFactory property="oldTeam"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Ime novog tima" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="transfer-new-team"/>
+                            <PropertyValueFactory property="newTeam"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Datum" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="transfer-date"/>
+                            <PropertyValueFactory property="date"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -197,25 +197,25 @@
                 <columns>
                     <TableColumn text="Ime" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="birth-date"/>
+                            <PropertyValueFactory property="name"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Nadimak" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="birth-date"/>
+                            <PropertyValueFactory property="nick"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Prezime" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="birth-date"/>
+                            <PropertyValueFactory property="surname"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Ime tima" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="birth-date"/>
+                            <PropertyValueFactory property="teamName"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -227,37 +227,37 @@
                 <columns>
                     <TableColumn text="Ime" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="tournament-name"/>
+                            <PropertyValueFactory property="name"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Datum početka" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="tournament-start-date"/>
+                            <PropertyValueFactory property="startDate"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Datum završetka" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="tournament-end-date"/>
+                            <PropertyValueFactory property="endDate"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Lokacija" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="tournament-location"/>
+                            <PropertyValueFactory property="tlocation"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Nagradni fond" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="tournament-prize-pool"/>
+                            <PropertyValueFactory property="prizePool"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Veliki turnir?" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="tournament-big-yn"/>
+                            <PropertyValueFactory property="bigYesNo"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -269,19 +269,19 @@
                 <columns>
                     <TableColumn text="Naslov" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="news-title"/>
+                            <PropertyValueFactory property="title"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Datum objavljivanja" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="news-date"/>
+                            <PropertyValueFactory property="date"/>
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn text="Ime autora" resizable="false" reorderable="false">
                         <cellValueFactory>
-                            <PropertyValueFactory property="news-author-name"/>
+                            <PropertyValueFactory property="authorName"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>

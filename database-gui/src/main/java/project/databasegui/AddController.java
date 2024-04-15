@@ -2,13 +2,15 @@ package project.databasegui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class AddController
 {
+    public Scanner readConfig = new Scanner("config.txt");
+
     //author inputs
     public TextField inputAuthorName;
     public TextField inputAuthorNick;
@@ -62,9 +64,9 @@ public class AddController
     public DatePicker inputNewsDate;
     public TextField inputNewsAuthorName;
 
-    private final String url = "jdbc:mysql://localhost:3306/database-project";
-    private final String username = "root";
-    private final String password = "";
+    private final String url = readConfig.nextLine().substring(5);
+    private final String user = readConfig.nextLine().substring(6);
+    private final String pass = readConfig.nextLine().substring(6);
 
     private static void showSuccessAlert()
     {
@@ -100,7 +102,7 @@ public class AddController
         int teamID;
         String sqlQuery = "SELECT IDTima FROM timovi WHERE ImeTima = ?";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password))
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, teamName);
@@ -116,7 +118,7 @@ public class AddController
         int tournamentID;
         String sqlQuery = "SELECT IDTurnira FROM turniri WHERE Ime = ?";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password))
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, tournamentName);
@@ -132,7 +134,7 @@ public class AddController
         int playerID;
         String sqlQuery = "SELECT IDIgraca FROM igraci WHERE Nadimak = ?";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password))
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, playerNick);
@@ -148,7 +150,7 @@ public class AddController
         int authorID;
         String sqlQuery = "SELECT IDAutora from autori WHERE Nadimak = ?";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password))
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, authorNick);
@@ -242,7 +244,7 @@ public class AddController
 
         String sqlQuery = "INSERT INTO autori(Ime, Nadimak, Prezime) VALUES(?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password))
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
 
@@ -274,7 +276,7 @@ public class AddController
 
         String sqlQuery = "INSERT INTO igraci(Ime, Nadimak, Prezime, DatumRodjenja, IDTima, Rejting, MajorTrofeji, MajorMVP) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password))
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
 
@@ -309,7 +311,7 @@ public class AddController
 
         String sqlQuery = "INSERT INTO mecevi(PrviTim, DrugiTim, IDTurnira, BrojMapa, Rezultat, DatumMeca) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password))
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
 
@@ -339,7 +341,7 @@ public class AddController
 
         String sqlQuery = "INSERT INTO timovi(ImeTima, LogoTima, RangPozicija) VALUES (?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password))
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
 
@@ -367,7 +369,7 @@ public class AddController
 
         String sqlQuery = "INSERT INTO transferi(IDIgraca, IDStarogTima, IDNovogTima, DatumTransfera) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password))
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
 
@@ -398,7 +400,7 @@ public class AddController
 
         String sqlQuery = "INSERT INTO turniri(ime, datumpocetka, datumzavrsetka, mestoigranja, nagradnifond, veciturnir) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password))
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
 
@@ -429,7 +431,7 @@ public class AddController
 
         String sqlQuery = "INSERT INTO treneri(Ime, Nadimak, Prezime, IDTima) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password))
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
 
@@ -457,7 +459,7 @@ public class AddController
 
         String sqlQuery = "INSERT INTO vesti(Naslov, DatumObjavljivanja, IDAutora) VALUES (?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password))
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
 
