@@ -1,13 +1,17 @@
 package project.databasegui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
+import javafx.util.Callback;
 import project.databasegui.tableitems.*;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class EditController
+public class EditController implements Initializable
 {
     public Scanner readConfig = new Scanner("config.txt");
 
@@ -20,9 +24,9 @@ public class EditController
     public TableView<Tournament> tableViewTournaments;
     public TableView<News> tableViewNews;
 
-    private final String url = readConfig.nextLine().substring(5);
-    private final String user = readConfig.nextLine().substring(6);
-    private final String pass = readConfig.nextLine().substring(6);
+    private String url;
+    private String user;
+    private String pass;
 
     public void loadAuthorData() throws SQLException
     {
@@ -171,9 +175,16 @@ public class EditController
     @FXML
     public void returnToMain() throws IOException { MainWindow.setRoot("main-window"); }
 
-    @FXML
-    public void initialize()
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
     {
-
+        tableViewAuthors.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        tableViewPlayers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        tableViewMatches.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        tableViewTeams.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        tableViewTransfers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        tableViewCoaches.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        tableViewTournaments.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        tableViewNews.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
     }
 }

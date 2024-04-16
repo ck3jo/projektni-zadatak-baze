@@ -64,9 +64,9 @@ public class AddController
     public DatePicker inputNewsDate;
     public TextField inputNewsAuthorName;
 
-    private final String url = readConfig.nextLine().substring(5);
-    private final String user = readConfig.nextLine().substring(6);
-    private final String pass = readConfig.nextLine().substring(6);
+    private String url;
+    private String user;
+    private String pass;
 
     private static void showSuccessAlert()
     {

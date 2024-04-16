@@ -46,9 +46,9 @@ public class SettingsController
             try (FileWriter fw = new FileWriter(fileName))
             {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno zapisivanje podataka.");
-                fw.write(inputDatabaseURL.getText() + "\n");
-                fw.write(inputDatabaseUsername.getText() + "\n");
-                fw.write(inputDatabasePassword.getText() + "\n");
+                fw.write("url: " + inputDatabaseURL.getText() + "\n");
+                fw.write("user: " + inputDatabaseUsername.getText() + "\n");
+                fw.write("pass: " + inputDatabasePassword.getText() + "\n");
 
                 alert.setHeaderText("Uspeh!");
                 alert.showAndWait();
