@@ -1,0 +1,22 @@
+.main-header
+{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 64px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.main-div
+{
+    display: flex;
+    flex-direction: column;
+    column-gap: 100px;
+    justify-self: center;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.main-div button
+{
+    margin-bottom: 10px;
+}
