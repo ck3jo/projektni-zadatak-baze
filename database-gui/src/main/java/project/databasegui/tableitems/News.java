@@ -8,32 +8,17 @@ public class News
     private String authorName;
     private LocalDate date;
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getAuthorName() { return authorName; }
+    public void setAuthorName(String authorName) { this.authorName = authorName; }
 
-    public String getAuthorName() {
-        return authorName;
-    }
+    public LocalDate getDate() { return date; }
+    public void setDate(LocalDate date) { this.date = date; }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-
-    public News(String title, String authorName, LocalDate date) {
+    public News(String title, String authorName, LocalDate date)
+    {
         this.title = title;
         this.authorName = authorName;
         this.date = date;

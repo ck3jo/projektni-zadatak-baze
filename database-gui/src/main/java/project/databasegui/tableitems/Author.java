@@ -6,31 +6,17 @@ public class Author
     private String nick;
     private String surname;
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getNick() { return nick; }
+    public void setNick(String nick) { this.nick = nick; }
 
-    public String getNick() {
-        return nick;
-    }
+    public String getSurname() { return surname; }
+    public void setSurname(String surname) { this.surname = surname; }
 
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public Author(String name, String nick, String surname) {
+    public Author(String name, String nick, String surname)
+    {
         this.name = name;
         this.nick = nick;
         this.surname = surname;

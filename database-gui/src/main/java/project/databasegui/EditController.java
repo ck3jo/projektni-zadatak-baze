@@ -2,8 +2,9 @@ package project.databasegui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
-import javafx.util.Callback;
 import project.databasegui.tableitems.*;
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +16,8 @@ public class EditController implements Initializable
 {
     public Scanner readConfig = new Scanner("config.txt");
 
+    public TabPane mainWindow;
+
     public TableView<Author> tableViewAuthors;
     public TableView<Player> tableViewPlayers;
     public TableView<Match> tableViewMatches;
@@ -23,10 +26,43 @@ public class EditController implements Initializable
     public TableView<Coach> tableViewCoaches;
     public TableView<Tournament> tableViewTournaments;
     public TableView<News> tableViewNews;
+    public Label debug;
 
     private String url;
     private String user;
     private String pass;
+
+    private String getTeamNameFromID(int teamID) throws SQLException
+    {
+        String teamName;
+        String sqlQuery = "SELECT ImeTima FROM timovi WHERE IDTima = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setInt(1, teamID);
+            ResultSet rs = ps.executeQuery();
+            teamName = rs.getString("IDTima");
+        }
+
+        return teamName;
+    }
+
+    private String getTournamentNameFromID(int tournamentID) throws SQLException
+    {
+        String tournamentName;
+        String sqlQuery = "SELECT Ime FROM turniri WHERE IDTurnira = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setInt(1, tournamentID);
+            ResultSet rs = ps.executeQuery();
+            tournamentName = rs.getString("IDTima");
+        }
+
+        return tournamentName;
+    }
 
     public void loadAuthorData() throws SQLException
     {
@@ -59,7 +95,16 @@ public class EditController implements Initializable
 
             while (rs.next())
             {
-                Author currAuthor = new Author(rs.getString(2), rs.getString(3), rs.getString(4));
+                Player currPlayer = new Player(
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getDate(5).toLocalDate(),
+                        getTeamNameFromID(rs.getInt(6)),
+                        rs.getDouble(7),
+                        rs.getInt(8),
+                        rs.getInt(9)
+                );
             }
         }
     }
@@ -77,7 +122,14 @@ public class EditController implements Initializable
 
             while (rs.next())
             {
-                Author currAuthor = new Author(rs.getString(2), rs.getString(3), rs.getString(4));
+                Match currMatch = new Match(
+                        getTeamNameFromID(rs.getInt(2)),
+                        getTeamNameFromID(rs.getInt(3)),
+                        getTournamentNameFromID(rs.getInt(3)),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getDate(6).toLocalDate()
+                );
             }
         }
     }
@@ -186,5 +238,7 @@ public class EditController implements Initializable
         tableViewCoaches.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         tableViewTournaments.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         tableViewNews.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+
+
     }
 }

@@ -9,39 +9,20 @@ public class Transfer
     private String newTeam;
     private LocalDate date;
 
-    public String getPlayerName() {
-        return playerName;
-    }
+    public String getPlayerName() { return playerName; }
+    public void setPlayerName(String playerName) { this.playerName = playerName; }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
+    public String getOldTeam() { return oldTeam; }
+    public void setOldTeam(String oldTeam) { this.oldTeam = oldTeam; }
 
-    public String getOldTeam() {
-        return oldTeam;
-    }
+    public String getNewTeam() { return newTeam; }
+    public void setNewTeam(String newTeam) { this.newTeam = newTeam; }
 
-    public void setOldTeam(String oldTeam) {
-        this.oldTeam = oldTeam;
-    }
+    public LocalDate getDate() { return date; }
+    public void setDate(LocalDate date) { this.date = date; }
 
-    public String getNewTeam() {
-        return newTeam;
-    }
-
-    public void setNewTeam(String newTeam) {
-        this.newTeam = newTeam;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Transfer(String playerName, String oldTeam, String newTeam, LocalDate date) {
+    public Transfer(String playerName, String oldTeam, String newTeam, LocalDate date)
+    {
         this.playerName = playerName;
         this.oldTeam = oldTeam;
         this.newTeam = newTeam;

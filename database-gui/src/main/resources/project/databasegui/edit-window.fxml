@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
-<?import java.net.URL?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-<VBox spacing="20.0"
-      xmlns="http://javafx.com/javafx/8.0.171"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="project.databasegui.EditController"
-      id="main-window">
+<VBox id="main-window" prefHeight="720.0" prefWidth="1280.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.databasegui.EditController">
 
     <Button onAction="#returnToMain" styleClass="exit-button">
         <graphic>
@@ -23,26 +15,37 @@
         </graphic>
     </Button>
 
-    <TabPane tabClosingPolicy="UNAVAILABLE" styleClass="tab-pane" VBox.vgrow="ALWAYS">
+    <TabPane styleClass="tab-pane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
         <Tab text="Autori">
             <TableView fx:id="tableViewAuthors">
-                <columnResizeProperty><TableView fx:constant=""/></columnResizeProperty>
                 <columns>
-                    <TableColumn text="Ime" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="413"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime">
                         <cellValueFactory>
-                            <PropertyValueFactory property="name"/>
+                            <PropertyValueFactory property="name" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Nadimak" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="413"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Nadimak">
                         <cellValueFactory>
-                            <PropertyValueFactory property="nick"/>
+                            <PropertyValueFactory property="nick" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Prezime" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="414"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Prezime">
                         <cellValueFactory>
-                            <PropertyValueFactory property="surname"/>
+                            <PropertyValueFactory property="surname" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -50,47 +53,75 @@
         </Tab>
 
         <Tab text="Igrači">
-            <TableView VBox.vgrow="ALWAYS" fx:id="tableViewPlayers">
+            <TableView fx:id="tableViewPlayers" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn text="Ime" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="177"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime">
                         <cellValueFactory>
-                            <PropertyValueFactory property="name"/>
+                            <PropertyValueFactory property="name" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Nadimak" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="177"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Nadimak">
                         <cellValueFactory>
-                            <PropertyValueFactory property="nick"/>
+                            <PropertyValueFactory property="nick" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Prezime" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="177"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Prezime">
                         <cellValueFactory>
-                            <PropertyValueFactory property="surname"/>
+                            <PropertyValueFactory property="surname" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Datum rođenja" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="177"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Datum rođenja">
                         <cellValueFactory>
-                            <PropertyValueFactory property="birthDate"/>
+                            <PropertyValueFactory property="birthDate" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Ime tima" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="177"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime tima">
                         <cellValueFactory>
-                            <PropertyValueFactory property="teamName"/>
+                            <PropertyValueFactory property="teamName" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Major trofeji" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="177"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Major trofeji">
                         <cellValueFactory>
-                            <PropertyValueFactory property="majorTrophies"/>
+                            <PropertyValueFactory property="majorTrophies" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Major MVP medalje" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="177"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Major MVP medalje">
                         <cellValueFactory>
-                            <PropertyValueFactory property="majorMVPs"/>
+                            <PropertyValueFactory property="majorMVPs" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -98,41 +129,65 @@
         </Tab>
 
         <Tab text="Mečevi">
-            <TableView VBox.vgrow="ALWAYS" fx:id="tableViewMatches">
+            <TableView fx:id="tableViewMatches" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn text="Ime prvog tima" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="206"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime prvog tima">
                         <cellValueFactory>
-                            <PropertyValueFactory property="firstTeamName"/>
+                            <PropertyValueFactory property="firstTeamName" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Ime drugog tima" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="206"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime drugog tima">
                         <cellValueFactory>
-                            <PropertyValueFactory property="secondTeamName"/>
+                            <PropertyValueFactory property="secondTeamName" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Ime turnira" resizable="" reorderable="false" sortable="false">
+                    <TableColumn minWidth="207"
+                                 reorderable="false"
+                                 resizable=""
+                                 sortable="false"
+                                 text="Ime turnira">
                         <cellValueFactory>
-                            <PropertyValueFactory property="tournamentName"/>
+                            <PropertyValueFactory property="tournamentName" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Broj mapa" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="207"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Broj mapa">
                         <cellValueFactory>
-                            <PropertyValueFactory property="numberOfMaps"/>
+                            <PropertyValueFactory property="numberOfMaps" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Rezultat" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="207"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Rezultat">
                         <cellValueFactory>
-                            <PropertyValueFactory property="score"/>
+                            <PropertyValueFactory property="score" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Datum meča" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="207"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Datum meča">
                         <cellValueFactory>
-                            <PropertyValueFactory property="matchDate"/>
+                            <PropertyValueFactory property="matchDate" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -140,23 +195,35 @@
         </Tab>
 
         <Tab text="Timovi">
-            <TableView VBox.vgrow="ALWAYS" fx:id="tableViewTeams">
+            <TableView fx:id="tableViewTeams" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn text="Ime" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="413"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime">
                         <cellValueFactory>
-                            <PropertyValueFactory property="name"/>
+                            <PropertyValueFactory property="name" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Logo" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="413"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Logo">
                         <cellValueFactory>
-                            <PropertyValueFactory property="logo"/>
+                            <PropertyValueFactory property="logo" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Ranking" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="414"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ranking">
                         <cellValueFactory>
-                            <PropertyValueFactory property="ranking"/>
+                            <PropertyValueFactory property="ranking" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -164,29 +231,45 @@
         </Tab>
 
         <Tab text="Transferi">
-            <TableView VBox.vgrow="ALWAYS" fx:id="tableViewTransfers">
+            <TableView fx:id="tableViewTransfers" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn text="Ime igrača" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="310"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime igrača">
                         <cellValueFactory>
-                            <PropertyValueFactory property="playerName"/>
+                            <PropertyValueFactory property="playerName" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Ime starog tima" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="310"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime starog tima">
                         <cellValueFactory>
-                            <PropertyValueFactory property="oldTeam"/>
+                            <PropertyValueFactory property="oldTeam" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Ime novog tima" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="310"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime novog tima">
                         <cellValueFactory>
-                            <PropertyValueFactory property="newTeam"/>
+                            <PropertyValueFactory property="newTeam" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Datum" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="310"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Datum">
                         <cellValueFactory>
-                            <PropertyValueFactory property="date"/>
+                            <PropertyValueFactory property="date" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -194,29 +277,45 @@
         </Tab>
 
         <Tab text="Treneri">
-            <TableView VBox.vgrow="ALWAYS" fx:id="tableViewCoaches">
+            <TableView fx:id="tableViewCoaches" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn text="Ime" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="310"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime">
                         <cellValueFactory>
-                            <PropertyValueFactory property="name"/>
+                            <PropertyValueFactory property="name" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Nadimak" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="310"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Nadimak">
                         <cellValueFactory>
-                            <PropertyValueFactory property="nick"/>
+                            <PropertyValueFactory property="nick" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Prezime" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="310"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Prezime">
                         <cellValueFactory>
-                            <PropertyValueFactory property="surname"/>
+                            <PropertyValueFactory property="surname" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Ime tima" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="310"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime tima">
                         <cellValueFactory>
-                            <PropertyValueFactory property="teamName"/>
+                            <PropertyValueFactory property="teamName" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -224,41 +323,65 @@
         </Tab>
 
         <Tab text="Turniri">
-            <TableView VBox.vgrow="ALWAYS" fx:id="tableViewTournaments">
+            <TableView fx:id="tableViewTournaments" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn text="Ime" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="206"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime">
                         <cellValueFactory>
-                            <PropertyValueFactory property="name"/>
+                            <PropertyValueFactory property="name" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Datum početka" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="206"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Datum početka">
                         <cellValueFactory>
-                            <PropertyValueFactory property="startDate"/>
+                            <PropertyValueFactory property="startDate" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Datum završetka" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="207"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Datum završetka">
                         <cellValueFactory>
-                            <PropertyValueFactory property="endDate"/>
+                            <PropertyValueFactory property="endDate" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Lokacija" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="207"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Lokacija">
                         <cellValueFactory>
-                            <PropertyValueFactory property="tlocation"/>
+                            <PropertyValueFactory property="tlocation" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Nagradni fond" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="207"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Nagradni fond">
                         <cellValueFactory>
-                            <PropertyValueFactory property="prizePool"/>
+                            <PropertyValueFactory property="prizePool" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Veliki turnir?" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="207"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Veliki turnir?">
                         <cellValueFactory>
-                            <PropertyValueFactory property="bigYesNo"/>
+                            <PropertyValueFactory property="bigYesNo" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -266,23 +389,35 @@
         </Tab>
 
         <Tab text="Vesti">
-            <TableView VBox.vgrow="ALWAYS" fx:id="tableViewNews">
+            <TableView fx:id="tableViewNews" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn text="Naslov" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="413"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Naslov">
                         <cellValueFactory>
-                            <PropertyValueFactory property="title"/>
+                            <PropertyValueFactory property="title" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Datum objavljivanja" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="413"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Datum objavljivanja">
                         <cellValueFactory>
-                            <PropertyValueFactory property="date"/>
+                            <PropertyValueFactory property="date" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn text="Ime autora" resizable="false" reorderable="false" sortable="false">
+                    <TableColumn minWidth="414"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Ime autora">
                         <cellValueFactory>
-                            <PropertyValueFactory property="authorName"/>
+                            <PropertyValueFactory property="authorName" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -291,13 +426,10 @@
     </TabPane>
 
     <padding>
-        <Insets bottom="160.0"
-                left="20.0"
-                right="20.0"
-                top="20.0"/>
+        <Insets bottom="160.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
     <stylesheets>
-        <URL value="@css/crud-window.css"/>
+        <URL value="@css/crud-window.css" />
     </stylesheets>
 </VBox>

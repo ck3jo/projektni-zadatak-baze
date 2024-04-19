@@ -11,53 +11,23 @@ public class Match
     private String score;
     private LocalDate matchDate;
 
-    public String getFirstTeamName() {
-        return firstTeamName;
-    }
+    public String getFirstTeamName() { return firstTeamName; }
+    public void setFirstTeamName(String firstTeamName) { this.firstTeamName = firstTeamName; }
 
-    public void setFirstTeamName(String firstTeamName) {
-        this.firstTeamName = firstTeamName;
-    }
+    public String getSecondTeamName() { return secondTeamName; }
+    public void setSecondTeamName(String secondTeamName) { this.secondTeamName = secondTeamName; }
 
-    public String getSecondTeamName() {
-        return secondTeamName;
-    }
+    public String getTournamentName() { return tournamentName; }
+    public void setTournamentName(String tournamentName) { this.tournamentName = tournamentName; }
 
-    public void setSecondTeamName(String secondTeamName) {
-        this.secondTeamName = secondTeamName;
-    }
+    public int getNumberOfMaps() { return numberOfMaps; }
+    public void setNumberOfMaps(int numberOfMaps) { this.numberOfMaps = numberOfMaps; }
 
-    public String getTournamentName() {
-        return tournamentName;
-    }
+    public String getScore() { return score; }
+    public void setScore(String score) { this.score = score; }
 
-    public void setTournamentName(String tournamentName) {
-        this.tournamentName = tournamentName;
-    }
-
-    public int getNumberOfMaps() {
-        return numberOfMaps;
-    }
-
-    public void setNumberOfMaps(int numberOfMaps) {
-        this.numberOfMaps = numberOfMaps;
-    }
-
-    public String getScore() {
-        return score;
-    }
-
-    public void setScore(String score) {
-        this.score = score;
-    }
-
-    public LocalDate getMatchDate() {
-        return matchDate;
-    }
-
-    public void setMatchDate(LocalDate matchDate) {
-        this.matchDate = matchDate;
-    }
+    public LocalDate getMatchDate() { return matchDate; }
+    public void setMatchDate(LocalDate matchDate) { this.matchDate = matchDate; }
 
     public Match(String firstTeamName, String secondTeamName, String tournamentName, int numberOfMaps, String score, LocalDate matchDate) {
         this.firstTeamName = firstTeamName;

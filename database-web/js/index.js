@@ -1,8 +1,0 @@
-goToAuthors = () => window.location.href = "authors.php"
-goToPlayers = () => window.location.href = "players.php"
-goToMatches = () => window.location.href = "matches.php"
-goToTeams = () => window.location.href = "teams.php"
-goToTransfers = () => window.location.href = "transfers.php"
-goToCoaches = () => window.location.href = "coaches.php"
-goToTournaments = () => window.location.href = "tournaments.php"
-goToNews = () => window.location.href = "news.php"

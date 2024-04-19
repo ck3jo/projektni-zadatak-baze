@@ -11,55 +11,26 @@ public class Tournament
     private int prizePool;
     private boolean bigYesNo;
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public LocalDate getStartDate() { return startDate; }
+    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
+    public LocalDate getEndDate() { return endDate; }
+    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
+    public int getPrizePool() { return prizePool; }
+    public void setPrizePool(int prizePool) { this.prizePool = prizePool; }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
+    public boolean isBigYesNo() { return bigYesNo; }
+    public void setBigYesNo(boolean bigYesNo) { this.bigYesNo = bigYesNo; }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public int getPrizePool() {
-        return prizePool;
-    }
-
-    public void setPrizePool(int prizePool) {
-        this.prizePool = prizePool;
-    }
-
-    public boolean isBigYesNo() {
-        return bigYesNo;
-    }
-
-    public void setBigYesNo(boolean bigYesNo) {
-        this.bigYesNo = bigYesNo;
-    }
-
-    public Tournament(String name, LocalDate startDate, LocalDate endDate, String location, int prizePool, boolean bigYesNo) {
+    public Tournament(String name, LocalDate startDate, LocalDate endDate, String location, int prizePool, boolean bigYesNo)
+    {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
