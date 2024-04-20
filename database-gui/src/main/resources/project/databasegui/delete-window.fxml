@@ -201,7 +201,7 @@
         <Tab text="Timovi">
             <TableView fx:id="tableViewTeams" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn minWidth="413"
+                    <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
@@ -211,23 +211,33 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="413"
+                    <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
-                                 text="Logo">
+                                 text="Rang pozicija">
                         <cellValueFactory>
-                            <PropertyValueFactory property="logo" />
+                            <PropertyValueFactory property="ranking" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="414"
+                    <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
-                                 text="Ranking">
+                                 text="Major trofeji">
                         <cellValueFactory>
-                            <PropertyValueFactory property="ranking" />
+                            <PropertyValueFactory property="majorTrophies" />
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn minWidth="310"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Region">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="region" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -430,7 +440,7 @@
     </TabPane>
 
     <padding>
-        <Insets bottom="20.0"
+        <Insets bottom="240.0"
                 left="20.0"
                 right="20.0"
                 top="20.0"/>

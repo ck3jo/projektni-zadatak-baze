@@ -26,7 +26,6 @@ public class DeleteController implements Initializable
     public TableView<Coach> tableViewCoaches;
     public TableView<Tournament> tableViewTournaments;
     public TableView<News> tableViewNews;
-    public Label debug;
 
     private String url = "jdbc:mysql://localhost:3306/database-project";
     private String user = "root";
@@ -198,8 +197,9 @@ public class DeleteController implements Initializable
             {
                 Team currTeam = new Team(
                         rs.getString(2),
-                        rs.getString(3),
-                        rs.getInt(4)
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getString(5)
                 );
                 allTeams.add(currTeam);
             }
@@ -240,7 +240,7 @@ public class DeleteController implements Initializable
         tableViewCoaches.getItems().clear();
 
         ObservableList<Coach> allCoaches = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT * FROM autori";
+        String sqlQuery = "SELECT * FROM treneri";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
@@ -337,6 +337,7 @@ public class DeleteController implements Initializable
             loadAuthorData();
             loadTeamData();
             loadPlayerData();
+            loadCoachData();
         }
         catch (SQLException e)
         {

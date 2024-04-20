@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class EditController implements Initializable
 {
     public Scanner readConfig = new Scanner("config.txt");
-    
+
     public TableView<Author> tableViewAuthors;
     public TableView<Player> tableViewPlayers;
     public TableView<Match> tableViewMatches;
@@ -26,7 +26,6 @@ public class EditController implements Initializable
     public TableView<Coach> tableViewCoaches;
     public TableView<Tournament> tableViewTournaments;
     public TableView<News> tableViewNews;
-    public Label debug;
 
     private String url = "jdbc:mysql://localhost:3306/database-project";
     private String user = "root";
@@ -198,8 +197,9 @@ public class EditController implements Initializable
             {
                 Team currTeam = new Team(
                         rs.getString(2),
-                        rs.getString(3),
-                        rs.getInt(4)
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getString(5)
                 );
                 allTeams.add(currTeam);
             }
@@ -337,6 +337,7 @@ public class EditController implements Initializable
             loadAuthorData();
             loadTeamData();
             loadPlayerData();
+            loadCoachData();
         }
         catch (SQLException e)
         {

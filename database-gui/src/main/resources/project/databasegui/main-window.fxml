@@ -23,7 +23,7 @@
           xmlns="http://javafx.com/javafx/8.0.171"
           xmlns:fx="http://javafx.com/fxml">
         <Button text="Dodajte podatke" styleClass="main-button" onAction="#goToAdd" />
-        <Button text="Izbrisite podatke" styleClass="main-button" onAction="#goToDelete" />
+        <Button text="Izbrišite podatke" styleClass="main-button" onAction="#goToDelete" />
         <Button text="Promenite podatke" styleClass="main-button" onAction="#goToEdit" />
     </HBox>
 

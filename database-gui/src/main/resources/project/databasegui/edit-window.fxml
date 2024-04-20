@@ -426,7 +426,10 @@
     </TabPane>
 
     <padding>
-        <Insets bottom="160.0" left="20.0" right="20.0" top="20.0" />
+        <Insets bottom="240.0"
+                left="20.0"
+                right="20.0"
+                top="20.0" />
     </padding>
 
     <stylesheets>
