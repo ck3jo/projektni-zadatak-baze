@@ -2,14 +2,17 @@ package project.databasegui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.cell.TextFieldTableCell;
 import project.databasegui.tableitems.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -18,17 +21,69 @@ public class EditController implements Initializable
     public Scanner readConfig = new Scanner("config.txt");
 
     public TableView<Author> tableViewAuthors;
+    public TableColumn<Author, String> tableColumnAuthorName;
+    public TableColumn<Author, String> tableColumnAuthorNick;
+    public TableColumn<Author, String> tableColumnAuthorSurname;
+
     public TableView<Player> tableViewPlayers;
+    public TableColumn<Player, String> tableColumnPlayerName;
+    public TableColumn<Player, String> tableColumnPlayerNick;
+    public TableColumn<Player, String> tableColumnPlayerSurname;
+    public TableColumn<Player, LocalDate> tableColumnPlayerBirthDate;
+    public TableColumn<Player, String> tableColumnPlayerNationality;
+    public TableColumn<Player, String> tableColumnPlayerTeamName;
+    public TableColumn<Player, String> tableColumnPlayerMajorTrophies;
+    public TableColumn<Player, String> tableColumnPlayerMajorMVPs;
+
     public TableView<Match> tableViewMatches;
+    public TableColumn<Match, String> tableColumnMatchFirstTeamName;
+    public TableColumn<Match, String> tableColumnMatchSecondTeamName;
+    public TableColumn<Match, String> tableColumnMatchTournamentName;
+    public TableColumn<Match, Integer> tableColumnMatchNumberOfMaps;
+    public TableColumn<Match, LocalDate> tableColumnMatchDate;
+
     public TableView<Team> tableViewTeams;
+    public TableColumn<Team, String> tableColumnTeamName;
+    public TableColumn<Team, Integer> tableColumnTeamRanking;
+    public TableColumn<Team, Integer> tableColumnTeamMajorTrophies;
+    public TableColumn<Team, String> tableColumnTeamRegion;
+
     public TableView<Transfer> tableViewTransfers;
+    public TableColumn<Transfer, String> tableColumnTransferPlayerName;
+    public TableColumn<Transfer, String> tableColumnTransferOldTeamName;
+    public TableColumn<Transfer, String> tableColumnTransferNewTeamName;
+    public TableColumn<Transfer, LocalDate> tableColumnTransferDate;
+
     public TableView<Coach> tableViewCoaches;
+    public TableColumn<Coach, String> tableColumnCoachName;
+    public TableColumn<Coach, String> tableColumnCoachNick;
+    public TableColumn<Coach, String> tableColumnCoachSurname;
+    public TableColumn<Coach, String> tableColumnCoachTeamName;
+
     public TableView<Tournament> tableViewTournaments;
+    public TableColumn<Tournament, String> tableColumnTournamentName;
+    public TableColumn<Tournament, LocalDate> tableColumnTournamentStartDate;
+    public TableColumn<Tournament, LocalDate> tableColumnTournamentEndDate;
+    public TableColumn<Tournament, String> tableColumnTournamentLocation;
+    public TableColumn<Tournament, Integer> tableColumnTournamentPrizePool;
+    public TableColumn<Tournament, Boolean> tableColumnTournamentIsBig;
+
     public TableView<News> tableViewNews;
+    public TableColumn<News, String> tableColumnNewsTitle;
+    public TableColumn<News, LocalDate> tableColumnNewsDate;
+    public TableColumn<News, String> tableColumnNewsAuthorName;
 
     private String url = "jdbc:mysql://localhost:3306/database-project";
     private String user = "root";
     private String pass = "";
+
+    public void addEditHandlers()
+    {
+        tableColumnAuthorName.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnAuthorName.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setName(t.getNewValue())
+        );
+    }
 
     private String getTeamNameFromID(int teamID) throws SQLException
     {
@@ -323,6 +378,8 @@ public class EditController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        addEditHandlers();
+
         tableViewAuthors.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         tableViewPlayers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         tableViewMatches.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);

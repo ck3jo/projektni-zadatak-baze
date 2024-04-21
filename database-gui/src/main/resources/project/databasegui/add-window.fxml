@@ -16,7 +16,7 @@
         </graphic>
     </Button>
 
-    <TabPane styleClass="tab-pane" tabClosingPolicy="UNAVAILABLE" prefHeight="600">
+    <TabPane styleClass="tab-pane" tabClosingPolicy="UNAVAILABLE" prefHeight="620">
         <Tab text="Autori">
             <VBox styleClass="table-background">
                 <Label styleClass="field-label" text="Ime" />

@@ -1,5 +1,5 @@
-CREATE DATABASE cs2novosti;
-USE DATABASE cs2novosti;
+CREATE DATABASE `database-project`;
+USE `database-project`;
 
 CREATE TABLE Mecevi (
     IDMeca INT PRIMARY KEY AUTO_INCREMENT,
