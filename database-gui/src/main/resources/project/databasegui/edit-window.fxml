@@ -17,7 +17,7 @@
 
     <TabPane styleClass="tab-pane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
         <Tab text="Autori">
-            <TableView fx:id="tableViewAuthors">
+            <TableView fx:id="tableViewAuthors" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="413"
                                  reorderable="false"
@@ -53,9 +53,9 @@
         </Tab>
 
         <Tab text="Igrači">
-            <TableView fx:id="tableViewPlayers" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tableViewPlayers" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
-                    <TableColumn minWidth="177"
+                    <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
@@ -65,7 +65,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="177"
+                    <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
@@ -75,7 +75,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="177"
+                    <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
@@ -85,7 +85,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="177"
+                    <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
@@ -95,7 +95,17 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="177"
+                    <TableColumn minWidth="155"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Nacionalnost">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="nationality" />
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
@@ -105,7 +115,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="177"
+                    <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
@@ -115,7 +125,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="177"
+                    <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
@@ -129,7 +139,7 @@
         </Tab>
 
         <Tab text="Mečevi">
-            <TableView fx:id="tableViewMatches" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tableViewMatches" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="206"
                                  reorderable="false"
@@ -195,9 +205,9 @@
         </Tab>
 
         <Tab text="Timovi">
-            <TableView fx:id="tableViewTeams" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tableViewTeams" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
-                    <TableColumn minWidth="413"
+                    <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
@@ -207,23 +217,33 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="413"
+                    <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
-                                 text="Logo">
+                                 text="Rang pozicija">
                         <cellValueFactory>
-                            <PropertyValueFactory property="logo" />
+                            <PropertyValueFactory property="ranking" />
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="414"
+                    <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
                                  sortable="false"
-                                 text="Ranking">
+                                 text="Major trofeji">
                         <cellValueFactory>
-                            <PropertyValueFactory property="ranking" />
+                            <PropertyValueFactory property="majorTrophies" />
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn minWidth="310"
+                                 reorderable="false"
+                                 resizable="false"
+                                 sortable="false"
+                                 text="Region">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="region" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -231,7 +251,7 @@
         </Tab>
 
         <Tab text="Transferi">
-            <TableView fx:id="tableViewTransfers" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tableViewTransfers" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="310"
                                  reorderable="false"
@@ -277,7 +297,7 @@
         </Tab>
 
         <Tab text="Treneri">
-            <TableView fx:id="tableViewCoaches" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tableViewCoaches" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="310"
                                  reorderable="false"
@@ -323,7 +343,7 @@
         </Tab>
 
         <Tab text="Turniri">
-            <TableView fx:id="tableViewTournaments" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tableViewTournaments" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="206"
                                  reorderable="false"
@@ -389,7 +409,7 @@
         </Tab>
 
         <Tab text="Vesti">
-            <TableView fx:id="tableViewNews" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tableViewNews" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="413"
                                  reorderable="false"

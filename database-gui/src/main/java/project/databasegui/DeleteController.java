@@ -4,8 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import project.databasegui.tableitems.*;
 import java.io.IOException;
@@ -140,10 +138,11 @@ public class DeleteController implements Initializable
                         rs.getString(3),
                         rs.getString(4),
                         rs.getDate(5).toLocalDate(),
-                        getTeamNameFromID(rs.getInt(6)),
-                        rs.getDouble(7),
-                        rs.getInt(8),
-                        rs.getInt(9)
+                        rs.getString(6),
+                        getTeamNameFromID(rs.getInt(7)),
+                        rs.getDouble(8),
+                        rs.getInt(9),
+                        rs.getInt(10)
                 );
                 allPlayers.add(currPlayer);
             }

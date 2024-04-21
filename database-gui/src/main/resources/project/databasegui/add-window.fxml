@@ -14,6 +14,9 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Separator?>
 
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <VBox spacing="20.0"
       xmlns="http://javafx.com/javafx/8.0.171"
       xmlns:fx="http://javafx.com/fxml"
@@ -194,17 +197,33 @@
 
                 <Separator valignment="BOTTOM" styleClass="separator"/>
 
-                <Label styleClass="field-label" text="Logo"/>
+                <Label styleClass="field-label" text="Ranking pozicija"/>
                 <TextField styleClass="input-field"
-                           promptText="Unesite link od logotipa tima..."
-                           fx:id="inputTeamLogo"/>
+                           promptText="Unesite ranking poziciju tima..."
+                           fx:id="inputTeamRanking"/>
 
                 <Separator valignment="BOTTOM" styleClass="separator"/>
 
-                <Label styleClass="field-label" text="Ranking pozicija"/>
+                <Label styleClass="field-label" text="Broj major trofeja"/>
                 <TextField styleClass="input-field"
-                           promptText="Unesite ranking poyiciju tima..."
-                           fx:id="inputTeamRanking"/>
+                           promptText="Unesite broj major trofeja tima..."
+                           fx:id="inputTeamMajorTrophies"/>
+
+                <Separator valignment="BOTTOM" styleClass="separator"/>
+
+                <Label styleClass="field-label" text="Region"/>
+                <ChoiceBox fx:id="inputTeamRegion" value="Evropa">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Evropa"/>
+                            <String fx:value="Severna Amerika"/>
+                            <String fx:value="Južna Amerika"/>
+                            <String fx:value="Azija"/>
+                            <String fx:value="Okeanija"/>
+                            <String fx:value="Afrika"/>
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
 
                 <Region VBox.vgrow="ALWAYS"/>
 

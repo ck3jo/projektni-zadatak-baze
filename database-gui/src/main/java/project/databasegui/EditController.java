@@ -4,8 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import project.databasegui.tableitems.*;
 import java.io.IOException;
@@ -140,10 +138,11 @@ public class EditController implements Initializable
                         rs.getString(3),
                         rs.getString(4),
                         rs.getDate(5).toLocalDate(),
-                        getTeamNameFromID(rs.getInt(6)),
-                        rs.getDouble(7),
-                        rs.getInt(8),
-                        rs.getInt(9)
+                        rs.getString(6),
+                        getTeamNameFromID(rs.getInt(7)),
+                        rs.getDouble(8),
+                        rs.getInt(9),
+                        rs.getInt(10)
                 );
                 allPlayers.add(currPlayer);
             }
@@ -240,7 +239,7 @@ public class EditController implements Initializable
         tableViewCoaches.getItems().clear();
 
         ObservableList<Coach> allCoaches = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT * FROM autori";
+        String sqlQuery = "SELECT * FROM treneri";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
@@ -267,7 +266,7 @@ public class EditController implements Initializable
         tableViewTournaments.getItems().clear();
 
         ObservableList<Tournament> allTournaments = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT * FROM autori";
+        String sqlQuery = "SELECT * FROM turniri";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
@@ -296,7 +295,7 @@ public class EditController implements Initializable
         tableViewNews.getItems().clear();
 
         ObservableList<News> allNews = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT * FROM autori";
+        String sqlQuery = "SELECT * FROM vesti";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
@@ -338,6 +337,10 @@ public class EditController implements Initializable
             loadTeamData();
             loadPlayerData();
             loadCoachData();
+            loadTournamentData();
+            loadMatchData();
+            loadTournamentData();
+            loadNewsData();
         }
         catch (SQLException e)
         {

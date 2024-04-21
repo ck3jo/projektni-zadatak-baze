@@ -8,6 +8,7 @@ public class Player
     private String nick;
     private String surname;
     private LocalDate birthDate;
+    private String nationality;
     private String teamName;
     private double rating;
     private int majorTrophies;
@@ -25,6 +26,9 @@ public class Player
     public LocalDate getBirthDate() { return birthDate; }
     public void setBirthDate(LocalDate birthDate) { this.birthDate = birthDate; }
 
+    public String getNationality() { return nationality; }
+    public void setNationality(String nationality) { this.nationality = nationality; }
+
     public String getTeamName() { return teamName; }
     public void setTeamName(String teamName) { this.teamName = teamName; }
 
@@ -37,12 +41,13 @@ public class Player
     public int getMajorMVPs() { return majorMVPs; }
     public void setMajorMVPs(int majorMVPs) { this.majorMVPs = majorMVPs; }
 
-    public Player(String name, String nick, String surname, LocalDate birthDate, String teamName, double rating, int majorTrophies, int majorMVPs)
+    public Player(String name, String nick, String surname, LocalDate birthDate, String nationality, String teamName, double rating, int majorTrophies, int majorMVPs)
     {
         this.name = name;
         this.nick = nick;
         this.surname = surname;
         this.birthDate = birthDate;
+        this.nationality = nationality;
         this.teamName = teamName;
         this.rating = rating;
         this.majorTrophies = majorTrophies;

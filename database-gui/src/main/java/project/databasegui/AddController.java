@@ -36,8 +36,9 @@ public class AddController
 
     //team inputs
     public TextField inputTeamName;
-    public TextField inputTeamLogo;
     public TextField inputTeamRanking;
+    public TextField inputTeamMajorTrophies;
+    public ChoiceBox<String> inputTeamRegion;
 
     //transfer inputs
     public TextField inputTransferPlayerNick;
@@ -193,8 +194,9 @@ public class AddController
     private void clearTeamForm()
     {
         inputTeamName.setText("");
-        inputTeamLogo.setText("");
         inputTeamRanking.setText("");
+        inputTeamMajorTrophies.setText("");
+        inputTeamRegion.setValue("");
     }
 
     private void clearTransferForm()
@@ -336,18 +338,20 @@ public class AddController
     public void sendTeamDataToDatabase() throws SQLException
     {
         String teamName = inputTeamName.getText();
-        String teamLogo = inputTeamLogo.getText();
         int teamRanking = Integer.parseInt(inputTeamRanking.getText());
+        int teamMajorTrophies = Integer.parseInt(inputTeamMajorTrophies.getText());
+        String teamRegion = inputTeamRegion.getValue();
 
-        String sqlQuery = "INSERT INTO timovi(ImeTima, LogoTima, RangPozicija) VALUES (?, ?, ?)";
+        String sqlQuery = "INSERT INTO timovi(ImeTima, RangPozicija, MajorTrofeji, Region) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
 
             ps.setString(1, teamName);
-            ps.setString(2, teamLogo);
-            ps.setInt(3, teamRanking);
+            ps.setInt(2, teamRanking);
+            ps.setInt(3, teamMajorTrophies);
+            ps.setString(4, teamRegion);
 
             int changedRows = ps.executeUpdate();
 
