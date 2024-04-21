@@ -266,7 +266,7 @@ public class DeleteController implements Initializable
         tableViewTournaments.getItems().clear();
 
         ObservableList<Tournament> allTournaments = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT * FROM autori";
+        String sqlQuery = "SELECT * FROM turniri";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
@@ -295,7 +295,7 @@ public class DeleteController implements Initializable
         tableViewNews.getItems().clear();
 
         ObservableList<News> allNews = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT * FROM autori";
+        String sqlQuery = "SELECT * FROM vesti";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
