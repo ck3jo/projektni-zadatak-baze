@@ -149,7 +149,7 @@ INSERT INTO igraci(Ime, Nadimak, Prezime, DatumRodjenja, Nacionalnost, IDTima, R
 ("Dzhami", "Jame", "Ali", '1998-09-23', "Rusija", 10, '1.12', 1, 1),
 ("David", "n0rb3r7", "Danielyan", '2001-03-11', "Rusija", 10, '1.07', 1, 0),
 ("Petr", "fame", "Bolyshev", '2003-03-03', "Rusija", 10, '1.14', 1, 0),
-("", "", "", '', "", 11, '', , ),
+("Nicolai", "device", "Reedtz", '1995-09-08', "Danska", 11, '1.05', 4, 2),
 ("", "", "", '', "", 11, '', , ),
 ("", "", "", '', "", 11, '', , ),
 ("", "", "", '', "", 11, '', , ),

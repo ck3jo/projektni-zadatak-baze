@@ -1,13 +1,16 @@
 package project.databasegui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class AddController
+public class AddController implements Initializable
 {
     public Scanner readConfig = new Scanner("config.txt");
 
@@ -21,6 +24,7 @@ public class AddController
     public TextField inputPlayerNick;
     public TextField inputPlayerSurname;
     public DatePicker inputPlayerBirthDate;
+    public TextField inputPlayerNationality;
     public TextField inputPlayerTeamName;
     public TextField inputPlayerRating;
     public TextField inputPlayerMajorTrophies;
@@ -271,12 +275,13 @@ public class AddController
         String playerNick = inputPlayerNick.getText();
         String playerSurname = sanitizeInputForNumbers(inputPlayerSurname.getText());
         LocalDate playerBirthDate = Date.valueOf(inputPlayerBirthDate.getValue()).toLocalDate();
+        String playerNationality = inputPlayerNationality.getText();
         int playerTeamID = getTeamIDFromName(inputPlayerTeamName.getText());
         double playerRating = Double.parseDouble(inputPlayerRating.getText());
         int playerMajorTrophies = Integer.parseInt(inputPlayerMajorTrophies.getText());
         int playerMajorMVPs = Integer.parseInt(inputPlayerMajorMVPs.getText());
 
-        String sqlQuery = "INSERT INTO igraci(Ime, Nadimak, Prezime, DatumRodjenja, IDTima, Rejting, MajorTrofeji, MajorMVP) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        String sqlQuery = "INSERT INTO igraci(Ime, Nadimak, Prezime, DatumRodjenja, Nacionalnost, IDTima, Rejting, MajorTrofeji, MajorMVP) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
@@ -286,10 +291,11 @@ public class AddController
             ps.setString(2, playerNick);
             ps.setString(3, playerSurname);
             ps.setDate(4, Date.valueOf(playerBirthDate));
-            ps.setInt(5, playerTeamID);
-            ps.setDouble(6, playerRating);
-            ps.setInt(7, playerMajorTrophies);
-            ps.setInt(8,playerMajorMVPs);
+            ps.setString(5, playerNationality);
+            ps.setInt(6, playerTeamID);
+            ps.setDouble(7, playerRating);
+            ps.setInt(8, playerMajorTrophies);
+            ps.setInt(9, playerMajorMVPs);
 
             int changedRows = ps.executeUpdate();
 
@@ -479,5 +485,11 @@ public class AddController
                 showSuccessAlert();
             }
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
+    {
+
     }
 }

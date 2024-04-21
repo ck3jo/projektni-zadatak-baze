@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
-<?import java.net.URL?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Separator?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
-<VBox spacing="20.0"
-      xmlns="http://javafx.com/javafx/8.0.171"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="project.databasegui.AddController"
-      id="main-window">
+<VBox id="main-window" prefHeight="720.0" prefWidth="1280.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.databasegui.AddController">
 
     <Button onAction="#returnToMain" styleClass="exit-button">
         <graphic>
@@ -29,390 +16,296 @@
         </graphic>
     </Button>
 
-    <TabPane tabClosingPolicy="UNAVAILABLE" styleClass="tab-pane">
+    <TabPane styleClass="tab-pane" tabClosingPolicy="UNAVAILABLE" prefHeight="600">
         <Tab text="Autori">
             <VBox styleClass="table-background">
-                <Label styleClass="field-label" text="Ime"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime autora..."
-                           fx:id="inputAuthorName"/>
+                <Label styleClass="field-label" text="Ime" />
+                <TextField fx:id="inputAuthorName" promptText="Unesite ime autora..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Nadimak"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite nadimak autora..."
-                           fx:id="inputAuthorNick"/>
+                <Label styleClass="field-label" text="Nadimak" />
+                <TextField fx:id="inputAuthorNick" promptText="Unesite nadimak autora..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Prezime"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite prezime autora..."
-                           fx:id="inputAuthorSurname"/>
+                <Label styleClass="field-label" text="Prezime" />
+                <TextField fx:id="inputAuthorSurname" promptText="Unesite prezime autora..." styleClass="input-field" />
 
-                <Region VBox.vgrow="ALWAYS"/>
+                <Region VBox.vgrow="ALWAYS" />
 
-                <Button text="Potvrdi unos" onAction="#sendAuthorDataToDatabase"/>
+                <Button onAction="#sendAuthorDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
-                    <Insets bottom="10"
-                            left="10"
-                            right="10"
-                            top="10"/>
+                    <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
             </VBox>
         </Tab>
 
         <Tab text="Igrači">
             <VBox styleClass="table-background">
-                <Label styleClass="field-label" text="Ime"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime igrača..."
-                           fx:id="inputPlayerName"/>
+                <Label styleClass="field-label" text="Ime" />
+                <TextField fx:id="inputPlayerName" promptText="Unesite ime igrača..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Nadimak"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite nadimak igrača..."
-                           fx:id="inputPlayerNick"/>
+                <Label styleClass="field-label" text="Nadimak" />
+                <TextField fx:id="inputPlayerNick" promptText="Unesite nadimak igrača..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Prezime"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite prezime igrača..."
-                           fx:id="inputPlayerSurname"/>
+                <Label styleClass="field-label" text="Prezime" />
+                <TextField fx:id="inputPlayerSurname" promptText="Unesite prezime igrača..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Datum rođenja"/>
-                <DatePicker styleClass="date-input"
-                            promptText="Unesite datum rođenja..."
-                            fx:id="inputPlayerBirthDate"/>
+                <Label styleClass="field-label" text="Datum rođenja" />
+                <DatePicker fx:id="inputPlayerBirthDate" promptText="Unesite datum rođenja..." styleClass="date-input" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Tim"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime tima..."
-                           fx:id="inputPlayerTeamName"/>
+                <Label styleClass="field-label" text="Nacionalnost" />
+                <TextField fx:id="inputPlayerNationality" promptText="Unesite nacionalnost igrača..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Rejting"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite rejting..."
-                           fx:id="inputPlayerRating"/>
+                <Label styleClass="field-label" text="Tim" />
+                <TextField fx:id="inputPlayerTeamName" promptText="Unesite ime tima..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Major trofeji"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite broj major trofeja..."
-                           fx:id="inputPlayerMajorTrophies"/>
+                <Label styleClass="field-label" text="Rejting" />
+                <TextField fx:id="inputPlayerRating" promptText="Unesite rejting..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Major MVP medalje"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite broj major MVP medalja..."
-                           fx:id="inputPlayerMajorMVPs"/>
+                <Label styleClass="field-label" text="Major trofeji" />
+                <TextField fx:id="inputPlayerMajorTrophies" promptText="Unesite broj major trofeja..." styleClass="input-field" />
 
-                <Region VBox.vgrow="ALWAYS"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Button text="Potvrdi unos" onAction="#sendPlayerDataToDatabase"/>
+                <Label styleClass="field-label" text="Major MVP medalje" />
+                <TextField fx:id="inputPlayerMajorMVPs" promptText="Unesite broj major MVP medalja..." styleClass="input-field" />
+
+                <Region VBox.vgrow="ALWAYS" />
+
+                <Button onAction="#sendPlayerDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
-                    <Insets bottom="10"
-                            left="10"
-                            right="10"
-                            top="10"/>
+                    <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
             </VBox>
         </Tab>
 
         <Tab text="Mečevi">
             <VBox styleClass="table-background">
-                <Label styleClass="field-label" text="Ime prvog tima"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime prvog tima..."
-                           fx:id="inputMatchFirstTeamName"/>
+                <Label styleClass="field-label" text="Ime prvog tima" />
+                <TextField fx:id="inputMatchFirstTeamName" promptText="Unesite ime prvog tima..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Ime drugog tima"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime drugog tima..."
-                           fx:id="inputMatchSecondTeamName"/>
+                <Label styleClass="field-label" text="Ime drugog tima" />
+                <TextField fx:id="inputMatchSecondTeamName" promptText="Unesite ime drugog tima..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Ime turnira"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime turnira..."
-                           fx:id="inputMatchTournamentName"/>
+                <Label styleClass="field-label" text="Ime turnira" />
+                <TextField fx:id="inputMatchTournamentName" promptText="Unesite ime turnira..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Broj mapa"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite broj mapa..."
-                           fx:id="inputMatchNumMaps"/>
+                <Label styleClass="field-label" text="Broj mapa" />
+                <TextField fx:id="inputMatchNumMaps" promptText="Unesite broj mapa..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Rezultat"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite rezultat..."
-                           fx:id="inputMatchScore"/>
+                <Label styleClass="field-label" text="Rezultat" />
+                <TextField fx:id="inputMatchScore" promptText="Unesite rezultat..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Datum meča"/>
-                <DatePicker styleClass="date-input"
-                            promptText="Unesite datum meča..."
-                            fx:id="inputMatchDate"/>
+                <Label styleClass="field-label" text="Datum meča" />
+                <DatePicker fx:id="inputMatchDate" promptText="Unesite datum meča..." styleClass="date-input" />
 
-                <Region VBox.vgrow="ALWAYS"/>
+                <Region VBox.vgrow="ALWAYS" />
 
-                <Button text="Potvrdi unos" onAction="#sendMatchDataToDatabase"/>
+                <Button onAction="#sendMatchDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
-                    <Insets bottom="10"
-                            left="10"
-                            right="10"
-                            top="10"/>
+                    <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
             </VBox>
         </Tab>
 
         <Tab text="Timovi">
             <VBox styleClass="table-background">
-                <Label styleClass="field-label" text="Ime"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime tima..."
-                           fx:id="inputTeamName"/>
+                <Label styleClass="field-label" text="Ime" />
+                <TextField fx:id="inputTeamName" promptText="Unesite ime tima..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Ranking pozicija"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ranking poziciju tima..."
-                           fx:id="inputTeamRanking"/>
+                <Label styleClass="field-label" text="Ranking pozicija" />
+                <TextField fx:id="inputTeamRanking" promptText="Unesite ranking poziciju tima..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Broj major trofeja"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite broj major trofeja tima..."
-                           fx:id="inputTeamMajorTrophies"/>
+                <Label styleClass="field-label" text="Broj major trofeja" />
+                <TextField fx:id="inputTeamMajorTrophies" promptText="Unesite broj major trofeja tima..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Region"/>
+                <Label styleClass="field-label" text="Region" />
                 <ChoiceBox fx:id="inputTeamRegion" value="Evropa">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Evropa"/>
-                            <String fx:value="Severna Amerika"/>
-                            <String fx:value="Južna Amerika"/>
-                            <String fx:value="Azija"/>
-                            <String fx:value="Okeanija"/>
-                            <String fx:value="Afrika"/>
+                            <String fx:value="Evropa" />
+                            <String fx:value="Severna Amerika" />
+                            <String fx:value="Južna Amerika" />
+                            <String fx:value="Azija" />
+                            <String fx:value="Okeanija" />
+                            <String fx:value="Afrika" />
                         </FXCollections>
                     </items>
                 </ChoiceBox>
 
-                <Region VBox.vgrow="ALWAYS"/>
+                <Region VBox.vgrow="ALWAYS" />
 
-                <Button text="Potvrdi unos" onAction="#sendTeamDataToDatabase"/>
+                <Button onAction="#sendTeamDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
-                    <Insets bottom="10"
-                            left="10"
-                            right="10"
-                            top="10"/>
+                    <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
             </VBox>
         </Tab>
 
         <Tab text="Transferi">
             <VBox styleClass="table-background">
-                <Label styleClass="field-label" text="Nadimak igrača"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite nadimak igrača..."
-                           fx:id="inputTransferPlayerNick"/>
+                <Label styleClass="field-label" text="Nadimak igrača" />
+                <TextField fx:id="inputTransferPlayerNick" promptText="Unesite nadimak igrača..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Ime starog tima"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime starog tima..."
-                           fx:id="inputTransferOldTeamName"/>
+                <Label styleClass="field-label" text="Ime starog tima" />
+                <TextField fx:id="inputTransferOldTeamName" promptText="Unesite ime starog tima..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Ime novog tima"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime novog tima..."
-                           fx:id="inputTransferNewTeamName"/>
+                <Label styleClass="field-label" text="Ime novog tima" />
+                <TextField fx:id="inputTransferNewTeamName" promptText="Unesite ime novog tima..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Datum transfera"/>
-                <DatePicker styleClass="date-input"
-                            promptText="Unesite datum transfera..."
-                            fx:id="inputTransferDate"/>
+                <Label styleClass="field-label" text="Datum transfera" />
+                <DatePicker fx:id="inputTransferDate" promptText="Unesite datum transfera..." styleClass="date-input" />
 
-                <Region VBox.vgrow="ALWAYS"/>
+                <Region VBox.vgrow="ALWAYS" />
 
-                <Button text="Potvrdi unos" onAction="#sendTransferDataToDatabase"/>
+                <Button onAction="#sendTransferDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
-                    <Insets bottom="10"
-                            left="10"
-                            right="10"
-                            top="10"/>
+                    <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
             </VBox>
         </Tab>
 
         <Tab text="Treneri">
             <VBox styleClass="table-background">
-                <Label styleClass="field-label" text="Ime"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime trenera..."
-                           fx:id="inputCoachName"/>
+                <Label styleClass="field-label" text="Ime" />
+                <TextField fx:id="inputCoachName" promptText="Unesite ime trenera..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Nadimak"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite nadimak trenera..."
-                           fx:id="inputCoachNick"/>
+                <Label styleClass="field-label" text="Nadimak" />
+                <TextField fx:id="inputCoachNick" promptText="Unesite nadimak trenera..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Prezime"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite prezime trenera..."
-                           fx:id="inputCoachSurname"/>
+                <Label styleClass="field-label" text="Prezime" />
+                <TextField fx:id="inputCoachSurname" promptText="Unesite prezime trenera..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Ime tima"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime tima..."
-                           fx:id="inputCoachTeamName"/>
+                <Label styleClass="field-label" text="Ime tima" />
+                <TextField fx:id="inputCoachTeamName" promptText="Unesite ime tima..." styleClass="input-field" />
 
-                <Region VBox.vgrow="ALWAYS"/>
+                <Region VBox.vgrow="ALWAYS" />
 
-                <Button text="Potvrdi unos" onAction="#sendCoachDataToDatabase"/>
+                <Button onAction="#sendCoachDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
-                    <Insets bottom="10"
-                            left="10"
-                            right="10"
-                            top="10"/>
+                    <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
             </VBox>
         </Tab>
 
         <Tab text="Turniri">
             <VBox styleClass="table-background">
-                <Label styleClass="field-label" text="Ime"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime turnira..."
-                           fx:id="inputTournamentName"/>
+                <Label styleClass="field-label" text="Ime" />
+                <TextField fx:id="inputTournamentName" promptText="Unesite ime turnira..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Datum početka"/>
-                <DatePicker styleClass="date-input"
-                            promptText="Unesite datum početka..."
-                            fx:id="inputTournamentStartDate"/>
+                <Label styleClass="field-label" text="Datum početka" />
+                <DatePicker fx:id="inputTournamentStartDate" promptText="Unesite datum početka..." styleClass="date-input" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Datum završetka"/>
-                <DatePicker styleClass="date-input"
-                            promptText="Unesite datum završetka..."
-                            fx:id="inputTournamentEndDate"/>
+                <Label styleClass="field-label" text="Datum završetka" />
+                <DatePicker fx:id="inputTournamentEndDate" promptText="Unesite datum završetka..." styleClass="date-input" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Mesto igranja"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite mesto igranja..."
-                           fx:id="inputTournamentLocation"/>
+                <Label styleClass="field-label" text="Mesto igranja" />
+                <TextField fx:id="inputTournamentLocation" promptText="Unesite mesto igranja..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Nagradni fond"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite nagradni fond..."
-                           fx:id="inputTournamentPrizePool"/>
+                <Label styleClass="field-label" text="Nagradni fond" />
+                <TextField fx:id="inputTournamentPrizePool" promptText="Unesite nagradni fond..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Veći turnir?"/>
-                <CheckBox styleClass="input-field" fx:id="inputTournamentSizeYesNo"/>
+                <Label styleClass="field-label" text="Veći turnir?" />
+                <CheckBox fx:id="inputTournamentSizeYesNo" styleClass="input-field" />
 
-                <Region VBox.vgrow="ALWAYS"/>
+                <Region VBox.vgrow="ALWAYS" />
 
-                <Button text="Potvrdi unos" onAction="#sendTournamentDataToDatabase"/>
+                <Button onAction="#sendTournamentDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
-                    <Insets bottom="10"
-                            left="10"
-                            right="10"
-                            top="10"/>
+                    <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
             </VBox>
         </Tab>
 
         <Tab text="Vesti">
             <VBox styleClass="table-background">
-                <Label styleClass="field-label" text="Naslov"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite naslov artikla..."
-                           fx:id="inputNewsTitle"/>
+                <Label styleClass="field-label" text="Naslov" />
+                <TextField fx:id="inputNewsTitle" promptText="Unesite naslov artikla..." styleClass="input-field" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Datum objavljivanja"/>
-                <DatePicker styleClass="date-input"
-                            promptText="Unesite datum objavljivanja..."
-                            fx:id="inputNewsDate"/>
+                <Label styleClass="field-label" text="Datum objavljivanja" />
+                <DatePicker fx:id="inputNewsDate" promptText="Unesite datum objavljivanja..." styleClass="date-input" />
 
-                <Separator valignment="BOTTOM" styleClass="separator"/>
+                <Separator styleClass="separator" valignment="BOTTOM" />
 
-                <Label styleClass="field-label" text="Ime autora"/>
-                <TextField styleClass="input-field"
-                           promptText="Unesite ime autora..."
-                           fx:id="inputNewsAuthorName"/>
+                <Label styleClass="field-label" text="Ime autora" />
+                <TextField fx:id="inputNewsAuthorName" promptText="Unesite ime autora..." styleClass="input-field" />
 
-                <Region VBox.vgrow="ALWAYS"/>
+                <Region VBox.vgrow="ALWAYS" />
 
-                <Button text="Potvrdi unos" onAction="#sendNewsDataToDatabase"/>
+                <Button onAction="#sendNewsDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
-                    <Insets bottom="10"
-                            left="10"
-                            right="10"
-                            top="10"/>
+                    <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
             </VBox>
         </Tab>
     </TabPane>
 
     <padding>
-        <Insets bottom="160.0"
-                left="20.0"
-                right="20.0"
-                top="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
     <stylesheets>

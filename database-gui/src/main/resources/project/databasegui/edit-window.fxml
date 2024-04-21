@@ -6,6 +6,7 @@
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.*?>
+<?import javafx.scene.control.Tooltip?>
 
 <VBox id="main-window" prefHeight="720.0" prefWidth="1280.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.databasegui.EditController">
 
@@ -22,7 +23,6 @@
                     <TableColumn minWidth="413"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime">
                         <cellValueFactory>
                             <PropertyValueFactory property="name" />
@@ -32,7 +32,6 @@
                     <TableColumn minWidth="413"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Nadimak">
                         <cellValueFactory>
                             <PropertyValueFactory property="nick" />
@@ -42,7 +41,6 @@
                     <TableColumn minWidth="414"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Prezime">
                         <cellValueFactory>
                             <PropertyValueFactory property="surname" />
@@ -58,7 +56,6 @@
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime">
                         <cellValueFactory>
                             <PropertyValueFactory property="name" />
@@ -68,7 +65,6 @@
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Nadimak">
                         <cellValueFactory>
                             <PropertyValueFactory property="nick" />
@@ -78,7 +74,6 @@
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Prezime">
                         <cellValueFactory>
                             <PropertyValueFactory property="surname" />
@@ -87,18 +82,22 @@
 
                     <TableColumn minWidth="155"
                                  reorderable="false"
-                                 resizable="false"
-                                 sortable="false"
-                                 text="Datum rođenja">
+                                 resizable="false">
                         <cellValueFactory>
                             <PropertyValueFactory property="birthDate" />
                         </cellValueFactory>
+                        <graphic>
+                            <Label text="Datum rođenja">
+                                <tooltip>
+                                    <Tooltip text="Format datuma je YYYY-MM-DD."/>
+                                </tooltip>
+                            </Label>
+                        </graphic>
                     </TableColumn>
 
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Nacionalnost">
                         <cellValueFactory>
                             <PropertyValueFactory property="nationality" />
@@ -108,7 +107,6 @@
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime tima">
                         <cellValueFactory>
                             <PropertyValueFactory property="teamName" />
@@ -118,7 +116,6 @@
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Major trofeji">
                         <cellValueFactory>
                             <PropertyValueFactory property="majorTrophies" />
@@ -128,7 +125,6 @@
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Major MVP medalje">
                         <cellValueFactory>
                             <PropertyValueFactory property="majorMVPs" />
@@ -144,7 +140,6 @@
                     <TableColumn minWidth="206"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime prvog tima">
                         <cellValueFactory>
                             <PropertyValueFactory property="firstTeamName" />
@@ -154,7 +149,6 @@
                     <TableColumn minWidth="206"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime drugog tima">
                         <cellValueFactory>
                             <PropertyValueFactory property="secondTeamName" />
@@ -163,8 +157,7 @@
 
                     <TableColumn minWidth="207"
                                  reorderable="false"
-                                 resizable=""
-                                 sortable="false"
+                                 resizable="false"
                                  text="Ime turnira">
                         <cellValueFactory>
                             <PropertyValueFactory property="tournamentName" />
@@ -174,7 +167,6 @@
                     <TableColumn minWidth="207"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Broj mapa">
                         <cellValueFactory>
                             <PropertyValueFactory property="numberOfMaps" />
@@ -184,7 +176,6 @@
                     <TableColumn minWidth="207"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Rezultat">
                         <cellValueFactory>
                             <PropertyValueFactory property="score" />
@@ -193,12 +184,17 @@
 
                     <TableColumn minWidth="207"
                                  reorderable="false"
-                                 resizable="false"
-                                 sortable="false"
-                                 text="Datum meča">
+                                 resizable="false">
                         <cellValueFactory>
                             <PropertyValueFactory property="matchDate" />
                         </cellValueFactory>
+                        <graphic>
+                            <Label text="Datum meča">
+                                <tooltip>
+                                    <Tooltip text="Format datuma je YYYY-MM-DD."/>
+                                </tooltip>
+                            </Label>
+                        </graphic>
                     </TableColumn>
                 </columns>
             </TableView>
@@ -210,7 +206,6 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime">
                         <cellValueFactory>
                             <PropertyValueFactory property="name" />
@@ -220,7 +215,6 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Rang pozicija">
                         <cellValueFactory>
                             <PropertyValueFactory property="ranking" />
@@ -230,7 +224,6 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Major trofeji">
                         <cellValueFactory>
                             <PropertyValueFactory property="majorTrophies" />
@@ -240,7 +233,6 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Region">
                         <cellValueFactory>
                             <PropertyValueFactory property="region" />
@@ -256,7 +248,6 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime igrača">
                         <cellValueFactory>
                             <PropertyValueFactory property="playerName" />
@@ -266,7 +257,6 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime starog tima">
                         <cellValueFactory>
                             <PropertyValueFactory property="oldTeam" />
@@ -276,7 +266,6 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime novog tima">
                         <cellValueFactory>
                             <PropertyValueFactory property="newTeam" />
@@ -286,11 +275,17 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Datum">
                         <cellValueFactory>
                             <PropertyValueFactory property="date" />
                         </cellValueFactory>
+                        <graphic>
+                            <Label text="Datum">
+                                <tooltip>
+                                    <Tooltip text="Format datuma je YYYY-MM-DD."/>
+                                </tooltip>
+                            </Label>
+                        </graphic>
                     </TableColumn>
                 </columns>
             </TableView>
@@ -302,7 +297,6 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime">
                         <cellValueFactory>
                             <PropertyValueFactory property="name" />
@@ -312,7 +306,6 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Nadimak">
                         <cellValueFactory>
                             <PropertyValueFactory property="nick" />
@@ -322,7 +315,6 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Prezime">
                         <cellValueFactory>
                             <PropertyValueFactory property="surname" />
@@ -332,7 +324,6 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime tima">
                         <cellValueFactory>
                             <PropertyValueFactory property="teamName" />
@@ -348,7 +339,6 @@
                     <TableColumn minWidth="206"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime">
                         <cellValueFactory>
                             <PropertyValueFactory property="name" />
@@ -357,28 +347,37 @@
 
                     <TableColumn minWidth="206"
                                  reorderable="false"
-                                 resizable="false"
-                                 sortable="false"
-                                 text="Datum početka">
+                                 resizable="false">
                         <cellValueFactory>
                             <PropertyValueFactory property="startDate" />
                         </cellValueFactory>
+                        <graphic>
+                            <Label text="Datum početka">
+                                <tooltip>
+                                    <Tooltip text="Format datuma je YYYY-MM-DD."/>
+                                </tooltip>
+                            </Label>
+                        </graphic>
                     </TableColumn>
 
                     <TableColumn minWidth="207"
                                  reorderable="false"
-                                 resizable="false"
-                                 sortable="false"
-                                 text="Datum završetka">
+                                 resizable="false">
                         <cellValueFactory>
                             <PropertyValueFactory property="endDate" />
                         </cellValueFactory>
+                        <graphic>
+                            <Label text="Datum početka">
+                                <tooltip>
+                                    <Tooltip text="Format datuma je YYYY-MM-DD."/>
+                                </tooltip>
+                            </Label>
+                        </graphic>
                     </TableColumn>
 
                     <TableColumn minWidth="207"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Lokacija">
                         <cellValueFactory>
                             <PropertyValueFactory property="tlocation" />
@@ -388,7 +387,6 @@
                     <TableColumn minWidth="207"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Nagradni fond">
                         <cellValueFactory>
                             <PropertyValueFactory property="prizePool" />
@@ -398,7 +396,6 @@
                     <TableColumn minWidth="207"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Veliki turnir?">
                         <cellValueFactory>
                             <PropertyValueFactory property="bigYesNo" />
@@ -414,7 +411,6 @@
                     <TableColumn minWidth="413"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Naslov">
                         <cellValueFactory>
                             <PropertyValueFactory property="title" />
@@ -423,18 +419,22 @@
 
                     <TableColumn minWidth="413"
                                  reorderable="false"
-                                 resizable="false"
-                                 sortable="false"
-                                 text="Datum objavljivanja">
+                                 resizable="false">
                         <cellValueFactory>
                             <PropertyValueFactory property="date" />
                         </cellValueFactory>
+                        <graphic>
+                            <Label text="Datum objavljivanja">
+                                <tooltip>
+                                    <Tooltip text="Format datuma je YYYY-MM-DD."/>
+                                </tooltip>
+                            </Label>
+                        </graphic>
                     </TableColumn>
 
                     <TableColumn minWidth="414"
                                  reorderable="false"
                                  resizable="false"
-                                 sortable="false"
                                  text="Ime autora">
                         <cellValueFactory>
                             <PropertyValueFactory property="authorName" />
