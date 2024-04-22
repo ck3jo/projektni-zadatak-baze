@@ -68,7 +68,8 @@
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Nadimak">
+                                 text="Nadimak"
+                                 fx:id="tableColumnPlayerNick">
                         <cellValueFactory>
                             <PropertyValueFactory property="nick" />
                         </cellValueFactory>
@@ -77,7 +78,8 @@
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Prezime">
+                                 text="Prezime"
+                                 fx:id="tableColumnPlayerSurname">
                         <cellValueFactory>
                             <PropertyValueFactory property="surname" />
                         </cellValueFactory>
@@ -85,7 +87,8 @@
 
                     <TableColumn minWidth="155"
                                  reorderable="false"
-                                 resizable="false">
+                                 resizable="false"
+                                 fx:id="tableColumnPlayerBirthDate">
                         <cellValueFactory>
                             <PropertyValueFactory property="birthDate" />
                         </cellValueFactory>
@@ -101,7 +104,8 @@
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Nacionalnost">
+                                 text="Nacionalnost"
+                                 fx:id="tableColumnPlayerNationality">
                         <cellValueFactory>
                             <PropertyValueFactory property="nationality" />
                         </cellValueFactory>
@@ -110,7 +114,8 @@
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Ime tima">
+                                 text="Ime tima"
+                                 fx:id="tableColumnPlayerTeamName">
                         <cellValueFactory>
                             <PropertyValueFactory property="teamName" />
                         </cellValueFactory>
@@ -119,7 +124,8 @@
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Major trofeji">
+                                 text="Major trofeji"
+                                 fx:id="tableColumnPlayerMajorTrophies">
                         <cellValueFactory>
                             <PropertyValueFactory property="majorTrophies" />
                         </cellValueFactory>
@@ -128,7 +134,8 @@
                     <TableColumn minWidth="155"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Major MVP medalje">
+                                 text="Major MVP medalje"
+                                 fx:id="tableColumnPlayerMajorMVPs">
                         <cellValueFactory>
                             <PropertyValueFactory property="majorMVPs" />
                         </cellValueFactory>
@@ -143,7 +150,8 @@
                     <TableColumn minWidth="206"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Ime prvog tima">
+                                 text="Ime prvog tima"
+                                 fx:id="tableColumnMatchFirstTeamName">
                         <cellValueFactory>
                             <PropertyValueFactory property="firstTeamName" />
                         </cellValueFactory>
@@ -152,7 +160,8 @@
                     <TableColumn minWidth="206"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Ime drugog tima">
+                                 text="Ime drugog tima"
+                                 fx:id="tableColumnMatchSecondTeamName">
                         <cellValueFactory>
                             <PropertyValueFactory property="secondTeamName" />
                         </cellValueFactory>
@@ -161,7 +170,8 @@
                     <TableColumn minWidth="207"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Ime turnira">
+                                 text="Ime turnira"
+                                 fx:id="tableColumnMatchTournamentName">
                         <cellValueFactory>
                             <PropertyValueFactory property="tournamentName" />
                         </cellValueFactory>
@@ -170,7 +180,8 @@
                     <TableColumn minWidth="207"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Broj mapa">
+                                 text="Broj mapa"
+                                 fx:id="tableColumnMatchNumberOfMaps">
                         <cellValueFactory>
                             <PropertyValueFactory property="numberOfMaps" />
                         </cellValueFactory>
@@ -179,7 +190,8 @@
                     <TableColumn minWidth="207"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Rezultat">
+                                 text="Rezultat"
+                                 fx:id="tableColumnMatchScore">
                         <cellValueFactory>
                             <PropertyValueFactory property="score" />
                         </cellValueFactory>
@@ -187,7 +199,8 @@
 
                     <TableColumn minWidth="207"
                                  reorderable="false"
-                                 resizable="false">
+                                 resizable="false"
+                                 fx:id="tableColumnMatchDate">
                         <cellValueFactory>
                             <PropertyValueFactory property="matchDate" />
                         </cellValueFactory>
@@ -209,7 +222,8 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Ime">
+                                 text="Ime"
+                                 fx:id="tableColumnTeamName">
                         <cellValueFactory>
                             <PropertyValueFactory property="name" />
                         </cellValueFactory>
@@ -218,7 +232,8 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Rang pozicija">
+                                 text="Rang pozicija"
+                                 fx:id="tableColumnTeamRanking">
                         <cellValueFactory>
                             <PropertyValueFactory property="ranking" />
                         </cellValueFactory>
@@ -227,7 +242,8 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Major trofeji">
+                                 text="Major trofeji"
+                                 fx:id="tableColumnTeamMajorTrophies">
                         <cellValueFactory>
                             <PropertyValueFactory property="majorTrophies" />
                         </cellValueFactory>
@@ -236,7 +252,8 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Region">
+                                 text="Region"
+                                 fx:id="tableColumnTeamRegion">
                         <cellValueFactory>
                             <PropertyValueFactory property="region" />
                         </cellValueFactory>
@@ -251,7 +268,8 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Ime igrača">
+                                 text="Ime igrača"
+                                 fx:id="tableColumnTransferPlayerName">
                         <cellValueFactory>
                             <PropertyValueFactory property="playerName" />
                         </cellValueFactory>
@@ -260,7 +278,8 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Ime starog tima">
+                                 text="Ime starog tima"
+                                 fx:id="tableColumnTransferOldTeamName">
                         <cellValueFactory>
                             <PropertyValueFactory property="oldTeam" />
                         </cellValueFactory>
@@ -269,7 +288,8 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Ime novog tima">
+                                 text="Ime novog tima"
+                                 fx:id="tableColumnTransferNewTeamName">
                         <cellValueFactory>
                             <PropertyValueFactory property="newTeam" />
                         </cellValueFactory>
@@ -278,7 +298,8 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Datum">
+                                 text="Datum"
+                                 fx:id="tableColumnTransferDate">
                         <cellValueFactory>
                             <PropertyValueFactory property="date" />
                         </cellValueFactory>
@@ -300,7 +321,8 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Ime">
+                                 text="Ime"
+                                 fx:id="tableColumnCoachName">
                         <cellValueFactory>
                             <PropertyValueFactory property="name" />
                         </cellValueFactory>
@@ -309,7 +331,8 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Nadimak">
+                                 text="Nadimak"
+                                 fx:id="tableColumnCoachNick">
                         <cellValueFactory>
                             <PropertyValueFactory property="nick" />
                         </cellValueFactory>
@@ -318,7 +341,8 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Prezime">
+                                 text="Prezime"
+                                 fx:id="tableColumnCoachSurname">
                         <cellValueFactory>
                             <PropertyValueFactory property="surname" />
                         </cellValueFactory>
@@ -327,7 +351,8 @@
                     <TableColumn minWidth="310"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Ime tima">
+                                 text="Ime tima"
+                                 fx:id="tableColumnCoachTeamName">
                         <cellValueFactory>
                             <PropertyValueFactory property="teamName" />
                         </cellValueFactory>
@@ -342,7 +367,8 @@
                     <TableColumn minWidth="206"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Ime">
+                                 text="Ime"
+                                 fx:id="tableColumnTournamentName">
                         <cellValueFactory>
                             <PropertyValueFactory property="name" />
                         </cellValueFactory>
@@ -350,7 +376,8 @@
 
                     <TableColumn minWidth="206"
                                  reorderable="false"
-                                 resizable="false">
+                                 resizable="false"
+                                 fx:id="tableColumnTournamentStartDate">
                         <cellValueFactory>
                             <PropertyValueFactory property="startDate" />
                         </cellValueFactory>
@@ -365,7 +392,8 @@
 
                     <TableColumn minWidth="207"
                                  reorderable="false"
-                                 resizable="false">
+                                 resizable="false"
+                                 fx:id="tableColumnTournamentEndDate">
                         <cellValueFactory>
                             <PropertyValueFactory property="endDate" />
                         </cellValueFactory>
@@ -381,16 +409,18 @@
                     <TableColumn minWidth="207"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Lokacija">
+                                 text="Lokacija"
+                                 fx:id="tableColumnTournamentLocation">
                         <cellValueFactory>
-                            <PropertyValueFactory property="tlocation" />
+                            <PropertyValueFactory property="location" />
                         </cellValueFactory>
                     </TableColumn>
 
                     <TableColumn minWidth="207"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Nagradni fond">
+                                 text="Nagradni fond"
+                                 fx:id="tableColumnTournamentPrizePool">
                         <cellValueFactory>
                             <PropertyValueFactory property="prizePool" />
                         </cellValueFactory>
@@ -399,9 +429,10 @@
                     <TableColumn minWidth="207"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Veliki turnir?">
+                                 text="Veliki turnir?"
+                                 fx:id="tableColumnTournamentIsBig">
                         <cellValueFactory>
-                            <PropertyValueFactory property="bigYesNo" />
+                            <PropertyValueFactory property="isBig" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -414,7 +445,8 @@
                     <TableColumn minWidth="413"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Naslov">
+                                 text="Naslov"
+                                 fx:id="tableColumnNewsTitle">
                         <cellValueFactory>
                             <PropertyValueFactory property="title" />
                         </cellValueFactory>
@@ -422,7 +454,8 @@
 
                     <TableColumn minWidth="413"
                                  reorderable="false"
-                                 resizable="false">
+                                 resizable="false"
+                                 fx:id="tableColumnNewsDate">
                         <cellValueFactory>
                             <PropertyValueFactory property="date" />
                         </cellValueFactory>
@@ -438,7 +471,8 @@
                     <TableColumn minWidth="414"
                                  reorderable="false"
                                  resizable="false"
-                                 text="Ime autora">
+                                 text="Ime autora"
+                                 fx:id="tableColumnNewsAuthorName">
                         <cellValueFactory>
                             <PropertyValueFactory property="authorName" />
                         </cellValueFactory>

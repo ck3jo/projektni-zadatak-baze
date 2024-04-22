@@ -9,7 +9,7 @@ public class Tournament
     private LocalDate endDate;
     private String location;
     private int prizePool;
-    private boolean bigYesNo;
+    private boolean isBig;
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -26,16 +26,16 @@ public class Tournament
     public int getPrizePool() { return prizePool; }
     public void setPrizePool(int prizePool) { this.prizePool = prizePool; }
 
-    public boolean isBigYesNo() { return bigYesNo; }
-    public void setBigYesNo(boolean bigYesNo) { this.bigYesNo = bigYesNo; }
+    public boolean getIsBig() { return isBig; }
+    public void setIsBig(boolean isBig) { this.isBig = isBig; }
 
-    public Tournament(String name, LocalDate startDate, LocalDate endDate, String location, int prizePool, boolean bigYesNo)
+    public Tournament(String name, LocalDate startDate, LocalDate endDate, String location, int prizePool, boolean isBig)
     {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.location = location;
         this.prizePool = prizePool;
-        this.bigYesNo = bigYesNo;
+        this.isBig = isBig;
     }
 }

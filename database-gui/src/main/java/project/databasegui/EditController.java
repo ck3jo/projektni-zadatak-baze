@@ -2,7 +2,6 @@ package project.databasegui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -19,6 +18,15 @@ import java.util.Scanner;
 public class EditController implements Initializable
 {
     public Scanner readConfig = new Scanner("config.txt");
+
+    public ObservableList<Author> allAuthors = FXCollections.observableArrayList();
+    public ObservableList<Player> allPlayers = FXCollections.observableArrayList();
+    public ObservableList<Match> allMatches = FXCollections.observableArrayList();
+    public ObservableList<Team> allTeams = FXCollections.observableArrayList();
+    public ObservableList<Transfer> allTransfers = FXCollections.observableArrayList();
+    public ObservableList<Coach> allCoaches = FXCollections.observableArrayList();
+    public ObservableList<Tournament> allTournaments = FXCollections.observableArrayList();
+    public ObservableList<News> allNews = FXCollections.observableArrayList();
 
     public TableView<Author> tableViewAuthors;
     public TableColumn<Author, String> tableColumnAuthorName;
@@ -40,6 +48,7 @@ public class EditController implements Initializable
     public TableColumn<Match, String> tableColumnMatchSecondTeamName;
     public TableColumn<Match, String> tableColumnMatchTournamentName;
     public TableColumn<Match, Integer> tableColumnMatchNumberOfMaps;
+    public TableColumn<Match, String> tableColumnMatchScore;
     public TableColumn<Match, LocalDate> tableColumnMatchDate;
 
     public TableView<Team> tableViewTeams;
@@ -83,6 +92,34 @@ public class EditController implements Initializable
         tableColumnAuthorName.setOnEditCommit(
                 t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setName(t.getNewValue())
         );
+
+        tableColumnAuthorNick.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnAuthorNick.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setNick(t.getNewValue())
+        );
+
+        tableColumnAuthorSurname.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnAuthorSurname.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setSurname(t.getNewValue())
+        );
+
+
+        tableColumnPlayerName.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnPlayerName.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setName(t.getNewValue())
+        );
+
+        tableColumnPlayerNick.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnPlayerNick.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setNick(t.getNewValue())
+        );
+
+        tableColumnPlayerSurname.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnPlayerSurname.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setSurname(t.getNewValue())
+        );
+
+
     }
 
     private String getTeamNameFromID(int teamID) throws SQLException
@@ -157,7 +194,6 @@ public class EditController implements Initializable
     {
         tableViewAuthors.getItems().clear();
 
-        ObservableList<Author> allAuthors = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * FROM autori";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -179,7 +215,6 @@ public class EditController implements Initializable
     {
         tableViewPlayers.getItems().clear();
 
-        ObservableList<Player> allPlayers = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * FROM igraci";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -211,7 +246,6 @@ public class EditController implements Initializable
     {
         tableViewMatches.getItems().clear();
 
-        ObservableList<Match> allMatches = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * FROM mecevi";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -240,7 +274,6 @@ public class EditController implements Initializable
     {
         tableViewTeams.getItems().clear();
 
-        ObservableList<Team> allTeams = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * FROM timovi";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -267,7 +300,6 @@ public class EditController implements Initializable
     {
         tableViewTransfers.getItems().clear();
 
-        ObservableList<Transfer> allTransfers = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * FROM transferi";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -294,7 +326,6 @@ public class EditController implements Initializable
     {
         tableViewCoaches.getItems().clear();
 
-        ObservableList<Coach> allCoaches = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * FROM treneri";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -321,7 +352,6 @@ public class EditController implements Initializable
     {
         tableViewTournaments.getItems().clear();
 
-        ObservableList<Tournament> allTournaments = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * FROM turniri";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -350,7 +380,6 @@ public class EditController implements Initializable
     {
         tableViewNews.getItems().clear();
 
-        ObservableList<News> allNews = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * FROM vesti";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -399,6 +428,7 @@ public class EditController implements Initializable
             loadMatchData();
             loadTournamentData();
             loadNewsData();
+            loadTransferData();
         }
         catch (SQLException e)
         {
