@@ -15,6 +15,7 @@ module project.databasegui
     requires eu.hansolo.tilesfx;
     requires mysql.connector.j;
     requires annotations;
+    requires protobuf.java;
 
     opens project.databasegui to javafx.fxml;
     opens project.databasegui.tableitems to javafx.fxml;

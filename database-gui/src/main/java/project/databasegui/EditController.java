@@ -8,6 +8,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.LocalDateStringConverter;
 import project.databasegui.tableitems.*;
 import java.io.IOException;
 import java.net.URL;
@@ -106,7 +107,6 @@ public class EditController implements Initializable
                 t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setSurname(t.getNewValue())
         );
 
-
         tableColumnPlayerName.setCellFactory(TextFieldTableCell.forTableColumn());
         tableColumnPlayerName.setOnEditCommit(
                 t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setName(t.getNewValue())
@@ -120,6 +120,51 @@ public class EditController implements Initializable
         tableColumnPlayerSurname.setCellFactory(TextFieldTableCell.forTableColumn());
         tableColumnPlayerSurname.setOnEditCommit(
                 t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setSurname(t.getNewValue())
+        );
+
+        tableColumnPlayerBirthDate.setCellFactory(DatePickerCell::new);
+        tableColumnPlayerBirthDate.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setBirthDate(t.getNewValue())
+        );
+
+        tableColumnPlayerNationality.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnPlayerNationality.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setNationality(t.getNewValue())
+        );
+
+        tableColumnPlayerTeamName.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnPlayerTeamName.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setTeamName(t.getNewValue())
+        );
+
+        tableColumnPlayerMajorTrophies.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnPlayerMajorTrophies.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setMajorTrophies(Integer.parseInt(t.getNewValue()))
+        );
+
+        tableColumnPlayerMajorMVPs.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnPlayerMajorMVPs.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setMajorMVPs(Integer.parseInt(t.getNewValue()))
+        );
+
+        tableColumnMatchFirstTeamName.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnMatchFirstTeamName.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setFirstTeamName(t.getNewValue())
+        );
+
+        tableColumnMatchSecondTeamName.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnMatchSecondTeamName.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setSecondTeamName(t.getNewValue())
+        );
+
+        tableColumnMatchTournamentName.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnMatchTournamentName.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setTournamentName(t.getNewValue())
+        );
+
+        tableColumnMatchNumberOfMaps.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableColumnMatchNumberOfMaps.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setNumberOfMaps(t.getNewValue())
         );
 
         tableColumnTournamentPrizePool.setCellFactory(col -> new TableCell<Tournament, Integer>()
