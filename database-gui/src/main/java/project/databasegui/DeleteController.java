@@ -15,7 +15,6 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.concurrent.locks.Condition;
 
 public class DeleteController implements Initializable
 {
@@ -48,7 +47,142 @@ public class DeleteController implements Initializable
 
             if (changedRows > 0)
             {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno brisanje podataka!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void removeFromPlayers(int playerID) throws SQLException
+    {
+        String sqlQuery = "DELETE FROM igraci WHERE IDIgraca = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setInt(1, playerID);
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno brisanje podataka!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void removeFromMatches(int matchID) throws SQLException
+    {
+        String sqlQuery = "DELETE FROM mecevi WHERE IDMeca = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setInt(1, matchID);
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspeh!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void removeFromTeams(int teamID) throws SQLException
+    {
+        String sqlQuery = "DELETE FROM timovi WHERE IDTima = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setInt(1, teamID);
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspeh!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void removeFromTransfers(int transferID) throws SQLException
+    {
+        String sqlQuery = "DELETE FROM transferi WHERE IDTransfera = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setInt(1, transferID);
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspeh!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void removeFromCoaches(int coachID) throws SQLException
+    {
+        String sqlQuery = "DELETE FROM treneri WHERE IDTrenera = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setInt(1, coachID);
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspeh!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void removeFromTournaments(int tournamentID) throws SQLException
+    {
+        String sqlQuery = "DELETE FROM turniri WHERE IDTurnira = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setInt(1, tournamentID);
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspeh!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void removeFromNews(int newsID) throws SQLException
+    {
+        String sqlQuery = "DELETE FROM vesti WHERE IDvesti = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setInt(1, newsID);
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspeh!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
             }
         }
     }
@@ -60,8 +194,20 @@ public class DeleteController implements Initializable
             {
                 if (tableViewAuthors.getSelectionModel().getSelectedItem() != null)
                 {
-                    selectedRow = tableViewAuthors.getSelectionModel().getSelectedIndex();
-                    tableViewAuthors.getItems().remove(selectedRow);
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Da li ste sigurni da želite da izbrišete podatak?");
+                    alert.setHeaderText("Upozorenje!");
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK)
+                        {
+                            selectedRow = tableViewAuthors.getSelectionModel().getSelectedIndex();
+                            tableViewAuthors.getItems().remove(selectedRow);
+                            try
+                            {
+                                removeFromAuthors(selectedRow);
+                            } catch (SQLException ex) { throw new RuntimeException(ex); }
+                        }
+                        else {}
+                    });
                 }
             }
         });
@@ -78,11 +224,141 @@ public class DeleteController implements Initializable
                        {
                            selectedRow = tableViewPlayers.getSelectionModel().getSelectedIndex();
                            tableViewPlayers.getItems().remove(selectedRow);
+                           try
+                           {
+                               removeFromPlayers(selectedRow);
+                           } catch (SQLException ex) { throw new RuntimeException(ex); }
                        }
-                       else
-                       {
+                       else {}
+                    });
+                }
+            }
+        });
 
-                       }
+        tableViewMatches.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.DELETE)
+            {
+                if (tableViewMatches.getSelectionModel().getSelectedItem() != null)
+                {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Da li ste sigurni da želite da izbrišete podatak?");
+                    alert.setHeaderText("Upozorenje!");
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK)
+                        {
+                            selectedRow = tableViewMatches.getSelectionModel().getSelectedIndex();
+                            tableViewMatches.getItems().remove(selectedRow);
+                            try
+                            {
+                                removeFromMatches(selectedRow);
+                            } catch (SQLException ex) { throw new RuntimeException(ex); }
+                        }
+                        else {}
+                    });
+                }
+            }
+        });
+
+        tableViewTeams.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.DELETE)
+            {
+                if (tableViewTeams.getSelectionModel().getSelectedItem() != null)
+                {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Da li ste sigurni da želite da izbrišete podatak?");
+                    alert.setHeaderText("Upozorenje!");
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK)
+                        {
+                            selectedRow = tableViewTeams.getSelectionModel().getSelectedIndex();
+                            tableViewTeams.getItems().remove(selectedRow);
+                            try
+                            {
+                                removeFromTeams(selectedRow);
+                            } catch (SQLException ex) { throw new RuntimeException(ex); }
+                        }
+                        else {}
+                    });
+                }
+            }
+        });
+
+        tableViewTransfers.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.DELETE)
+            {
+                if (tableViewTransfers.getSelectionModel().getSelectedItem() != null)
+                {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Da li ste sigurni da želite da izbrišete podatak?");
+                    alert.setHeaderText("Upozorenje!");
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK)
+                        {
+                            selectedRow = tableViewPlayers.getSelectionModel().getSelectedIndex();
+                            tableViewTransfers.getItems().remove(selectedRow);
+                            try
+                            {
+                                removeFromTransfers(selectedRow);
+                            } catch (SQLException ex) { throw new RuntimeException(ex); }
+                        }
+                        else {}
+                    });
+                }
+            }
+        });
+
+        tableViewCoaches.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.DELETE)
+            {
+                if (tableViewCoaches.getSelectionModel().getSelectedItem() != null) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Da li ste sigurni da želite da izbrišete podatak?");
+                    alert.setHeaderText("Upozorenje!");
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            selectedRow = tableViewCoaches.getSelectionModel().getSelectedIndex();
+                            tableViewCoaches.getItems().remove(selectedRow);
+                            try
+                            {
+                                removeFromCoaches(selectedRow);
+                            } catch (SQLException ex) {throw new RuntimeException(ex); }
+                        } else {}
+                    });
+                }
+            }
+        });
+
+        tableViewTournaments.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.DELETE)
+            {
+                if (tableViewTournaments.getSelectionModel().getSelectedItem() != null) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Da li ste sigurni da želite da izbrišete podatak?");
+                    alert.setHeaderText("Upozorenje!");
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            selectedRow = tableViewTournaments.getSelectionModel().getSelectedIndex();
+                            tableViewTournaments.getItems().remove(selectedRow);
+                            try
+                            {
+                                removeFromTournaments(selectedRow);
+                            } catch (SQLException ex) { throw new RuntimeException(ex); }
+                        } else {}
+                    });
+                }
+            }
+        });
+
+        tableViewNews.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.DELETE)
+            {
+                if (tableViewNews.getSelectionModel().getSelectedItem() != null) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Da li ste sigurni da želite da izbrišete podatak?");
+                    alert.setHeaderText("Upozorenje!");
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            selectedRow = tableViewNews.getSelectionModel().getSelectedIndex();
+                            tableViewNews.getItems().remove(selectedRow);
+                            try
+                            {
+                                removeFromNews(selectedRow);
+                            } catch (SQLException ex) { throw new RuntimeException(ex); }
+                        } else {}
                     });
                 }
             }
@@ -401,6 +677,10 @@ public class DeleteController implements Initializable
             loadTeamData();
             loadPlayerData();
             loadCoachData();
+            loadTournamentData();
+            loadMatchData();
+            loadNewsData();
+            loadTransferData();
         }
         catch (SQLException e)
         {
