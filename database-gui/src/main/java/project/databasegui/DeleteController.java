@@ -4,17 +4,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import project.databasegui.tableitems.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.concurrent.locks.Condition;
 
 public class DeleteController implements Initializable
 {
     public Scanner readConfig = new Scanner("config.txt");
+
+    public int selectedRow;
 
     public TableView<Author> tableViewAuthors;
     public TableView<Player> tableViewPlayers;
@@ -28,6 +35,59 @@ public class DeleteController implements Initializable
     private String url = "jdbc:mysql://localhost:3306/database-project";
     private String user = "root";
     private String pass = "";
+
+    public void removeFromAuthors(int authorID) throws SQLException
+    {
+        String sqlQuery = "DELETE FROM autori WHERE IDAutora = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setInt(1, authorID);
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            }
+        }
+    }
+
+    public void addDeleteListeners()
+    {
+        tableViewAuthors.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.DELETE)
+            {
+                if (tableViewAuthors.getSelectionModel().getSelectedItem() != null)
+                {
+                    selectedRow = tableViewAuthors.getSelectionModel().getSelectedIndex();
+                    tableViewAuthors.getItems().remove(selectedRow);
+                }
+            }
+        });
+
+        tableViewPlayers.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.DELETE)
+            {
+                if (tableViewPlayers.getSelectionModel().getSelectedItem() != null)
+                {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Da li ste sigurni da želite da izbrišete podatak?");
+                    alert.setHeaderText("Upozorenje!");
+                    alert.showAndWait().ifPresent(response -> {
+                       if (response == ButtonType.OK)
+                       {
+                           selectedRow = tableViewPlayers.getSelectionModel().getSelectedIndex();
+                           tableViewPlayers.getItems().remove(selectedRow);
+                       }
+                       else
+                       {
+
+                       }
+                    });
+                }
+            }
+        });
+    }
 
     private String getTeamNameFromID(int teamID) throws SQLException
     {
@@ -322,6 +382,10 @@ public class DeleteController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        selectedRow = 1;
+
+        addDeleteListeners();
+
         tableViewAuthors.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         tableViewPlayers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         tableViewMatches.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);

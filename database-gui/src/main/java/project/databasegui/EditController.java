@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -11,7 +12,9 @@ import project.databasegui.tableitems.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -119,7 +122,28 @@ public class EditController implements Initializable
                 t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setSurname(t.getNewValue())
         );
 
+        tableColumnTournamentPrizePool.setCellFactory(col -> new TableCell<Tournament, Integer>()
+        {
+            @Override
+            protected void updateItem(Integer item, boolean empty)
+            {
+                NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
 
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(currencyFormat.format(item));
+            }
+        });
+
+        tableColumnTournamentIsBig.setCellFactory(col -> new TableCell<Tournament, Boolean>()
+        {
+            @Override
+            protected void updateItem(Boolean item, boolean empty)
+            {
+                super.updateItem(item, empty);
+                setText(empty ? null : item ? "Jeste" : "Nije");
+            }
+        });
     }
 
     private String getTeamNameFromID(int teamID) throws SQLException
@@ -426,7 +450,6 @@ public class EditController implements Initializable
             loadCoachData();
             loadTournamentData();
             loadMatchData();
-            loadTournamentData();
             loadNewsData();
             loadTransferData();
         }
