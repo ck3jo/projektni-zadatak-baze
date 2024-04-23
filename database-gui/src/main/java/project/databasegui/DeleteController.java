@@ -203,7 +203,7 @@ public class DeleteController implements Initializable
                             tableViewAuthors.getItems().remove(selectedRow);
                             try
                             {
-                                removeFromAuthors(selectedRow);
+                                removeFromAuthors(selectedRow + 1);
                             } catch (SQLException ex) { throw new RuntimeException(ex); }
                         }
                         else {}
@@ -226,7 +226,7 @@ public class DeleteController implements Initializable
                            tableViewPlayers.getItems().remove(selectedRow);
                            try
                            {
-                               removeFromPlayers(selectedRow);
+                               removeFromPlayers(selectedRow + 1);
                            } catch (SQLException ex) { throw new RuntimeException(ex); }
                        }
                        else {}
@@ -249,7 +249,7 @@ public class DeleteController implements Initializable
                             tableViewMatches.getItems().remove(selectedRow);
                             try
                             {
-                                removeFromMatches(selectedRow);
+                                removeFromMatches(selectedRow + 1);
                             } catch (SQLException ex) { throw new RuntimeException(ex); }
                         }
                         else {}
@@ -272,7 +272,7 @@ public class DeleteController implements Initializable
                             tableViewTeams.getItems().remove(selectedRow);
                             try
                             {
-                                removeFromTeams(selectedRow);
+                                removeFromTeams(selectedRow + 1);
                             } catch (SQLException ex) { throw new RuntimeException(ex); }
                         }
                         else {}
@@ -295,7 +295,7 @@ public class DeleteController implements Initializable
                             tableViewTransfers.getItems().remove(selectedRow);
                             try
                             {
-                                removeFromTransfers(selectedRow);
+                                removeFromTransfers(selectedRow + 1);
                             } catch (SQLException ex) { throw new RuntimeException(ex); }
                         }
                         else {}
@@ -307,16 +307,18 @@ public class DeleteController implements Initializable
         tableViewCoaches.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode() == KeyCode.DELETE)
             {
-                if (tableViewCoaches.getSelectionModel().getSelectedItem() != null) {
+                if (tableViewCoaches.getSelectionModel().getSelectedItem() != null)
+                {
                     Alert alert = new Alert(Alert.AlertType.WARNING, "Da li ste sigurni da želite da izbrišete podatak?");
                     alert.setHeaderText("Upozorenje!");
                     alert.showAndWait().ifPresent(response -> {
-                        if (response == ButtonType.OK) {
+                        if (response == ButtonType.OK)
+                        {
                             selectedRow = tableViewCoaches.getSelectionModel().getSelectedIndex();
                             tableViewCoaches.getItems().remove(selectedRow);
                             try
                             {
-                                removeFromCoaches(selectedRow);
+                                removeFromCoaches(selectedRow + 1);
                             } catch (SQLException ex) {throw new RuntimeException(ex); }
                         } else {}
                     });
@@ -327,16 +329,18 @@ public class DeleteController implements Initializable
         tableViewTournaments.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode() == KeyCode.DELETE)
             {
-                if (tableViewTournaments.getSelectionModel().getSelectedItem() != null) {
+                if (tableViewTournaments.getSelectionModel().getSelectedItem() != null)
+                {
                     Alert alert = new Alert(Alert.AlertType.WARNING, "Da li ste sigurni da želite da izbrišete podatak?");
                     alert.setHeaderText("Upozorenje!");
                     alert.showAndWait().ifPresent(response -> {
-                        if (response == ButtonType.OK) {
+                        if (response == ButtonType.OK)
+                        {
                             selectedRow = tableViewTournaments.getSelectionModel().getSelectedIndex();
                             tableViewTournaments.getItems().remove(selectedRow);
                             try
                             {
-                                removeFromTournaments(selectedRow);
+                                removeFromTournaments(selectedRow + 1);
                             } catch (SQLException ex) { throw new RuntimeException(ex); }
                         } else {}
                     });
@@ -347,16 +351,18 @@ public class DeleteController implements Initializable
         tableViewNews.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode() == KeyCode.DELETE)
             {
-                if (tableViewNews.getSelectionModel().getSelectedItem() != null) {
+                if (tableViewNews.getSelectionModel().getSelectedItem() != null)
+                {
                     Alert alert = new Alert(Alert.AlertType.WARNING, "Da li ste sigurni da želite da izbrišete podatak?");
                     alert.setHeaderText("Upozorenje!");
                     alert.showAndWait().ifPresent(response -> {
-                        if (response == ButtonType.OK) {
+                        if (response == ButtonType.OK)
+                        {
                             selectedRow = tableViewNews.getSelectionModel().getSelectedIndex();
                             tableViewNews.getItems().remove(selectedRow);
                             try
                             {
-                                removeFromNews(selectedRow);
+                                removeFromNews(selectedRow + 1);
                             } catch (SQLException ex) { throw new RuntimeException(ex); }
                         } else {}
                     });

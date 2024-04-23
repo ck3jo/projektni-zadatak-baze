@@ -69,9 +69,9 @@ public class AddController implements Initializable
     public DatePicker inputNewsDate;
     public TextField inputNewsAuthorName;
 
-    private String url;
-    private String user;
-    private String pass;
+    private String url = "jdbc:mysql://localhost:3306/database-project";
+    private String user = "root";
+    private String pass = "";
 
     private static void showSuccessAlert()
     {

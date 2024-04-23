@@ -416,7 +416,7 @@
                                  sortable="false"
                                  text="Lokacija">
                         <cellValueFactory>
-                            <PropertyValueFactory property="tlocation" />
+                            <PropertyValueFactory property="location" />
                         </cellValueFactory>
                     </TableColumn>
 
@@ -436,7 +436,7 @@
                                  sortable="false"
                                  text="Veliki turnir?">
                         <cellValueFactory>
-                            <PropertyValueFactory property="bigYesNo" />
+                            <PropertyValueFactory property="isBig" />
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
