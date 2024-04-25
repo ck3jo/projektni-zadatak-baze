@@ -1,6 +1,5 @@
 package project.databasegui;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
+import javafx.stage.StageStyle;
 import project.databasegui.tableitems.*;
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +22,7 @@ import java.util.Scanner;
 
 public class EditController implements Initializable
 {
-    public Scanner readConfig = new Scanner("config.txt");
+    public Scanner config = new Scanner("config.txt");
 
     public VBox mainWindow;
 
@@ -93,6 +93,14 @@ public class EditController implements Initializable
     private String user = "root";
     private String pass = "";
 
+    public void readConfig()
+    {
+        while (config.hasNext())
+        {
+            
+        }
+    }
+
     private int getTeamIDFromName(String teamName) throws SQLException
     {
         int teamID;
@@ -141,6 +149,22 @@ public class EditController implements Initializable
         return playerID;
     }
 
+    private int getAuthorIDFromNick(String authorNick) throws SQLException
+    {
+        int authorID;
+        String sqlQuery = "SELECT IDAutora from autori WHERE Nadimak = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setString(1, authorNick);
+            ResultSet rs = ps.executeQuery();
+            authorID = rs.getInt("IDAutora");
+        }
+
+        return authorID;
+    }
+
     public void confirmAuthorEdit(int rowToEdit, String name, String nick, String surname)
     {
         String sqlQuery = "UPDATE autori SET Ime = ?, Nadimak = ?, Prezime = ? WHERE IDAutora = ?";
@@ -161,8 +185,7 @@ public class EditController implements Initializable
                 alert.setHeaderText("Uspeh!");
                 alert.showAndWait();
             }
-        }
-        catch (SQLException e)
+        } catch (SQLException e)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
             alert.setHeaderText("Greška!");
@@ -196,8 +219,7 @@ public class EditController implements Initializable
                 alert.setHeaderText("Uspeh!");
                 alert.showAndWait();
             }
-        }
-        catch (SQLException e)
+        } catch (SQLException e)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
             alert.setHeaderText("Greška!");
@@ -228,8 +250,7 @@ public class EditController implements Initializable
                 alert.setHeaderText("Uspeh!");
                 alert.showAndWait();
             }
-        }
-        catch (SQLException e)
+        } catch (SQLException e)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
             alert.setHeaderText("Greška!");
@@ -258,8 +279,7 @@ public class EditController implements Initializable
                 alert.setHeaderText("Uspeh!");
                 alert.showAndWait();
             }
-        }
-        catch (SQLException e)
+        } catch (SQLException e)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
             alert.setHeaderText("Greška!");
@@ -279,6 +299,96 @@ public class EditController implements Initializable
             ps.setInt(3, newTeamID);
             ps.setDate(4, Date.valueOf(date));
             ps.setInt(5, rowToEdit);
+
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
+            }
+        } catch (SQLException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
+            alert.setHeaderText("Greška!");
+            alert.showAndWait();
+        }
+    }
+
+    public void confirmCoachEdit(int rowToEdit, String name, String nick, String surname, int teamID)
+    {
+        String sqlQuery = "UPDATE treneri SET Ime = ?, Nadimak = ?, Prezime = ?, IDTima = ? WHERE IDTrenera = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setString(1, name);
+            ps.setString(2, nick);
+            ps.setString(3, surname);
+            ps.setInt(4, teamID);
+            ps.setInt(5, rowToEdit);
+
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
+            }
+        }
+        catch (SQLException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
+            alert.setHeaderText("Greška!");
+            alert.showAndWait();
+        }
+    }
+
+    public void confirmTournamentEdit(int rowToEdit, String name, LocalDate startDate, LocalDate endDate, String location, int prizePool, boolean isBig)
+    {
+        String sqlQuery = "UPDATE turniri SET Ime = ?, DatumPocetka = ?, DatumZavrsetka = ?, MestoIgranja = ?, NagradniFond = ?, VeciTurnir = ? WHERE IDTurnira = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setString(1, name);
+            ps.setDate(2, Date.valueOf(startDate));
+            ps.setDate(3, Date.valueOf(endDate));
+            ps.setString(4, location);
+            ps.setInt(5, prizePool);
+            ps.setBoolean(6, isBig);
+            ps.setInt(7, rowToEdit);
+
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
+            }
+        }
+        catch (SQLException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
+            alert.setHeaderText("Greška!");
+            alert.showAndWait();
+        }
+    }
+
+    public void confirmNewsEdit(int rowToEdit, String title, int authorID, LocalDate date)
+    {
+        String sqlQuery = "UPDATE vesti SET Naslov = ?, DatumObjavljivanja = ?, IDAutora = ? WHERE IDVesti = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setString(1, title);
+            ps.setDate(2, Date.valueOf(date));
+            ps.setInt(3, authorID);
+            ps.setInt(4, rowToEdit);
 
             int changedRows = ps.executeUpdate();
 
@@ -322,6 +432,7 @@ public class EditController implements Initializable
                 vbox.getChildren().addAll(textFieldAuthorName, textFieldAuthorNick, textFieldAuthorSurname);
                 dialog.getDialogPane().setContent(vbox);
                 dialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+                dialog.initStyle(StageStyle.UTILITY);
 
                 dialog.setResultConverter((ButtonType button) -> {
                     if (button == ButtonType.YES)
@@ -387,6 +498,7 @@ public class EditController implements Initializable
                 );
                 dialog.getDialogPane().setContent(vbox);
                 dialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+                dialog.initStyle(StageStyle.UTILITY);
 
                 dialog.setResultConverter((ButtonType button) -> {
                     if (button == ButtonType.YES)
@@ -474,6 +586,7 @@ public class EditController implements Initializable
                 );
                 dialog.getDialogPane().setContent(vbox);
                 dialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+                dialog.initStyle(StageStyle.UTILITY);
 
                 dialog.setResultConverter((ButtonType button) -> {
                     if (button == ButtonType.YES)
@@ -552,6 +665,7 @@ public class EditController implements Initializable
                 );
                 dialog.getDialogPane().setContent(vbox);
                 dialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+                dialog.initStyle(StageStyle.UTILITY);
 
                 dialog.setResultConverter((ButtonType button) -> {
                     if (button == ButtonType.YES)
@@ -617,18 +731,19 @@ public class EditController implements Initializable
                 );
                 dialog.getDialogPane().setContent(vbox);
                 dialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+                dialog.initStyle(StageStyle.UTILITY);
 
                 dialog.setResultConverter((ButtonType button) -> {
                     if (button == ButtonType.YES)
                     {
+                        Transfer newTransfer = new Transfer(
+                                textFieldTransferPlayerName.getText(),
+                                textFieldTransferOldTeamName.getText(),
+                                textFieldTransferNewTeamName.getText(),
+                                datePickerTransferDate.getValue()
+                        );
                         try
                         {
-                            Transfer newTransfer = new Transfer(
-                                    textFieldTransferPlayerName.getText(),
-                                    textFieldTransferOldTeamName.getText(),
-                                    textFieldTransferNewTeamName.getText(),
-                                    datePickerTransferDate.getValue()
-                            );
                             confirmTransferEdit(
                                     rowToEdit,
                                     getPlayerIDFromNick(newTransfer.getPlayerName()),
@@ -682,8 +797,192 @@ public class EditController implements Initializable
                 dialog.setTitle("Izmenite podatke");
 
                 vbox.getChildren().addAll(
-                        
+                        textFieldCoachName,
+                        textFieldCoachNick,
+                        textFieldCoachSurname,
+                        textFieldCoachTeamName
                 );
+                dialog.getDialogPane().setContent(vbox);
+                dialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+                dialog.initStyle(StageStyle.UTILITY);
+
+                dialog.setResultConverter((ButtonType button) -> {
+                    if (button == ButtonType.YES)
+                    {
+                        Coach newCoach = new Coach(
+                                textFieldCoachName.getText(),
+                                textFieldCoachNick.getText(),
+                                textFieldCoachSurname.getText(),
+                                textFieldCoachTeamName.getText()
+                        );
+                        try
+                        {
+                            confirmCoachEdit(
+                                    rowToEdit,
+                                    newCoach.getName(),
+                                    newCoach.getNick(),
+                                    newCoach.getSurname(),
+                                    getTeamIDFromName(newCoach.getTeamName())
+                            );
+                        } catch (SQLException e)
+                        {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    return null;
+                });
+
+                Optional<Coach> dialogResult = dialog.showAndWait();
+                dialogResult.ifPresent(_ -> {
+                    allCoaches.clear();
+                    try
+                    {
+                        loadCoachData();
+                    }
+                    catch (SQLException e)
+                    {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+        });
+
+        tableViewTournaments.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && tableViewTournaments.getSelectionModel().getSelectedItem() != null)
+            {
+                Tournament selectedTournament = tableViewTournaments.getSelectionModel().getSelectedItem();
+                int rowToEdit = tableViewTournaments.getSelectionModel().getSelectedIndex() + 1;
+
+                Dialog<Tournament> dialog = new Dialog<>();
+                VBox vbox = new VBox();
+                TextField textFieldTournamentName = new TextField(selectedTournament.getName());
+                DatePicker datePickerTournamentStartDate = new DatePicker(selectedTournament.getStartDate());
+                DatePicker datePickerTournamentEndDate = new DatePicker(selectedTournament.getEndDate());
+                TextField textFieldTournamentLocation = new TextField(selectedTournament.getLocation());
+                TextField textFieldTournamentPrizePool = new TextField(Integer.toString(selectedTournament.getPrizePool()));
+                CheckBox checkBoxTournamentIsBig = new CheckBox();
+                checkBoxTournamentIsBig.setSelected(selectedTournament.getIsBig());
+                checkBoxTournamentIsBig.setIndeterminate(false);
+
+                vbox.setSpacing(10);
+                vbox.setPadding(new Insets(10, 10, 10, 10));
+                vbox.setPrefWidth(600);
+                vbox.setPrefHeight(400);
+
+                vbox.getChildren().addAll(
+                        textFieldTournamentName,
+                        datePickerTournamentStartDate,
+                        datePickerTournamentEndDate,
+                        textFieldTournamentLocation,
+                        textFieldTournamentPrizePool,
+                        checkBoxTournamentIsBig
+                );
+                dialog.getDialogPane().setContent(vbox);
+                dialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+                dialog.initStyle(StageStyle.UTILITY);
+
+                dialog.setResultConverter((ButtonType button) -> {
+                    if (button == ButtonType.YES)
+                    {
+                        Tournament newTournament = new Tournament(
+                                textFieldTournamentName.getText(),
+                                datePickerTournamentStartDate.getValue(),
+                                datePickerTournamentEndDate.getValue(),
+                                textFieldTournamentLocation.getText(),
+                                Integer.parseInt(textFieldTournamentPrizePool.getText()),
+                                checkBoxTournamentIsBig.isSelected()
+                        );
+                        confirmTournamentEdit(
+                                rowToEdit,
+                                newTournament.getName(),
+                                newTournament.getStartDate(),
+                                newTournament.getEndDate(),
+                                newTournament.getLocation(),
+                                newTournament.getPrizePool(),
+                                newTournament.getIsBig()
+                        );
+                    }
+                    return null;
+                });
+
+                Optional<Tournament> dialogResult = dialog.showAndWait();
+                dialogResult.ifPresent(_ -> {
+                    allTournaments.clear();
+                    try
+                    {
+                        loadTournamentData();
+                    }
+                    catch (SQLException e)
+                    {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+        });
+
+        tableViewNews.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && tableViewNews.getSelectionModel().getSelectedItem() != null)
+            {
+                News selectedNews = tableViewNews.getSelectionModel().getSelectedItem();
+                int rowToEdit = tableViewNews.getSelectionModel().getSelectedIndex() + 1;
+
+                Dialog<News> dialog = new Dialog<>();
+                VBox vbox = new VBox();
+                TextField textFieldNewsTitle = new TextField(selectedNews.getTitle());
+                DatePicker datePickerPublishDate = new DatePicker(selectedNews.getDate());
+                TextField textFieldAuthorName = new TextField(selectedNews.getAuthorName());
+
+                vbox.setSpacing(10);
+                vbox.setPadding(new Insets(10, 10, 10, 10));
+                vbox.setPrefWidth(600);
+                vbox.setPrefHeight(400);
+
+                vbox.getChildren().addAll(
+                        textFieldNewsTitle,
+                        datePickerPublishDate,
+                        textFieldAuthorName
+                );
+                dialog.getDialogPane().setContent(vbox);
+                dialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+                dialog.initStyle(StageStyle.UTILITY);
+
+                dialog.setResultConverter((ButtonType button) -> {
+                    if (button == ButtonType.YES)
+                    {
+                        News newNews = new News(
+                                textFieldNewsTitle.getText(),
+                                textFieldAuthorName.getText(),
+                                datePickerPublishDate.getValue()
+                        );
+                        try
+                        {
+                            confirmNewsEdit(
+                                    rowToEdit,
+                                    newNews.getTitle(),
+                                    getAuthorIDFromNick(newNews.getAuthorName()),
+                                    newNews.getDate()
+                            );
+                        }
+                        catch (SQLException e)
+                        {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    return null;
+                });
+
+                Optional<News> dialogResult = dialog.showAndWait();
+                dialogResult.ifPresent(_ -> {
+                    allNews.clear();
+                    try
+                    {
+                        loadNewsData();
+                    }
+                    catch (SQLException e)
+                    {
+                        throw new RuntimeException(e);
+                    }
+                });
             }
         });
     }
