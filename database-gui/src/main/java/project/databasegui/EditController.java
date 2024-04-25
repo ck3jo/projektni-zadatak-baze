@@ -10,19 +10,20 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import project.databasegui.tableitems.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.sql.Date;
 import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class EditController implements Initializable
 {
-    public Scanner config = new Scanner("config.txt");
+    public Scanner config = new Scanner(new File("config.txt"));
 
     public VBox mainWindow;
 
@@ -89,15 +90,31 @@ public class EditController implements Initializable
     public TableColumn<News, LocalDate> tableColumnNewsDate;
     public TableColumn<News, String> tableColumnNewsAuthorName;
 
-    private String url = "jdbc:mysql://localhost:3306/database-project";
-    private String user = "root";
-    private String pass = "";
+    private String url;
+    private String user;
+    private String pass;
+
+    public EditController() throws FileNotFoundException {}
 
     public void readConfig()
     {
-        while (config.hasNext())
+        if (config.hasNextLine())
         {
-            
+            url = config.nextLine().substring(5);
+        }
+        else url = "jdbc:mysql://localhost:3306/database-project";
+
+        if (config.hasNextLine())
+        {
+            user = config.nextLine().substring(6);
+        }
+        else user = "root";
+
+        if (config.hasNextLine())
+        {
+            String tmp = config.nextLine();
+            if (tmp.equals("pass: §")) pass = "";
+            else pass = tmp.substring(6);
         }
     }
 
@@ -1272,6 +1289,7 @@ public class EditController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        readConfig();
         addEditHandlers();
 
         tableColumnTournamentPrizePool.setCellFactory(_ -> new TableCell<>()

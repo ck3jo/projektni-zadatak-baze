@@ -3,6 +3,8 @@ package project.databasegui;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -12,7 +14,7 @@ import java.util.Scanner;
 
 public class AddController implements Initializable
 {
-    public Scanner readConfig = new Scanner("config.txt");
+    public Scanner config = new Scanner(new File("config.txt"));
 
     //author inputs
     public TextField inputAuthorName;
@@ -69,9 +71,33 @@ public class AddController implements Initializable
     public DatePicker inputNewsDate;
     public TextField inputNewsAuthorName;
 
-    private String url = "jdbc:mysql://localhost:3306/database-project";
-    private String user = "root";
-    private String pass = "";
+    private String url;
+    private String user;
+    private String pass;
+
+    public AddController() throws FileNotFoundException {}
+
+    public void readConfig()
+    {
+        if (config.hasNextLine())
+        {
+            url = config.nextLine().substring(5);
+        }
+        else url = "jdbc:mysql://localhost:3306/database-project";
+
+        if (config.hasNextLine())
+        {
+            user = config.nextLine().substring(6);
+        }
+        else user = "root";
+
+        if (config.hasNextLine())
+        {
+            String tmp = config.nextLine();
+            if (tmp.equals("pass: §")) pass = "";
+            else pass = tmp.substring(6);
+        }
+    }
 
     private static void showSuccessAlert()
     {
@@ -490,6 +516,6 @@ public class AddController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-
+        readConfig();
     }
 }

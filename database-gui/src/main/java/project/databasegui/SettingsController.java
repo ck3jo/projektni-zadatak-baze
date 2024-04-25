@@ -48,7 +48,12 @@ public class SettingsController
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno zapisivanje podataka.");
                 fw.write("url: " + inputDatabaseURL.getText() + "\n");
                 fw.write("user: " + inputDatabaseUsername.getText() + "\n");
-                fw.write("pass: " + inputDatabasePassword.getText() + "\n");
+                if (inputDatabasePassword.getText() == null || inputDatabasePassword.getText().isEmpty())
+                {
+                    fw.write("pass: §" + "\n");
+                }
+                else fw.write("pass: " + inputDatabasePassword.getText() + "\n");
+                fw.write("eof" + "\n");
 
                 alert.setHeaderText("Uspeh!");
                 alert.showAndWait();
@@ -61,7 +66,12 @@ public class SettingsController
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno zapisivanje podataka.");
                 fw.write("url: " + inputDatabaseURL.getText() + "\n");
                 fw.write("user: " + inputDatabaseUsername.getText() + "\n");
-                fw.write("pass: " + inputDatabasePassword.getText() + "\n");
+                if (inputDatabasePassword.getText() == null || inputDatabasePassword.getText().isEmpty())
+                {
+                    fw.write("pass: §" + "\n");
+                }
+                else fw.write("pass: " + inputDatabasePassword.getText() + "\n");
+                fw.write("eof" + "\n");
 
                 alert.setHeaderText("Uspeh!");
                 alert.showAndWait();

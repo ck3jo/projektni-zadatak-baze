@@ -10,6 +10,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import project.databasegui.tableitems.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -18,7 +20,7 @@ import java.util.Scanner;
 
 public class DeleteController implements Initializable
 {
-    public Scanner readConfig = new Scanner("config.txt");
+    public Scanner config = new Scanner(new File("config.txt"));
 
     public int selectedRow;
 
@@ -31,9 +33,33 @@ public class DeleteController implements Initializable
     public TableView<Tournament> tableViewTournaments;
     public TableView<News> tableViewNews;
 
-    private String url = "jdbc:mysql://localhost:3306/database-project";
-    private String user = "root";
-    private String pass = "";
+    private String url;
+    private String user;
+    private String pass;
+
+    public DeleteController() throws FileNotFoundException {}
+
+    public void readConfig()
+    {
+        if (config.hasNextLine())
+        {
+            url = config.nextLine().substring(5);
+        }
+        else url = "jdbc:mysql://localhost:3306/database-project";
+
+        if (config.hasNextLine())
+        {
+            user = config.nextLine().substring(6);
+        }
+        else user = "root";
+
+        if (config.hasNextLine())
+        {
+            String tmp = config.nextLine();
+            if (tmp.equals("pass: §")) pass = "";
+            else pass = tmp.substring(6);
+        }
+    }
 
     public void removeFromAuthors(int authorID) throws SQLException
     {
@@ -664,6 +690,7 @@ public class DeleteController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        readConfig();
         selectedRow = 1;
 
         addDeleteListeners();
