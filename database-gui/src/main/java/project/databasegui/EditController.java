@@ -1,20 +1,17 @@
 package project.databasegui;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import project.databasegui.tableitems.*;
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +19,7 @@ import java.sql.*;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -32,13 +30,28 @@ public class EditController implements Initializable
     public VBox mainWindow;
 
     public ObservableList<Author> allAuthors = FXCollections.observableArrayList();
+    public Property<ObservableList<Author>> authorListProperty = new SimpleObjectProperty<>();
+
     public ObservableList<Player> allPlayers = FXCollections.observableArrayList();
+    public Property<ObservableList<Player>> playerListProperty = new SimpleObjectProperty<>();
+
     public ObservableList<Match> allMatches = FXCollections.observableArrayList();
+    public Property<ObservableList<Match>> matchListProperty = new SimpleObjectProperty<>();
+
     public ObservableList<Team> allTeams = FXCollections.observableArrayList();
+    public Property<ObservableList<Team>> teamListProperty = new SimpleObjectProperty<>();
+
     public ObservableList<Transfer> allTransfers = FXCollections.observableArrayList();
+    public Property<ObservableList<Transfer>> transferListProperty = new SimpleObjectProperty<>();
+
     public ObservableList<Coach> allCoaches = FXCollections.observableArrayList();
+    public Property<ObservableList<Coach>> coachListProperty = new SimpleObjectProperty<>();
+
     public ObservableList<Tournament> allTournaments = FXCollections.observableArrayList();
+    public Property<ObservableList<Tournament>> tournamentListProperty = new SimpleObjectProperty<>();
+
     public ObservableList<News> allNews = FXCollections.observableArrayList();
+    public Property<ObservableList<News>> newsListProperty = new SimpleObjectProperty<>();
 
     public TableView<Author> tableViewAuthors;
     public TableColumn<Author, String> tableColumnAuthorName;
@@ -98,6 +111,64 @@ public class EditController implements Initializable
     private String user = "root";
     private String pass = "";
 
+    public void confirmAuthorEdit(int rowToEdit, String name, String nick, String surname)
+    {
+        String sqlQuery = "UPDATE autori SET Ime = ?, Nadimak = ?, Prezime = ? WHERE IDAutora = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setString(1, name);
+            ps.setString(2, nick);
+            ps.setString(3, surname);
+            ps.setInt(4, rowToEdit);
+
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
+            }
+        }
+        catch (SQLException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
+            alert.setHeaderText("Greška!");
+            alert.showAndWait();
+        }
+    }
+
+    public void confirmPlayerEdit(int rowToEdit, String name, String nick, String surname)
+    {
+        String sqlQuery = "UPDATE autori SET Ime = ?, Nadimak = ?, Prezime = ? WHERE IDAutora = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        {
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setString(1, name);
+            ps.setString(2, nick);
+            ps.setString(3, surname);
+            ps.setInt(4, rowToEdit);
+
+            int changedRows = ps.executeUpdate();
+
+            if (changedRows > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
+                alert.setHeaderText("Uspeh!");
+                alert.showAndWait();
+            }
+        }
+        catch (SQLException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
+            alert.setHeaderText("Greška!");
+            alert.showAndWait();
+        }
+    }
+
     public void addEditHandlers()
     {
         tableViewAuthors.setOnMouseClicked(new EventHandler<>() {
@@ -106,30 +177,53 @@ public class EditController implements Initializable
             {
                 if (event.getClickCount() == 2 && tableViewAuthors.getSelectionModel().getSelectedItem() != null)
                 {
-                    Author author = tableViewAuthors.getSelectionModel().getSelectedItem();
-                    AuthorEditController authorEditController = new AuthorEditController(
-                            tableViewAuthors.getSelectionModel().getSelectedIndex() + 1,
-                            author.getName(),
-                            author.getNick(),
-                            author.getSurname()
-                    );
-                    Stage stage = new Stage();
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("author-edit-window.fxml"));
+                    Author selectedAuthor = tableViewAuthors.getSelectionModel().getSelectedItem();
+                    int rowToEdit = tableViewAuthors.getSelectionModel().getSelectedIndex() + 1;
 
-                    fxmlLoader.setController(authorEditController);
+                    Dialog<Author> dialog = new Dialog<>();
+                    VBox vbox = new VBox();
+                    TextField textFieldAuthorName = new TextField();
+                    TextField textFieldAuthorNick = new TextField();
+                    TextField textFieldAuthorSurname = new TextField();
 
-                    try
-                    {
-                        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-                        stage.setScene(scene);
-                        stage.initModality(Modality.APPLICATION_MODAL);
-                        stage.initStyle(StageStyle.UNIFIED);
-                        stage.show();
-                    }
-                    catch (IOException e)
-                    {
-                        throw new RuntimeException(e);
-                    }
+                    textFieldAuthorName.setText(selectedAuthor.getName());
+                    textFieldAuthorNick.setText(selectedAuthor.getNick());
+                    textFieldAuthorSurname.setText(selectedAuthor.getSurname());
+
+                    vbox.setSpacing(10);
+                    vbox.setPadding(new Insets(10, 10, 10, 10));
+                    vbox.setPrefWidth(600);
+                    vbox.setPrefHeight(400);
+
+                    dialog.initModality(Modality.APPLICATION_MODAL);
+                    dialog.setTitle("Izmenite podatke");
+
+                    vbox.getChildren().addAll(textFieldAuthorName, textFieldAuthorNick, textFieldAuthorSurname);
+                    dialog.getDialogPane().setContent(vbox);
+                    dialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+
+                    dialog.setResultConverter((ButtonType button) -> {
+                        if (button == ButtonType.YES)
+                        {
+                            Author newAuthor = new Author(textFieldAuthorName.getText(), textFieldAuthorNick.getText(), textFieldAuthorSurname.getText());
+                            confirmAuthorEdit(rowToEdit, newAuthor.getName(), newAuthor.getNick(), newAuthor.getSurname());
+                            return newAuthor;
+                        }
+                        return null;
+                    });
+
+                    Optional<Author> dialogResult = dialog.showAndWait();
+                    dialogResult.ifPresent(author -> {
+                        allAuthors.clear();
+                        try
+                        {
+                            loadAuthorData();
+                        }
+                        catch (SQLException e)
+                        {
+                            throw new RuntimeException(e);
+                        }
+                    });
                 }
             }
         });
