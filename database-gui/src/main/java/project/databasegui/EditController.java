@@ -2,13 +2,19 @@ package project.databasegui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.converter.LocalDateStringConverter;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import project.databasegui.tableitems.*;
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +28,8 @@ import java.util.Scanner;
 public class EditController implements Initializable
 {
     public Scanner readConfig = new Scanner("config.txt");
+
+    public VBox mainWindow;
 
     public ObservableList<Author> allAuthors = FXCollections.observableArrayList();
     public ObservableList<Player> allPlayers = FXCollections.observableArrayList();
@@ -92,101 +100,37 @@ public class EditController implements Initializable
 
     public void addEditHandlers()
     {
-        tableColumnAuthorName.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnAuthorName.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setName(t.getNewValue())
-        );
-
-        tableColumnAuthorNick.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnAuthorNick.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setNick(t.getNewValue())
-        );
-
-        tableColumnAuthorSurname.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnAuthorSurname.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setSurname(t.getNewValue())
-        );
-
-        tableColumnPlayerName.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnPlayerName.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setName(t.getNewValue())
-        );
-
-        tableColumnPlayerNick.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnPlayerNick.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setNick(t.getNewValue())
-        );
-
-        tableColumnPlayerSurname.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnPlayerSurname.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setSurname(t.getNewValue())
-        );
-
-        tableColumnPlayerBirthDate.setCellFactory(DatePickerCell::new);
-        tableColumnPlayerBirthDate.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setBirthDate(t.getNewValue())
-        );
-
-        tableColumnPlayerNationality.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnPlayerNationality.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setNationality(t.getNewValue())
-        );
-
-        tableColumnPlayerTeamName.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnPlayerTeamName.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setTeamName(t.getNewValue())
-        );
-
-        tableColumnPlayerMajorTrophies.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnPlayerMajorTrophies.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setMajorTrophies(Integer.parseInt(t.getNewValue()))
-        );
-
-        tableColumnPlayerMajorMVPs.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnPlayerMajorMVPs.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setMajorMVPs(Integer.parseInt(t.getNewValue()))
-        );
-
-        tableColumnMatchFirstTeamName.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnMatchFirstTeamName.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setFirstTeamName(t.getNewValue())
-        );
-
-        tableColumnMatchSecondTeamName.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnMatchSecondTeamName.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setSecondTeamName(t.getNewValue())
-        );
-
-        tableColumnMatchTournamentName.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnMatchTournamentName.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setTournamentName(t.getNewValue())
-        );
-
-        tableColumnMatchNumberOfMaps.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableColumnMatchNumberOfMaps.setOnEditCommit(
-                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setNumberOfMaps(t.getNewValue())
-        );
-
-        tableColumnTournamentPrizePool.setCellFactory(col -> new TableCell<Tournament, Integer>()
-        {
+        tableViewAuthors.setOnMouseClicked(new EventHandler<>() {
             @Override
-            protected void updateItem(Integer item, boolean empty)
+            public void handle(MouseEvent event)
             {
-                NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
+                if (event.getClickCount() == 2 && tableViewAuthors.getSelectionModel().getSelectedItem() != null)
+                {
+                    Author author = tableViewAuthors.getSelectionModel().getSelectedItem();
+                    AuthorEditController authorEditController = new AuthorEditController(
+                            tableViewAuthors.getSelectionModel().getSelectedIndex() + 1,
+                            author.getName(),
+                            author.getNick(),
+                            author.getSurname()
+                    );
+                    Stage stage = new Stage();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("author-edit-window.fxml"));
 
-                super.updateItem(item, empty);
-                if (empty) setText(null);
-                else setText(currencyFormat.format(item));
-            }
-        });
+                    fxmlLoader.setController(authorEditController);
 
-        tableColumnTournamentIsBig.setCellFactory(col -> new TableCell<Tournament, Boolean>()
-        {
-            @Override
-            protected void updateItem(Boolean item, boolean empty)
-            {
-                super.updateItem(item, empty);
-                setText(empty ? null : item ? "Jeste" : "Nije");
+                    try
+                    {
+                        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+                        stage.setScene(scene);
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.initStyle(StageStyle.UNIFIED);
+                        stage.show();
+                    }
+                    catch (IOException e)
+                    {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         });
     }
@@ -477,6 +421,19 @@ public class EditController implements Initializable
     public void initialize(URL location, ResourceBundle resources)
     {
         addEditHandlers();
+
+        tableColumnTournamentPrizePool.setCellFactory(col -> new TableCell<Tournament, Integer>()
+        {
+            @Override
+            protected void updateItem(Integer item, boolean empty)
+            {
+                NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(currencyFormat.format(item));
+            }
+        });
 
         tableViewAuthors.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         tableViewPlayers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);

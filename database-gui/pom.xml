@@ -67,6 +67,10 @@
         <artifactId>ikonli-javafx</artifactId>
         <version>12.3.1</version>
     </dependency><dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <version>8.3.0</version>
+    </dependency><dependency>
         <groupId>org.kordamp.ikonli</groupId>
         <artifactId>ikonli-material2-pack</artifactId>
         <version>12.2.0</version>
