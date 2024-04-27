@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
@@ -17,15 +18,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class EditController implements Initializable
 {
     public Scanner config = new Scanner(new File("config.txt"));
-
-    public VBox mainWindow;
 
     public ObservableList<Author> allAuthors = FXCollections.observableArrayList();
     public ObservableList<Player> allPlayers = FXCollections.observableArrayList();
@@ -48,6 +49,7 @@ public class EditController implements Initializable
     public TableColumn<Player, LocalDate> tableColumnPlayerBirthDate;
     public TableColumn<Player, String> tableColumnPlayerNationality;
     public TableColumn<Player, String> tableColumnPlayerTeamName;
+    public TableColumn<Player, Double> tableColumnPlayerRating;
     public TableColumn<Player, String> tableColumnPlayerMajorTrophies;
     public TableColumn<Player, String> tableColumnPlayerMajorMVPs;
 
@@ -116,6 +118,20 @@ public class EditController implements Initializable
             if (tmp.equals("pass: §")) pass = "";
             else pass = tmp.substring(6);
         }
+    }
+
+    private static void showSuccessAlert()
+    {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
+        alert.setHeaderText("Uspeh!");
+        alert.showAndWait();
+    }
+
+    private static void showErrorAlert()
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
+        alert.setHeaderText("Greška!");
+        alert.showAndWait();
     }
 
     private int getTeamIDFromName(String teamName) throws SQLException
@@ -196,18 +212,9 @@ public class EditController implements Initializable
 
             int changedRows = ps.executeUpdate();
 
-            if (changedRows > 0)
-            {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
-                alert.setHeaderText("Uspeh!");
-                alert.showAndWait();
-            }
-        } catch (SQLException e)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
-            alert.setHeaderText("Greška!");
-            alert.showAndWait();
+            if (changedRows > 0) showSuccessAlert();
         }
+        catch (SQLException e) { showErrorAlert(); }
     }
 
     public void confirmPlayerEdit(int rowToEdit, String name, String nick, String surname, LocalDate birthDate, String nationality, int teamID, double rating, int majorTrophies, int majorMVPs)
@@ -230,18 +237,9 @@ public class EditController implements Initializable
 
             int changedRows = ps.executeUpdate();
 
-            if (changedRows > 0)
-            {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
-                alert.setHeaderText("Uspeh!");
-                alert.showAndWait();
-            }
-        } catch (SQLException e)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
-            alert.setHeaderText("Greška!");
-            alert.showAndWait();
+            if (changedRows > 0) showSuccessAlert();
         }
+        catch (SQLException e) { showErrorAlert(); }
     }
 
     public void confirmMatchEdit(int rowToEdit, String firstTeamName, String secondTeamName, int tournamentID, int numberOfMaps, String score, LocalDate date)
@@ -261,18 +259,9 @@ public class EditController implements Initializable
 
             int changedRows = ps.executeUpdate();
 
-            if (changedRows > 0)
-            {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
-                alert.setHeaderText("Uspeh!");
-                alert.showAndWait();
-            }
-        } catch (SQLException e)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
-            alert.setHeaderText("Greška!");
-            alert.showAndWait();
+            if (changedRows > 0) showSuccessAlert();
         }
+        catch (SQLException e) { showErrorAlert(); }
     }
 
     public void confirmTeamEdit(int rowToEdit, String name, int ranking, int majorTrophies, String region)
@@ -290,18 +279,9 @@ public class EditController implements Initializable
 
             int changedRows = ps.executeUpdate();
 
-            if (changedRows > 0)
-            {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
-                alert.setHeaderText("Uspeh!");
-                alert.showAndWait();
-            }
-        } catch (SQLException e)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
-            alert.setHeaderText("Greška!");
-            alert.showAndWait();
+            if (changedRows > 0) showSuccessAlert();
         }
+        catch (SQLException e) { showErrorAlert(); }
     }
 
     public void confirmTransferEdit(int rowToEdit, int playerID, int oldTeamID, int newTeamID, LocalDate date)
@@ -319,18 +299,9 @@ public class EditController implements Initializable
 
             int changedRows = ps.executeUpdate();
 
-            if (changedRows > 0)
-            {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
-                alert.setHeaderText("Uspeh!");
-                alert.showAndWait();
-            }
-        } catch (SQLException e)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
-            alert.setHeaderText("Greška!");
-            alert.showAndWait();
+            if (changedRows > 0) showSuccessAlert();
         }
+        catch (SQLException e) { showErrorAlert(); }
     }
 
     public void confirmCoachEdit(int rowToEdit, String name, String nick, String surname, int teamID)
@@ -348,19 +319,9 @@ public class EditController implements Initializable
 
             int changedRows = ps.executeUpdate();
 
-            if (changedRows > 0)
-            {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
-                alert.setHeaderText("Uspeh!");
-                alert.showAndWait();
-            }
+            if (changedRows > 0) showSuccessAlert();
         }
-        catch (SQLException e)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
-            alert.setHeaderText("Greška!");
-            alert.showAndWait();
-        }
+        catch (SQLException e) { showErrorAlert(); }
     }
 
     public void confirmTournamentEdit(int rowToEdit, String name, LocalDate startDate, LocalDate endDate, String location, int prizePool, boolean isBig)
@@ -380,19 +341,9 @@ public class EditController implements Initializable
 
             int changedRows = ps.executeUpdate();
 
-            if (changedRows > 0)
-            {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
-                alert.setHeaderText("Uspeh!");
-                alert.showAndWait();
-            }
+            if (changedRows > 0) showSuccessAlert();
         }
-        catch (SQLException e)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
-            alert.setHeaderText("Greška!");
-            alert.showAndWait();
-        }
+        catch (SQLException e) { showErrorAlert(); }
     }
 
     public void confirmNewsEdit(int rowToEdit, String title, int authorID, LocalDate date)
@@ -409,19 +360,9 @@ public class EditController implements Initializable
 
             int changedRows = ps.executeUpdate();
 
-            if (changedRows > 0)
-            {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
-                alert.setHeaderText("Uspeh!");
-                alert.showAndWait();
-            }
+            if (changedRows > 0) showSuccessAlert();
         }
-        catch (SQLException e)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
-            alert.setHeaderText("Greška!");
-            alert.showAndWait();
-        }
+        catch (SQLException e) { showErrorAlert(); }
     }
 
     public void addEditHandlers()
@@ -877,6 +818,8 @@ public class EditController implements Initializable
                 DatePicker datePickerTournamentEndDate = new DatePicker(selectedTournament.getEndDate());
                 TextField textFieldTournamentLocation = new TextField(selectedTournament.getLocation());
                 TextField textFieldTournamentPrizePool = new TextField(Integer.toString(selectedTournament.getPrizePool()));
+                HBox checkBoxWholeElement = new HBox();
+                Label checkBoxLabel = new Label("Veliki turnir?");
                 CheckBox checkBoxTournamentIsBig = new CheckBox();
                 checkBoxTournamentIsBig.setSelected(selectedTournament.getIsBig());
                 checkBoxTournamentIsBig.setIndeterminate(false);
@@ -886,13 +829,16 @@ public class EditController implements Initializable
                 vbox.setPrefWidth(600);
                 vbox.setPrefHeight(400);
 
+                checkBoxWholeElement.setSpacing(5);
+                checkBoxWholeElement.getChildren().addAll(checkBoxLabel, checkBoxTournamentIsBig);
+
                 vbox.getChildren().addAll(
                         textFieldTournamentName,
                         datePickerTournamentStartDate,
                         datePickerTournamentEndDate,
                         textFieldTournamentLocation,
                         textFieldTournamentPrizePool,
-                        checkBoxTournamentIsBig
+                        checkBoxWholeElement
                 );
                 dialog.getDialogPane().setContent(vbox);
                 dialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
@@ -1292,6 +1238,45 @@ public class EditController implements Initializable
         readConfig();
         addEditHandlers();
 
+        tableColumnPlayerBirthDate.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty)
+            {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d. MMMM uuuu.");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(dateFormat.format(item));
+            }
+        });
+
+        tableColumnPlayerRating.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(Double item, boolean empty)
+            {
+                DecimalFormat decimalFormat = new DecimalFormat("####0.00");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(decimalFormat.format(item));
+            }
+        });
+
+        tableColumnMatchDate.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty)
+            {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d. MMMM uuuu.");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(dateFormat.format(item));
+            }
+        });
+
         tableColumnTournamentPrizePool.setCellFactory(_ -> new TableCell<>()
         {
             @Override
@@ -1302,6 +1287,69 @@ public class EditController implements Initializable
                 super.updateItem(item, empty);
                 if (empty) setText(null);
                 else setText(currencyFormat.format(item));
+            }
+        });
+
+        tableColumnTournamentIsBig.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(Boolean item, boolean empty)
+            {
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(item ? "Jeste" : "Nije");
+            }
+        });
+
+        tableColumnTransferDate.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty)
+            {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d. MMMM uuuu.");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(dateFormat.format(item));
+            }
+        });
+
+        tableColumnTournamentStartDate.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty)
+            {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d. MMMM uuuu.");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(dateFormat.format(item));
+            }
+        });
+
+        tableColumnTournamentEndDate.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty)
+            {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d. MMMM uuuu.");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(dateFormat.format(item));
+            }
+        });
+
+        tableColumnNewsDate.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty)
+            {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d. MMMM uuuu.");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(dateFormat.format(item));
             }
         });
 

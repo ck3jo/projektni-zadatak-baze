@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<VBox fx:id="mainWindow" id="main-window" prefHeight="720.0" prefWidth="1280.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.databasegui.EditController">
+<VBox id="main-window" prefHeight="720.0" prefWidth="1280.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.databasegui.EditController">
 
     <Button onAction="#returnToMain" styleClass="exit-button">
         <graphic>
@@ -55,7 +55,7 @@
         <Tab text="Igrači">
             <TableView fx:id="tableViewPlayers" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
-                    <TableColumn minWidth="155"
+                    <TableColumn minWidth="138"
                                  reorderable="false"
                                  resizable="false"
                                  text="Ime"
@@ -65,7 +65,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="155"
+                    <TableColumn minWidth="138"
                                  reorderable="false"
                                  resizable="false"
                                  text="Nadimak"
@@ -75,7 +75,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="155"
+                    <TableColumn minWidth="138"
                                  reorderable="false"
                                  resizable="false"
                                  text="Prezime"
@@ -85,7 +85,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="155"
+                    <TableColumn minWidth="138"
                                  reorderable="false"
                                  resizable="false"
                                  fx:id="tableColumnPlayerBirthDate">
@@ -101,7 +101,7 @@
                         </graphic>
                     </TableColumn>
 
-                    <TableColumn minWidth="155"
+                    <TableColumn minWidth="138"
                                  reorderable="false"
                                  resizable="false"
                                  text="Nacionalnost"
@@ -111,7 +111,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="155"
+                    <TableColumn minWidth="138"
                                  reorderable="false"
                                  resizable="false"
                                  text="Ime tima"
@@ -121,7 +121,17 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="155"
+                    <TableColumn minWidth="138"
+                                 reorderable="false"
+                                 resizable="false"
+                                 text="Rejting"
+                                 fx:id="tableColumnPlayerRating">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="rating" />
+                        </cellValueFactory>
+                    </TableColumn>
+
+                    <TableColumn minWidth="137"
                                  reorderable="false"
                                  resizable="false"
                                  text="Major trofeji"
@@ -131,7 +141,7 @@
                         </cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn minWidth="155"
+                    <TableColumn minWidth="137"
                                  reorderable="false"
                                  resizable="false"
                                  text="Major MVP medalje"

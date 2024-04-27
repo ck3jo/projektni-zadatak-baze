@@ -4,9 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import project.databasegui.tableitems.*;
@@ -15,6 +13,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -25,13 +28,59 @@ public class DeleteController implements Initializable
     public int selectedRow;
 
     public TableView<Author> tableViewAuthors;
+    public TableColumn<Author, String> tableColumnAuthorName;
+    public TableColumn<Author, String> tableColumnAuthorNick;
+    public TableColumn<Author, String> tableColumnAuthorSurname;
+
     public TableView<Player> tableViewPlayers;
+    public TableColumn<Player, String> tableColumnPlayerName;
+    public TableColumn<Player, String> tableColumnPlayerNick;
+    public TableColumn<Player, String> tableColumnPlayerSurname;
+    public TableColumn<Player, LocalDate> tableColumnPlayerBirthDate;
+    public TableColumn<Player, String> tableColumnPlayerNationality;
+    public TableColumn<Player, String> tableColumnPlayerTeamName;
+    public TableColumn<Player, Double> tableColumnPlayerRating;
+    public TableColumn<Player, String> tableColumnPlayerMajorTrophies;
+    public TableColumn<Player, String> tableColumnPlayerMajorMVPs;
+
     public TableView<Match> tableViewMatches;
+    public TableColumn<Match, String> tableColumnMatchFirstTeamName;
+    public TableColumn<Match, String> tableColumnMatchSecondTeamName;
+    public TableColumn<Match, String> tableColumnMatchTournamentName;
+    public TableColumn<Match, Integer> tableColumnMatchNumberOfMaps;
+    public TableColumn<Match, String> tableColumnMatchScore;
+    public TableColumn<Match, LocalDate> tableColumnMatchDate;
+
     public TableView<Team> tableViewTeams;
+    public TableColumn<Team, String> tableColumnTeamName;
+    public TableColumn<Team, Integer> tableColumnTeamRanking;
+    public TableColumn<Team, Integer> tableColumnTeamMajorTrophies;
+    public TableColumn<Team, String> tableColumnTeamRegion;
+
     public TableView<Transfer> tableViewTransfers;
+    public TableColumn<Transfer, String> tableColumnTransferPlayerName;
+    public TableColumn<Transfer, String> tableColumnTransferOldTeamName;
+    public TableColumn<Transfer, String> tableColumnTransferNewTeamName;
+    public TableColumn<Transfer, LocalDate> tableColumnTransferDate;
+
     public TableView<Coach> tableViewCoaches;
+    public TableColumn<Coach, String> tableColumnCoachName;
+    public TableColumn<Coach, String> tableColumnCoachNick;
+    public TableColumn<Coach, String> tableColumnCoachSurname;
+    public TableColumn<Coach, String> tableColumnCoachTeamName;
+
     public TableView<Tournament> tableViewTournaments;
+    public TableColumn<Tournament, String> tableColumnTournamentName;
+    public TableColumn<Tournament, LocalDate> tableColumnTournamentStartDate;
+    public TableColumn<Tournament, LocalDate> tableColumnTournamentEndDate;
+    public TableColumn<Tournament, String> tableColumnTournamentLocation;
+    public TableColumn<Tournament, Integer> tableColumnTournamentPrizePool;
+    public TableColumn<Tournament, Boolean> tableColumnTournamentIsBig;
+
     public TableView<News> tableViewNews;
+    public TableColumn<News, String> tableColumnNewsTitle;
+    public TableColumn<News, LocalDate> tableColumnNewsDate;
+    public TableColumn<News, String> tableColumnNewsAuthorName;
 
     private String url;
     private String user;
@@ -694,6 +743,121 @@ public class DeleteController implements Initializable
         selectedRow = 1;
 
         addDeleteListeners();
+
+        tableColumnPlayerBirthDate.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty)
+            {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d. MMMM uuuu.");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(dateFormat.format(item));
+            }
+        });
+
+        tableColumnPlayerRating.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(Double item, boolean empty)
+            {
+                DecimalFormat decimalFormat = new DecimalFormat("####0.00");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(decimalFormat.format(item));
+            }
+        });
+
+        tableColumnMatchDate.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty)
+            {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d. MMMM uuuu.");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(dateFormat.format(item));
+            }
+        });
+
+        tableColumnTournamentPrizePool.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(Integer item, boolean empty)
+            {
+                NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(currencyFormat.format(item));
+            }
+        });
+
+        tableColumnTournamentIsBig.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(Boolean item, boolean empty)
+            {
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(item ? "Jeste" : "Nije");
+            }
+        });
+
+        tableColumnTransferDate.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty)
+            {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d. MMMM uuuu.");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(dateFormat.format(item));
+            }
+        });
+
+        tableColumnTournamentStartDate.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty)
+            {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d. MMMM uuuu.");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(dateFormat.format(item));
+            }
+        });
+
+        tableColumnTournamentEndDate.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty)
+            {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d. MMMM uuuu.");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(dateFormat.format(item));
+            }
+        });
+
+        tableColumnNewsDate.setCellFactory(_ -> new TableCell<>()
+        {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty)
+            {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d. MMMM uuuu.");
+
+                super.updateItem(item, empty);
+                if (empty) setText(null);
+                else setText(dateFormat.format(item));
+            }
+        });
 
         tableViewAuthors.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         tableViewPlayers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
