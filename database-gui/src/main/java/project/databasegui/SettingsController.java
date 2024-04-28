@@ -13,7 +13,7 @@ public class SettingsController
     public TextField inputDatabaseURL;
     public TextField inputDatabaseUsername;
     public TextField inputDatabasePassword;
-    private final String fileName = "config.txt";
+    private final String fileName = "app.config";
     private final File config = new File(fileName);
 
     public void createConfig() throws IOException
@@ -42,41 +42,35 @@ public class SettingsController
         if (!config.isFile())
         {
             createConfig();
-
-            try (FileWriter fw = new FileWriter(fileName))
-            {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno zapisivanje podataka.");
-                fw.write("url: " + inputDatabaseURL.getText() + "\n");
-                fw.write("user: " + inputDatabaseUsername.getText() + "\n");
-                if (inputDatabasePassword.getText() == null || inputDatabasePassword.getText().isEmpty())
-                {
-                    fw.write("pass: §" + "\n");
-                }
-                else fw.write("pass: " + inputDatabasePassword.getText() + "\n");
-                fw.write("eof" + "\n");
-
-                alert.setHeaderText("Uspeh!");
-                alert.showAndWait();
-            }
+            writeToFile();
         }
-        if (config.isFile())
+        else
         {
-            try (FileWriter fw = new FileWriter(fileName))
-            {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno zapisivanje podataka.");
-                fw.write("url: " + inputDatabaseURL.getText() + "\n");
-                fw.write("user: " + inputDatabaseUsername.getText() + "\n");
-                if (inputDatabasePassword.getText() == null || inputDatabasePassword.getText().isEmpty())
-                {
-                    fw.write("pass: §" + "\n");
-                }
-                else fw.write("pass: " + inputDatabasePassword.getText() + "\n");
-                fw.write("eof" + "\n");
-
-                alert.setHeaderText("Uspeh!");
-                alert.showAndWait();
-            }
+            writeToFile();
         }
+    }
+
+    private void writeToFile() throws IOException
+    {
+        try (FileWriter fw = new FileWriter(fileName))
+        {
+            fw.write("url: " + inputDatabaseURL.getText() + "\n");
+            fw.write("user: " + inputDatabaseUsername.getText() + "\n");
+            if (inputDatabasePassword.getText() == null || inputDatabasePassword.getText().isEmpty())
+            {
+                fw.write("pass: §" + "\n");
+            }
+            else fw.write("pass: " + inputDatabasePassword.getText() + "\n");
+            fw.write("eof" + "\n");
+            showSuccessAlert();
+        }
+    }
+
+    private static void showSuccessAlert()
+    {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno zapisivanje podataka.");
+        alert.setHeaderText("Uspeh!");
+        alert.showAndWait();
     }
 
     @FXML

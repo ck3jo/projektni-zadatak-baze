@@ -25,7 +25,7 @@ import project.databasegui.tableitems.*;
 
 public class EditController implements Initializable
 {
-    public Scanner config = new Scanner(new File("config.txt"));
+    public Scanner config = new Scanner(new File("app.config"));
 
     public ObservableList<Author> allAuthors = FXCollections.observableArrayList();
     public ObservableList<Player> allPlayers = FXCollections.observableArrayList();

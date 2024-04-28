@@ -23,7 +23,7 @@ import java.util.Scanner;
 
 public class DeleteController implements Initializable
 {
-    public Scanner config = new Scanner(new File("config.txt"));
+    public Scanner config = new Scanner(new File("app.config"));
 
     public int selectedRow;
 

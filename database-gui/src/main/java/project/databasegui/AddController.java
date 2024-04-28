@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class AddController implements Initializable
 {
-    public Scanner config = new Scanner(new File("config.txt"));
+    public Scanner config = new Scanner(new File("app.config"));
 
     //author inputs
     public TextField inputAuthorName;
