@@ -21,7 +21,7 @@ public class MainController
             return false;
         }
 
-        if(!url.substring(5).startsWith("jdbc:mysql//"))
+        if(!url.substring(5).startsWith("jdbc:mysql://"))
         {
             showErrorAlert("Nepravilan protokol URL-a.");
             return false;

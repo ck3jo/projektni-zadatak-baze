@@ -21,6 +21,7 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import net.synedra.validatorfx.Validator;
 import project.databasegui.tableitems.*;
 
 public class EditController implements Initializable
@@ -119,6 +120,18 @@ public class EditController implements Initializable
         }
     }
 
+    private static Double tryParseDouble(String str)
+    {
+        try { return Double.parseDouble(str); }
+        catch (NumberFormatException e) { return null; }
+    }
+
+    private static Integer tryParseInt(String str)
+    {
+        try { return Integer.parseInt(str); }
+        catch (NumberFormatException e) { return null; }
+    }
+
     private static void showSuccessAlert()
     {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno menjanje podataka!");
@@ -129,6 +142,13 @@ public class EditController implements Initializable
     private static void showErrorAlert()
     {
         Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri izmeni podataka.");
+        alert.setHeaderText("Greška!");
+        alert.showAndWait();
+    }
+
+    private static void showWrongInputAlert()
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Postoje greške u unetim podacima.");
         alert.setHeaderText("Greška!");
         alert.showAndWait();
     }
@@ -375,13 +395,40 @@ public class EditController implements Initializable
                 Dialog<Author> dialog = new Dialog<>();
                 VBox vbox = new VBox();
                 TextField textFieldAuthorName = new TextField(selectedAuthor.getName());
+                Validator textFieldAuthorNameValidator = new Validator();
+                textFieldAuthorNameValidator.createCheck()
+                        .dependsOn("name", textFieldAuthorName.textProperty())
+                        .withMethod(c -> {
+                           String name = c.get("name");
+                           if (name.matches(".*\\d.*"))
+                           {
+                               c.error("Brojevi se ne smeju pojavljivati u imenima.");
+                           }
+                           if (name.length() > 45)
+                           {
+                               c.error("Predugačko ime.");
+                           }
+                        })
+                        .decorates(textFieldAuthorName)
+                        .immediate();
+
                 TextField textFieldAuthorNick = new TextField(selectedAuthor.getNick());
                 TextField textFieldAuthorSurname = new TextField(selectedAuthor.getSurname());
+                Validator textFieldAuthorSurnameValidator = new Validator();
+                textFieldAuthorSurnameValidator.createCheck()
+                        .dependsOn("surname", textFieldAuthorNick.textProperty())
+                        .withMethod(c -> {
+                            String surname = c.get("surname");
+                            if (surname.matches(".*\\d.*")) { c.error("Ime ne sme sadržati brojeve."); }
+                            if (surname.length() > 45) { c.error("Predugačko prezime."); }
+                        })
+                        .decorates(textFieldAuthorSurname)
+                        .immediate();
 
                 vbox.setSpacing(10);
                 vbox.setPadding(new Insets(10, 10, 10, 10));
                 vbox.setPrefWidth(600);
-                vbox.setPrefHeight(400);
+                vbox.setPrefHeight(100);
 
                 dialog.initModality(Modality.APPLICATION_MODAL);
                 dialog.setTitle("Izmenite podatke");
@@ -392,12 +439,15 @@ public class EditController implements Initializable
                 dialog.initStyle(StageStyle.UTILITY);
 
                 dialog.setResultConverter((ButtonType button) -> {
-                    if (button == ButtonType.YES)
+                    if (button == ButtonType.YES &&
+                        !textFieldAuthorNameValidator.containsErrors() &&
+                        !textFieldAuthorSurnameValidator.containsErrors())
                     {
                         Author newAuthor = new Author(textFieldAuthorName.getText(), textFieldAuthorNick.getText(), textFieldAuthorSurname.getText());
                         confirmAuthorEdit(rowToEdit, newAuthor.getName(), newAuthor.getNick(), newAuthor.getSurname());
                         return newAuthor;
                     }
+                    else if (button == ButtonType.YES) { showWrongInputAlert(); }
                     return null;
                 });
 
@@ -425,19 +475,81 @@ public class EditController implements Initializable
                 Dialog<Player> dialog = new Dialog<>();
                 VBox vbox = new VBox();
                 TextField textFieldPlayerName = new TextField(selectedPlayer.getName());
+                Validator textFieldPlayerNameValidator = new Validator();
+                textFieldPlayerNameValidator.createCheck()
+                        .dependsOn("name", textFieldPlayerName.textProperty())
+                        .withMethod(c -> {
+                            String name = c.get("name");
+                            if (name.matches(".*\\d.*")) { c.error("Ime ne sme sadržati brojeve."); }
+                            if (name.length() > 45) { c.error("Predugačko ime."); }
+                        })
+                        .decorates(textFieldPlayerName)
+                        .immediate();
+
                 TextField textFieldPlayerNick = new TextField(selectedPlayer.getNick());
                 TextField textFieldPlayerSurname = new TextField(selectedPlayer.getSurname());
+                Validator textFieldPlayerSurnameValidator = new Validator();
+                textFieldPlayerSurnameValidator.createCheck()
+                        .dependsOn("surname", textFieldPlayerSurname.textProperty())
+                        .withMethod(c -> {
+                            String surname = c.get("surname");
+                            if (surname.matches(".*\\d.*")) { c.error("Prezime ne sme sadržati brojeve."); }
+                            if (surname.length() > 45) { c.error("Predugačko prezime."); }
+                        })
+                        .decorates(textFieldPlayerSurname)
+                        .immediate();
+
                 DatePicker datePickerPlayerBirthDate = new DatePicker(selectedPlayer.getBirthDate());
                 TextField textFieldPlayerNationality = new TextField(selectedPlayer.getNationality());
+                Validator textFieldPlayerNationalityValidator = new Validator();
+                textFieldPlayerNationalityValidator.createCheck()
+                        .dependsOn("nationality", textFieldPlayerNationality.textProperty())
+                        .withMethod(c -> {
+                            String nationality = c.get("nationality");
+                            if (nationality.matches(".*\\d.*")) { c.error("Ime države ne sme sadržati brojeve."); }
+                            if (nationality.length() > 45) { c.error("Predugačko ime države."); }
+                        })
+                        .decorates(textFieldPlayerNationality)
+                        .immediate();
+
                 TextField textFieldPlayerTeamName = new TextField(selectedPlayer.getTeamName());
                 TextField textFieldPlayerRating = new TextField(Double.toString(selectedPlayer.getRating()));
+                Validator textFieldPlayerRatingValidator = new Validator();
+                textFieldPlayerRatingValidator.createCheck()
+                        .dependsOn("rating", textFieldPlayerRating.textProperty())
+                        .withMethod(c -> {
+                            Double rating = tryParseDouble(c.get("rating"));
+                            if (rating == null) { c.error("Nepravilno unet rejting."); }
+                        })
+                        .decorates(textFieldPlayerRating)
+                        .immediate();
+
                 TextField textFieldPlayerMajorTrophies = new TextField(Integer.toString(selectedPlayer.getMajorTrophies()));
+                Validator textFieldPlayerMajorTrophiesValidator = new Validator();
+                textFieldPlayerMajorTrophiesValidator.createCheck()
+                        .dependsOn("majorTrophies", textFieldPlayerMajorTrophies.textProperty())
+                        .withMethod(c -> {
+                            Integer majorTrophies = tryParseInt(c.get("majorTrophies"));
+                            if (majorTrophies == null) { c.error("Nepravilno unet broj major trofeja."); }
+                        })
+                        .decorates(textFieldPlayerMajorTrophies)
+                        .immediate();
+
                 TextField textFieldPlayerMajorMVPs = new TextField(Integer.toString(selectedPlayer.getMajorMVPs()));
+                Validator textFieldPlayerMajorMVPsValidator = new Validator();
+                textFieldPlayerMajorMVPsValidator.createCheck()
+                        .dependsOn("majorMVPs", textFieldPlayerMajorMVPs.textProperty())
+                        .withMethod(c -> {
+                            Integer majorMVPs = tryParseInt(c.get("majorMVPs"));
+                            if (majorMVPs == null) { c.error("Nepravilno unet broj major MVP medalja."); }
+                        })
+                        .decorates(textFieldPlayerMajorMVPs)
+                        .immediate();
 
                 vbox.setSpacing(10);
                 vbox.setPadding(new Insets(10, 10, 10, 10));
                 vbox.setPrefWidth(600);
-                vbox.setPrefHeight(400);
+                vbox.setPrefHeight(300);
 
                 dialog.initModality(Modality.APPLICATION_MODAL);
                 dialog.setTitle("Izmenite podatke");
@@ -458,7 +570,12 @@ public class EditController implements Initializable
                 dialog.initStyle(StageStyle.UTILITY);
 
                 dialog.setResultConverter((ButtonType button) -> {
-                    if (button == ButtonType.YES)
+                    if (button == ButtonType.YES &&
+                        !textFieldPlayerNameValidator.containsErrors() &&
+                        !textFieldPlayerSurnameValidator.containsErrors() &&
+                        !textFieldPlayerNationalityValidator.containsErrors() &&
+                        !textFieldPlayerMajorTrophiesValidator.containsErrors() &&
+                        !textFieldPlayerMajorMVPsValidator.containsErrors())
                     {
                         Player newPlayer = new Player(
                                 textFieldPlayerName.getText(),
@@ -492,6 +609,7 @@ public class EditController implements Initializable
                         }
                         return newPlayer;
                     }
+                    else if (button == ButtonType.YES) { showWrongInputAlert(); }
                     return null;
                 });
 
@@ -522,7 +640,27 @@ public class EditController implements Initializable
                 TextField textFieldSecondTeamName = new TextField(selectedMatch.getSecondTeamName());
                 TextField textFieldTournamentName = new TextField(selectedMatch.getTournamentName());
                 TextField textFieldNumberOfMaps = new TextField(Integer.toString(selectedMatch.getNumberOfMaps()));
+                Validator textFieldNumberOfMapsValidator = new Validator();
+                textFieldNumberOfMapsValidator.createCheck()
+                        .dependsOn("numberOfMaps", textFieldFirstTeamName.textProperty())
+                        .withMethod(c -> {
+                            Integer numberOfMaps = tryParseInt(c.get("numberOfMaps"));
+                            if (numberOfMaps == null) { c.error("Nepravilno unet broj mapa."); }
+                        })
+                        .decorates(textFieldNumberOfMaps)
+                        .immediate();
+
                 TextField textFieldScore = new TextField(selectedMatch.getScore());
+                Validator textFieldScoreValidator = new Validator();
+                textFieldScoreValidator.createCheck()
+                        .dependsOn("score", textFieldFirstTeamName.textProperty())
+                        .withMethod(c -> {
+                            String score = c.get("score");
+                            if (!score.matches("\\d:\\d")) { c.error("Nepravilno unet rezultat."); }
+                        })
+                        .decorates(textFieldScore)
+                        .immediate();
+
                 DatePicker datePickerMatchDate = new DatePicker(selectedMatch.getMatchDate());
 
                 vbox.setSpacing(10);
@@ -546,7 +684,9 @@ public class EditController implements Initializable
                 dialog.initStyle(StageStyle.UTILITY);
 
                 dialog.setResultConverter((ButtonType button) -> {
-                    if (button == ButtonType.YES)
+                    if (button == ButtonType.YES &&
+                        !textFieldNumberOfMapsValidator.containsErrors() &&
+                        !textFieldScoreValidator.containsErrors())
                     {
                         Match newMatch = new Match(
                                 textFieldFirstTeamName.getText(),
@@ -574,6 +714,7 @@ public class EditController implements Initializable
                         }
                         return newMatch;
                     }
+                    else if (button == ButtonType.YES) { showWrongInputAlert(); }
                     return null;
                 });
 
@@ -602,14 +743,35 @@ public class EditController implements Initializable
                 VBox vbox = new VBox();
                 TextField textFieldTeamName = new TextField(selectedTeam.getName());
                 TextField textFieldTeamRanking = new TextField(Integer.toString(selectedTeam.getRanking()));
+                Validator textFieldTeamRankingValidator = new Validator();
+                textFieldTeamRankingValidator.createCheck()
+                        .dependsOn("ranking", textFieldTeamRanking.textProperty())
+                        .withMethod(c -> {
+                            Integer ranking = tryParseInt(c.get("ranking"));
+                            if (ranking == null) { c.error("Nepravilno uneta rang pozicija."); }
+                        })
+                        .decorates(textFieldTeamRanking)
+                        .immediate();
+
                 TextField textFieldMajorTrophies = new TextField(Integer.toString(selectedTeam.getMajorTrophies()));
+                Validator textFieldMajorTrophiesValidator = new Validator();
+                textFieldMajorTrophiesValidator.createCheck()
+                        .dependsOn("majorTrophies", textFieldMajorTrophies.textProperty())
+                        .withMethod(c -> {
+                            Integer majorTrophies = tryParseInt(c.get("majorTrophies"));
+                            if (majorTrophies == null) { c.error("Nepravilno unet broj major trofeja."); }
+                        })
+                        .decorates(textFieldMajorTrophies)
+                        .immediate();
+
                 ChoiceBox<String> choiceBoxRegion = new ChoiceBox<>();
                 choiceBoxRegion.getItems().addAll("Evropa", "Severna Amerika", "Južna Amerika", "Azija", "Okeanija", "Afrika");
+                choiceBoxRegion.setValue(selectedTeam.getRegion());
 
                 vbox.setSpacing(10);
                 vbox.setPadding(new Insets(10, 10, 10, 10));
                 vbox.setPrefWidth(600);
-                vbox.setPrefHeight(400);
+                vbox.setPrefHeight(120);
 
                 dialog.initModality(Modality.APPLICATION_MODAL);
                 dialog.setTitle("Izmenite podatke");
@@ -625,7 +787,9 @@ public class EditController implements Initializable
                 dialog.initStyle(StageStyle.UTILITY);
 
                 dialog.setResultConverter((ButtonType button) -> {
-                    if (button == ButtonType.YES)
+                    if (button == ButtonType.YES &&
+                        !textFieldTeamRankingValidator.containsErrors() &&
+                        !textFieldMajorTrophiesValidator.containsErrors())
                     {
                         Team newTeam = new Team(
                                 textFieldTeamName.getText(),
@@ -641,6 +805,7 @@ public class EditController implements Initializable
                                 newTeam.getRegion()
                         );
                     }
+                    else if (button == ButtonType.YES) { showWrongInputAlert(); }
                     return null;
                 });
 
@@ -741,14 +906,36 @@ public class EditController implements Initializable
                 Dialog<Coach> dialog = new Dialog<>();
                 VBox vbox = new VBox();
                 TextField textFieldCoachName = new TextField(selectedCoach.getName());
+                Validator textFieldCoachNameValidator = new Validator();
+                textFieldCoachNameValidator.createCheck()
+                        .dependsOn("name", textFieldCoachName.textProperty())
+                        .withMethod(c -> {
+                            String name = c.get("name");
+                            if (name.matches(".*\\d.*")) { c.error("Ime ne sme sadržati brojeve."); }
+                            else if (name.length() > 45) { c.error("Predugačko ime."); }
+                        })
+                        .decorates(textFieldCoachName)
+                        .immediate();
+
                 TextField textFieldCoachNick = new TextField(selectedCoach.getNick());
                 TextField textFieldCoachSurname = new TextField(selectedCoach.getSurname());
+                Validator textFieldCoachSurnameValidator = new Validator();
+                textFieldCoachSurnameValidator.createCheck()
+                        .dependsOn("surname", textFieldCoachSurname.textProperty())
+                        .withMethod(c -> {
+                            String surname = c.get("surname");
+                            if (surname.matches(".*\\d.*")) { c.error("Prezime ne sme sadržati brojeve."); }
+                            else if (surname.length() > 45) { c.error("Predugačko prezime."); }
+                        })
+                        .decorates(textFieldCoachSurname)
+                        .immediate();
+
                 TextField textFieldCoachTeamName = new TextField(selectedCoach.getTeamName());
 
                 vbox.setSpacing(10);
                 vbox.setPadding(new Insets(10, 10, 10, 10));
                 vbox.setPrefWidth(600);
-                vbox.setPrefHeight(400);
+                vbox.setPrefHeight(120);
 
                 dialog.initModality(Modality.APPLICATION_MODAL);
                 dialog.setTitle("Izmenite podatke");
@@ -764,7 +951,9 @@ public class EditController implements Initializable
                 dialog.initStyle(StageStyle.UTILITY);
 
                 dialog.setResultConverter((ButtonType button) -> {
-                    if (button == ButtonType.YES)
+                    if (button == ButtonType.YES &&
+                        !textFieldCoachNameValidator.containsErrors() &&
+                        !textFieldCoachSurnameValidator.containsErrors())
                     {
                         Coach newCoach = new Coach(
                                 textFieldCoachName.getText(),
@@ -786,6 +975,7 @@ public class EditController implements Initializable
                             throw new RuntimeException(e);
                         }
                     }
+                    else if (button == ButtonType.YES) { showWrongInputAlert(); }
                     return null;
                 });
 
@@ -816,7 +1006,27 @@ public class EditController implements Initializable
                 DatePicker datePickerTournamentStartDate = new DatePicker(selectedTournament.getStartDate());
                 DatePicker datePickerTournamentEndDate = new DatePicker(selectedTournament.getEndDate());
                 TextField textFieldTournamentLocation = new TextField(selectedTournament.getLocation());
+                Validator textFieldTournamentLocationValidator = new Validator();
+                textFieldTournamentLocationValidator.createCheck()
+                        .dependsOn("location", textFieldTournamentLocation.textProperty())
+                        .withMethod(c -> {
+                            String location = c.get("location");
+                            if (location.matches(".*\\d.*")) { c.error("Lokacija ne sme sadržati brojeve."); }
+                        })
+                        .decorates(textFieldTournamentLocation)
+                        .immediate();
+
                 TextField textFieldTournamentPrizePool = new TextField(Integer.toString(selectedTournament.getPrizePool()));
+                Validator textFieldTournamentPrizePoolValidator = new Validator();
+                textFieldTournamentPrizePoolValidator.createCheck()
+                        .dependsOn("prizePool", textFieldTournamentPrizePool.textProperty())
+                        .withMethod(c -> {
+                            Integer prizePool = tryParseInt(c.get("prizePool"));
+                            if (prizePool == null) { c.error("Nepravilno unet nagradni fond turnira."); }
+                        })
+                        .decorates(textFieldTournamentPrizePool)
+                        .immediate();
+
                 HBox checkBoxWholeElement = new HBox();
                 Label checkBoxLabel = new Label("Veliki turnir?");
                 CheckBox checkBoxTournamentIsBig = new CheckBox();
@@ -844,7 +1054,9 @@ public class EditController implements Initializable
                 dialog.initStyle(StageStyle.UTILITY);
 
                 dialog.setResultConverter((ButtonType button) -> {
-                    if (button == ButtonType.YES)
+                    if (button == ButtonType.YES &&
+                        !textFieldTournamentLocationValidator.containsErrors() &&
+                        !textFieldTournamentPrizePoolValidator.containsErrors())
                     {
                         Tournament newTournament = new Tournament(
                                 textFieldTournamentName.getText(),
@@ -864,6 +1076,7 @@ public class EditController implements Initializable
                                 newTournament.getIsBig()
                         );
                     }
+                    else if (button == ButtonType.YES) { showWrongInputAlert(); }
                     return null;
                 });
 
@@ -897,7 +1110,7 @@ public class EditController implements Initializable
                 vbox.setSpacing(10);
                 vbox.setPadding(new Insets(10, 10, 10, 10));
                 vbox.setPrefWidth(600);
-                vbox.setPrefHeight(400);
+                vbox.setPrefHeight(100);
 
                 vbox.getChildren().addAll(
                         textFieldNewsTitle,

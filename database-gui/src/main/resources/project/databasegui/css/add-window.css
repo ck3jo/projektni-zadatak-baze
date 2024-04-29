@@ -43,11 +43,6 @@
 
 }
 
-.tab-pane
-{
-    -fx-min-height: 575px;
-}
-
 .separator
 {
     -fx-padding: 5 0 0 0;

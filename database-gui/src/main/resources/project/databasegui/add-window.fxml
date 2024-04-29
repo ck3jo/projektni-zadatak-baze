@@ -34,7 +34,7 @@
 
                 <Region VBox.vgrow="ALWAYS" />
 
-                <Button onAction="#sendAuthorDataToDatabase" text="Potvrdi unos" />
+                <Button fx:id="buttonSendAuthorData" onAction="#sendAuthorDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
@@ -89,7 +89,7 @@
 
                 <Region VBox.vgrow="ALWAYS" />
 
-                <Button onAction="#sendPlayerDataToDatabase" text="Potvrdi unos" />
+                <Button fx:id="buttonSendPlayerData" onAction="#sendPlayerDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
@@ -129,7 +129,7 @@
 
                 <Region VBox.vgrow="ALWAYS" />
 
-                <Button onAction="#sendMatchDataToDatabase" text="Potvrdi unos" />
+                <Button fx:id="buttonSendMatchData" onAction="#sendMatchDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
@@ -170,7 +170,7 @@
 
                 <Region VBox.vgrow="ALWAYS" />
 
-                <Button onAction="#sendTeamDataToDatabase" text="Potvrdi unos" />
+                <Button fx:id="buttonSendTeamData" onAction="#sendTeamDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
@@ -200,7 +200,7 @@
 
                 <Region VBox.vgrow="ALWAYS" />
 
-                <Button onAction="#sendTransferDataToDatabase" text="Potvrdi unos" />
+                <Button fx:id="buttonSendTransferData" onAction="#sendTransferDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
@@ -230,7 +230,7 @@
 
                 <Region VBox.vgrow="ALWAYS" />
 
-                <Button onAction="#sendCoachDataToDatabase" text="Potvrdi unos" />
+                <Button fx:id="buttonSendCoachData" onAction="#sendCoachDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
@@ -270,7 +270,7 @@
 
                 <Region VBox.vgrow="ALWAYS" />
 
-                <Button onAction="#sendTournamentDataToDatabase" text="Potvrdi unos" />
+                <Button fx:id="buttonSendTournamentData" onAction="#sendTournamentDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
@@ -295,7 +295,7 @@
 
                 <Region VBox.vgrow="ALWAYS" />
 
-                <Button onAction="#sendNewsDataToDatabase" text="Potvrdi unos" />
+                <Button fx:id="buttonSendNewsData" onAction="#sendNewsDataToDatabase" text="Potvrdi unos" />
 
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
@@ -309,6 +309,6 @@
     </padding>
 
     <stylesheets>
-        <URL value="@css/crud-window.css" />
+        <URL value="@css/add-window.css" />
     </stylesheets>
 </VBox>

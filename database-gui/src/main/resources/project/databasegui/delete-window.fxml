@@ -15,7 +15,7 @@
 
     <Button onAction="#returnToMain" styleClass="exit-button">
         <graphic>
-            <FontIcon iconLiteral="mdsal-exit_to_app:24:BLACK" />
+            <FontIcon iconLiteral="mdsal-exit_to_app:24:BLACK"/>
         </graphic>
     </Button>
 
@@ -29,7 +29,7 @@
                                  text="Ime"
                                  fx:id="tableColumnAuthorName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="name" />
+                            <PropertyValueFactory property="name"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -39,7 +39,7 @@
                                  text="Nadimak"
                                  fx:id="tableColumnAuthorNick">
                         <cellValueFactory>
-                            <PropertyValueFactory property="nick" />
+                            <PropertyValueFactory property="nick"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -49,7 +49,7 @@
                                  text="Prezime"
                                  fx:id="tableColumnAuthorSurname">
                         <cellValueFactory>
-                            <PropertyValueFactory property="surname" />
+                            <PropertyValueFactory property="surname"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -65,7 +65,7 @@
                                  text="Ime"
                                  fx:id="tableColumnPlayerName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="name" />
+                            <PropertyValueFactory property="name"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -75,7 +75,7 @@
                                  text="Nadimak"
                                  fx:id="tableColumnPlayerNick">
                         <cellValueFactory>
-                            <PropertyValueFactory property="nick" />
+                            <PropertyValueFactory property="nick"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -85,7 +85,7 @@
                                  text="Prezime"
                                  fx:id="tableColumnPlayerSurname">
                         <cellValueFactory>
-                            <PropertyValueFactory property="surname" />
+                            <PropertyValueFactory property="surname"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -94,7 +94,7 @@
                                  resizable="false"
                                  fx:id="tableColumnPlayerBirthDate">
                         <cellValueFactory>
-                            <PropertyValueFactory property="birthDate" />
+                            <PropertyValueFactory property="birthDate"/>
                         </cellValueFactory>
                         <graphic>
                             <Label text="Datum rođenja">
@@ -111,7 +111,7 @@
                                  text="Nacionalnost"
                                  fx:id="tableColumnPlayerNationality">
                         <cellValueFactory>
-                            <PropertyValueFactory property="nationality" />
+                            <PropertyValueFactory property="nationality"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -121,7 +121,7 @@
                                  text="Ime tima"
                                  fx:id="tableColumnPlayerTeamName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="teamName" />
+                            <PropertyValueFactory property="teamName"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -131,7 +131,7 @@
                                  text="Rejting"
                                  fx:id="tableColumnPlayerRating">
                         <cellValueFactory>
-                            <PropertyValueFactory property="rating" />
+                            <PropertyValueFactory property="rating"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -141,7 +141,7 @@
                                  text="Major trofeji"
                                  fx:id="tableColumnPlayerMajorTrophies">
                         <cellValueFactory>
-                            <PropertyValueFactory property="majorTrophies" />
+                            <PropertyValueFactory property="majorTrophies"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -151,7 +151,7 @@
                                  text="Major MVP medalje"
                                  fx:id="tableColumnPlayerMajorMVPs">
                         <cellValueFactory>
-                            <PropertyValueFactory property="majorMVPs" />
+                            <PropertyValueFactory property="majorMVPs"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -167,7 +167,7 @@
                                  text="Ime prvog tima"
                                  fx:id="tableColumnMatchFirstTeamName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="firstTeamName" />
+                            <PropertyValueFactory property="firstTeamName"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -177,7 +177,7 @@
                                  text="Ime drugog tima"
                                  fx:id="tableColumnMatchSecondTeamName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="secondTeamName" />
+                            <PropertyValueFactory property="secondTeamName"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -187,7 +187,7 @@
                                  text="Ime turnira"
                                  fx:id="tableColumnMatchTournamentName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="tournamentName" />
+                            <PropertyValueFactory property="tournamentName"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -197,7 +197,7 @@
                                  text="Broj mapa"
                                  fx:id="tableColumnMatchNumberOfMaps">
                         <cellValueFactory>
-                            <PropertyValueFactory property="numberOfMaps" />
+                            <PropertyValueFactory property="numberOfMaps"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -207,7 +207,7 @@
                                  text="Rezultat"
                                  fx:id="tableColumnMatchScore">
                         <cellValueFactory>
-                            <PropertyValueFactory property="score" />
+                            <PropertyValueFactory property="score"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -216,7 +216,7 @@
                                  resizable="false"
                                  fx:id="tableColumnMatchDate">
                         <cellValueFactory>
-                            <PropertyValueFactory property="matchDate" />
+                            <PropertyValueFactory property="matchDate"/>
                         </cellValueFactory>
                         <graphic>
                             <Label text="Datum meča">
@@ -239,7 +239,7 @@
                                  text="Ime"
                                  fx:id="tableColumnTeamName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="name" />
+                            <PropertyValueFactory property="name"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -249,7 +249,7 @@
                                  text="Rang pozicija"
                                  fx:id="tableColumnTeamRanking">
                         <cellValueFactory>
-                            <PropertyValueFactory property="ranking" />
+                            <PropertyValueFactory property="ranking"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -259,7 +259,7 @@
                                  text="Major trofeji"
                                  fx:id="tableColumnTeamMajorTrophies">
                         <cellValueFactory>
-                            <PropertyValueFactory property="majorTrophies" />
+                            <PropertyValueFactory property="majorTrophies"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -269,7 +269,7 @@
                                  text="Region"
                                  fx:id="tableColumnTeamRegion">
                         <cellValueFactory>
-                            <PropertyValueFactory property="region" />
+                            <PropertyValueFactory property="region"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -285,7 +285,7 @@
                                  text="Ime igrača"
                                  fx:id="tableColumnTransferPlayerName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="playerName" />
+                            <PropertyValueFactory property="playerName"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -295,7 +295,7 @@
                                  text="Ime starog tima"
                                  fx:id="tableColumnTransferOldTeamName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="oldTeam" />
+                            <PropertyValueFactory property="oldTeam"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -305,7 +305,7 @@
                                  text="Ime novog tima"
                                  fx:id="tableColumnTransferNewTeamName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="newTeam" />
+                            <PropertyValueFactory property="newTeam"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -315,7 +315,7 @@
                                  text="Datum"
                                  fx:id="tableColumnTransferDate">
                         <cellValueFactory>
-                            <PropertyValueFactory property="date" />
+                            <PropertyValueFactory property="date"/>
                         </cellValueFactory>
                         <graphic>
                             <Label text="Datum">
@@ -338,7 +338,7 @@
                                  text="Ime"
                                  fx:id="tableColumnCoachName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="name" />
+                            <PropertyValueFactory property="name"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -348,7 +348,7 @@
                                  text="Nadimak"
                                  fx:id="tableColumnCoachNick">
                         <cellValueFactory>
-                            <PropertyValueFactory property="nick" />
+                            <PropertyValueFactory property="nick"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -358,7 +358,7 @@
                                  text="Prezime"
                                  fx:id="tableColumnCoachSurname">
                         <cellValueFactory>
-                            <PropertyValueFactory property="surname" />
+                            <PropertyValueFactory property="surname"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -368,7 +368,7 @@
                                  text="Ime tima"
                                  fx:id="tableColumnCoachTeamName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="teamName" />
+                            <PropertyValueFactory property="teamName"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -384,7 +384,7 @@
                                  text="Ime"
                                  fx:id="tableColumnTournamentName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="name" />
+                            <PropertyValueFactory property="name"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -393,7 +393,7 @@
                                  resizable="false"
                                  fx:id="tableColumnTournamentStartDate">
                         <cellValueFactory>
-                            <PropertyValueFactory property="startDate" />
+                            <PropertyValueFactory property="startDate"/>
                         </cellValueFactory>
                         <graphic>
                             <Label text="Datum početka">
@@ -409,7 +409,7 @@
                                  resizable="false"
                                  fx:id="tableColumnTournamentEndDate">
                         <cellValueFactory>
-                            <PropertyValueFactory property="endDate" />
+                            <PropertyValueFactory property="endDate"/>
                         </cellValueFactory>
                         <graphic>
                             <Label text="Datum početka">
@@ -426,7 +426,7 @@
                                  text="Lokacija"
                                  fx:id="tableColumnTournamentLocation">
                         <cellValueFactory>
-                            <PropertyValueFactory property="location" />
+                            <PropertyValueFactory property="location"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -436,7 +436,7 @@
                                  text="Nagradni fond"
                                  fx:id="tableColumnTournamentPrizePool">
                         <cellValueFactory>
-                            <PropertyValueFactory property="prizePool" />
+                            <PropertyValueFactory property="prizePool"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -446,7 +446,7 @@
                                  text="Veliki turnir?"
                                  fx:id="tableColumnTournamentIsBig">
                         <cellValueFactory>
-                            <PropertyValueFactory property="isBig" />
+                            <PropertyValueFactory property="isBig"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -462,7 +462,7 @@
                                  text="Naslov"
                                  fx:id="tableColumnNewsTitle">
                         <cellValueFactory>
-                            <PropertyValueFactory property="title" />
+                            <PropertyValueFactory property="title"/>
                         </cellValueFactory>
                     </TableColumn>
 
@@ -488,7 +488,7 @@
                                  text="Ime autora"
                                  fx:id="tableColumnNewsAuthorName">
                         <cellValueFactory>
-                            <PropertyValueFactory property="authorName" />
+                            <PropertyValueFactory property="authorName"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -497,13 +497,13 @@
     </TabPane>
 
     <padding>
-        <Insets bottom="240.0"
+        <Insets bottom="20.0"
                 left="20.0"
                 right="20.0"
                 top="20.0"/>
     </padding>
 
     <stylesheets>
-        <URL value="@css/crud-window.css" />
+        <URL value="@css/del-edit-window.css" />
     </stylesheets>
 </VBox>

@@ -16,7 +16,6 @@ module project.databasegui
     requires mysql.connector.j;
     requires annotations;
     requires protobuf.java;
-    requires jdk.compiler;
 
     opens project.databasegui to javafx.fxml;
     opens project.databasegui.tableitems to javafx.fxml;

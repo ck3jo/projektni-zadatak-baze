@@ -3,6 +3,7 @@ package project.databasegui;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import net.synedra.validatorfx.Validator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,58 +19,82 @@ public class AddController implements Initializable
 
     //author inputs
     public TextField inputAuthorName;
+    public Validator inputAuthorNameValidator = new Validator();
     public TextField inputAuthorNick;
     public TextField inputAuthorSurname;
+    public Validator inputAuthorSurnameValidator = new Validator();
+    public Button buttonSendAuthorData;
 
     //player inputs
     public TextField inputPlayerName;
+    public Validator inputPlayerNameValidator = new Validator();
     public TextField inputPlayerNick;
     public TextField inputPlayerSurname;
+    public Validator inputPlayerSurnameValidator = new Validator();
     public DatePicker inputPlayerBirthDate;
     public TextField inputPlayerNationality;
+    public Validator inputPlayerNationalityValidator = new Validator();
     public TextField inputPlayerTeamName;
     public TextField inputPlayerRating;
+    public Validator inputPlayerRatingValidator = new Validator();
     public TextField inputPlayerMajorTrophies;
+    public Validator inputPlayerMajorTrophiesValidator = new Validator();
     public TextField inputPlayerMajorMVPs;
+    public Validator inputPlayerMajorMVPsValidator = new Validator();
+    public Button buttonSendPlayerData;
 
     //match inputs
     public TextField inputMatchFirstTeamName;
     public TextField inputMatchSecondTeamName;
     public TextField inputMatchTournamentName;
     public TextField inputMatchNumMaps;
+    public Validator inputMatchNumMapsValidator = new Validator();
     public TextField inputMatchScore;
+    public Validator inputMatchScoreValidator = new Validator();
     public DatePicker inputMatchDate;
+    public Button buttonSendMatchData;
 
     //team inputs
     public TextField inputTeamName;
     public TextField inputTeamRanking;
+    public Validator inputTeamRankingValidator = new Validator();
     public TextField inputTeamMajorTrophies;
+    public Validator inputTeamMajorTrophiesValidator = new Validator();
     public ChoiceBox<String> inputTeamRegion;
+    public Button buttonSendTeamData;
 
     //transfer inputs
     public TextField inputTransferPlayerNick;
     public TextField inputTransferOldTeamName;
     public TextField inputTransferNewTeamName;
     public DatePicker inputTransferDate;
+    public Button buttonSendTransferData;
 
     //coach inputs
     public TextField inputCoachName;
+    public Validator inputCoachNameValidator = new Validator();
     public TextField inputCoachNick;
     public TextField inputCoachSurname;
+    public Validator inputCoachSurnameValidator = new Validator();
     public TextField inputCoachTeamName;
+    public Button buttonSendCoachData;
 
     //tournament inputs
     public TextField inputTournamentName;
     public DatePicker inputTournamentStartDate;
     public DatePicker inputTournamentEndDate;
     public TextField inputTournamentLocation;
+    public Validator inputTournamentLocationValidator = new Validator();
     public TextField inputTournamentPrizePool;
+    public Validator inputTournamentPrizePoolValidator = new Validator();
     public CheckBox inputTournamentSizeYesNo;
+    public Button buttonSendTournamentData;
 
     //news inputs
     public TextField inputNewsTitle;
     public DatePicker inputNewsDate;
     public TextField inputNewsAuthorName;
+    public Button buttonSendNewsData;
 
     private String url;
     private String user;
@@ -99,6 +124,18 @@ public class AddController implements Initializable
         }
     }
 
+    private static Double tryParseDouble(String str)
+    {
+        try { return Double.parseDouble(str); }
+        catch (NumberFormatException e) { return null; }
+    }
+
+    private static Integer tryParseInt(String str)
+    {
+        try { return Integer.parseInt(str); }
+        catch (NumberFormatException e) { return null; }
+    }
+
     private static void showSuccessAlert()
     {
         Alert successAlert = new Alert(Alert.AlertType.CONFIRMATION, "Uspešno ubacivanje podataka!", ButtonType.OK);
@@ -106,26 +143,11 @@ public class AddController implements Initializable
         successAlert.showAndWait();
     }
 
-    private String sanitizeInputForNumbers(String s)
+    private static void showWrongInputAlert()
     {
-        String tmpString = s;
-
-        if (s.length() == 45) tmpString = s.substring(0, 44);
-
-        if (tmpString.matches("\\d*."))
-        {
-            StringBuilder newString = new StringBuilder();
-
-            for (int i = 0; i < newString.length(); ++i)
-            {
-                char c = tmpString.charAt(i);
-                if (!Character.isDigit(c)) newString.append(c);
-            }
-
-            tmpString = newString.toString();
-        }
-
-        return tmpString;
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Postoji greška u unetim podacima.");
+        alert.setHeaderText("Greška!");
+        alert.showAndWait();
     }
 
     private int getTeamIDFromName(String teamName) throws SQLException
@@ -270,129 +292,150 @@ public class AddController implements Initializable
     @FXML
     public void sendAuthorDataToDatabase() throws SQLException
     {
-        String authorName = sanitizeInputForNumbers(inputAuthorName.getText());
-        String authorNick = inputAuthorNick.getText();
-        String authorSurname = sanitizeInputForNumbers(inputAuthorSurname.getText());
-
-        String sqlQuery = "INSERT INTO autori(Ime, Nadimak, Prezime) VALUES(?, ?, ?)";
-
-        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        if (!inputAuthorNameValidator.containsErrors() && !inputAuthorSurnameValidator.containsErrors())
         {
-            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            String authorName = inputAuthorName.getText();
+            String authorNick = inputAuthorNick.getText();
+            String authorSurname = inputAuthorSurname.getText();
 
-            ps.setString(1, authorName);
-            ps.setString(2, authorNick);
-            ps.setString(3, authorSurname);
+            String sqlQuery = "INSERT INTO autori(Ime, Nadimak, Prezime) VALUES(?, ?, ?)";
 
-            int changedRows = ps.executeUpdate();
-
-            if (changedRows > 0)
+            try (Connection conn = DriverManager.getConnection(url, user, pass))
             {
-                clearAuthorForm();
-                showSuccessAlert();
+                PreparedStatement ps = conn.prepareStatement(sqlQuery);
+
+                ps.setString(1, authorName);
+                ps.setString(2, authorNick);
+                ps.setString(3, authorSurname);
+
+                int changedRows = ps.executeUpdate();
+
+                if (changedRows > 0)
+                {
+                    clearAuthorForm();
+                    showSuccessAlert();
+                }
             }
         }
+        else { showWrongInputAlert(); }
     }
 
     @FXML
     public void sendPlayerDataToDatabase() throws SQLException
     {
-        String playerName = sanitizeInputForNumbers(inputPlayerName.getText());
-        String playerNick = inputPlayerNick.getText();
-        String playerSurname = sanitizeInputForNumbers(inputPlayerSurname.getText());
-        LocalDate playerBirthDate = Date.valueOf(inputPlayerBirthDate.getValue()).toLocalDate();
-        String playerNationality = inputPlayerNationality.getText();
-        int playerTeamID = getTeamIDFromName(inputPlayerTeamName.getText());
-        double playerRating = Double.parseDouble(inputPlayerRating.getText());
-        int playerMajorTrophies = Integer.parseInt(inputPlayerMajorTrophies.getText());
-        int playerMajorMVPs = Integer.parseInt(inputPlayerMajorMVPs.getText());
-
-        String sqlQuery = "INSERT INTO igraci(Ime, Nadimak, Prezime, DatumRodjenja, Nacionalnost, IDTima, Rejting, MajorTrofeji, MajorMVP) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        if (!inputPlayerNameValidator.containsErrors() &&
+            !inputPlayerSurnameValidator.containsErrors() &&
+            !inputPlayerNationalityValidator.containsErrors() &&
+            !inputPlayerRatingValidator.containsErrors() &&
+            !inputPlayerMajorTrophiesValidator.containsErrors() &&
+            !inputPlayerMajorMVPsValidator.containsErrors())
         {
-            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            String playerName = inputPlayerName.getText();
+            String playerNick = inputPlayerNick.getText();
+            String playerSurname = inputPlayerSurname.getText();
+            LocalDate playerBirthDate = Date.valueOf(inputPlayerBirthDate.getValue()).toLocalDate();
+            String playerNationality = inputPlayerNationality.getText();
+            int playerTeamID = getTeamIDFromName(inputPlayerTeamName.getText());
+            double playerRating = Double.parseDouble(inputPlayerRating.getText());
+            int playerMajorTrophies = Integer.parseInt(inputPlayerMajorTrophies.getText());
+            int playerMajorMVPs = Integer.parseInt(inputPlayerMajorMVPs.getText());
 
-            ps.setString(1, playerName);
-            ps.setString(2, playerNick);
-            ps.setString(3, playerSurname);
-            ps.setDate(4, Date.valueOf(playerBirthDate));
-            ps.setString(5, playerNationality);
-            ps.setInt(6, playerTeamID);
-            ps.setDouble(7, playerRating);
-            ps.setInt(8, playerMajorTrophies);
-            ps.setInt(9, playerMajorMVPs);
+            String sqlQuery = "INSERT INTO igraci(Ime, Nadimak, Prezime, DatumRodjenja, Nacionalnost, IDTima, Rejting, MajorTrofeji, MajorMVP) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            int changedRows = ps.executeUpdate();
-
-            if (changedRows > 0)
+            try (Connection conn = DriverManager.getConnection(url, user, pass))
             {
-                clearPlayerForm();
-                showSuccessAlert();
+                PreparedStatement ps = conn.prepareStatement(sqlQuery);
+
+                ps.setString(1, playerName);
+                ps.setString(2, playerNick);
+                ps.setString(3, playerSurname);
+                ps.setDate(4, Date.valueOf(playerBirthDate));
+                ps.setString(5, playerNationality);
+                ps.setInt(6, playerTeamID);
+                ps.setDouble(7, playerRating);
+                ps.setInt(8, playerMajorTrophies);
+                ps.setInt(9, playerMajorMVPs);
+
+                int changedRows = ps.executeUpdate();
+
+                if (changedRows > 0)
+                {
+                    clearPlayerForm();
+                    showSuccessAlert();
+                }
             }
         }
+        else { showWrongInputAlert(); }
     }
 
     @FXML
     public void sendMatchDataToDatabase() throws SQLException
     {
-        int matchFirstTeamID = getTeamIDFromName(inputMatchFirstTeamName.getText());
-        int matchSecondTeamID = getTeamIDFromName(inputMatchSecondTeamName.getText());
-        int matchTournamentID = getTournamentIDFromName(inputMatchTournamentName.getText());
-        int matchNumberOfMaps = Integer.parseInt(inputMatchNumMaps.getText());
-        String matchScore = inputMatchScore.getText();
-        LocalDate matchDate = Date.valueOf(inputMatchDate.getValue()).toLocalDate();
-
-        String sqlQuery = "INSERT INTO mecevi(PrviTim, DrugiTim, IDTurnira, BrojMapa, Rezultat, DatumMeca) VALUES (?, ?, ?, ?, ?, ?)";
-
-        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        if (!inputMatchNumMapsValidator.containsErrors() && !inputMatchScoreValidator.containsErrors())
         {
-            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            int matchFirstTeamID = getTeamIDFromName(inputMatchFirstTeamName.getText());
+            int matchSecondTeamID = getTeamIDFromName(inputMatchSecondTeamName.getText());
+            int matchTournamentID = getTournamentIDFromName(inputMatchTournamentName.getText());
+            int matchNumberOfMaps = Integer.parseInt(inputMatchNumMaps.getText());
+            String matchScore = inputMatchScore.getText();
+            LocalDate matchDate = Date.valueOf(inputMatchDate.getValue()).toLocalDate();
 
-            ps.setInt(1, matchFirstTeamID);
-            ps.setInt(2, matchSecondTeamID);
-            ps.setInt(3, matchTournamentID);
-            ps.setInt(4, matchNumberOfMaps);
-            ps.setString(5, matchScore);
-            ps.setDate(6, Date.valueOf(matchDate));
+            String sqlQuery = "INSERT INTO mecevi(PrviTim, DrugiTim, IDTurnira, BrojMapa, Rezultat, DatumMeca) VALUES (?, ?, ?, ?, ?, ?)";
 
-            int changedRows = ps.executeUpdate();
-
-            if (changedRows > 0)
+            try (Connection conn = DriverManager.getConnection(url, user, pass))
             {
-                clearMatchForm();
-                showSuccessAlert();
+                PreparedStatement ps = conn.prepareStatement(sqlQuery);
+
+                ps.setInt(1, matchFirstTeamID);
+                ps.setInt(2, matchSecondTeamID);
+                ps.setInt(3, matchTournamentID);
+                ps.setInt(4, matchNumberOfMaps);
+                ps.setString(5, matchScore);
+                ps.setDate(6, Date.valueOf(matchDate));
+
+                int changedRows = ps.executeUpdate();
+
+                if (changedRows > 0)
+                {
+                    clearMatchForm();
+                    showSuccessAlert();
+                }
             }
         }
+        else { showWrongInputAlert(); }
     }
 
     @FXML
     public void sendTeamDataToDatabase() throws SQLException
     {
-        String teamName = inputTeamName.getText();
-        int teamRanking = Integer.parseInt(inputTeamRanking.getText());
-        int teamMajorTrophies = Integer.parseInt(inputTeamMajorTrophies.getText());
-        String teamRegion = inputTeamRegion.getValue();
-
-        String sqlQuery = "INSERT INTO timovi(ImeTima, RangPozicija, MajorTrofeji, Region) VALUES (?, ?, ?, ?)";
-
-        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        if (!inputTeamRankingValidator.containsErrors() && !inputTeamMajorTrophiesValidator.containsErrors())
         {
-            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            String teamName = inputTeamName.getText();
+            int teamRanking = Integer.parseInt(inputTeamRanking.getText());
+            int teamMajorTrophies = Integer.parseInt(inputTeamMajorTrophies.getText());
+            String teamRegion = inputTeamRegion.getValue();
 
-            ps.setString(1, teamName);
-            ps.setInt(2, teamRanking);
-            ps.setInt(3, teamMajorTrophies);
-            ps.setString(4, teamRegion);
+            String sqlQuery = "INSERT INTO timovi(ImeTima, RangPozicija, MajorTrofeji, Region) VALUES (?, ?, ?, ?)";
 
-            int changedRows = ps.executeUpdate();
-
-            if (changedRows > 0)
+            try (Connection conn = DriverManager.getConnection(url, user, pass))
             {
-                clearTeamForm();
-                showSuccessAlert();
+                PreparedStatement ps = conn.prepareStatement(sqlQuery);
+
+                ps.setString(1, teamName);
+                ps.setInt(2, teamRanking);
+                ps.setInt(3, teamMajorTrophies);
+                ps.setString(4, teamRegion);
+
+                int changedRows = ps.executeUpdate();
+
+                if (changedRows > 0)
+                {
+                    clearTeamForm();
+                    showSuccessAlert();
+                }
             }
         }
+        else { showWrongInputAlert(); }
     }
 
     @FXML
@@ -427,63 +470,71 @@ public class AddController implements Initializable
     @FXML
     public void sendTournamentDataToDatabase() throws SQLException
     {
-        String tournamentName = inputTournamentName.getText();
-        LocalDate startDate = Date.valueOf(inputTournamentStartDate.getValue()).toLocalDate();
-        LocalDate endDate = Date.valueOf(inputTournamentEndDate.getValue()).toLocalDate();
-        String tournamentLocation = inputTournamentLocation.getText();
-        int tournamentPrizePool = Integer.parseInt(inputTournamentPrizePool.getText());
-        int tournamentIsBig = inputTournamentSizeYesNo.isSelected() ? 1 : 0;
-
-        String sqlQuery = "INSERT INTO turniri(ime, datumpocetka, datumzavrsetka, mestoigranja, nagradnifond, veciturnir) VALUES (?, ?, ?, ?, ?, ?)";
-
-        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        if (!inputTournamentLocationValidator.containsErrors() && inputTournamentPrizePoolValidator.containsErrors())
         {
-            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            String tournamentName = inputTournamentName.getText();
+            LocalDate startDate = Date.valueOf(inputTournamentStartDate.getValue()).toLocalDate();
+            LocalDate endDate = Date.valueOf(inputTournamentEndDate.getValue()).toLocalDate();
+            String tournamentLocation = inputTournamentLocation.getText();
+            int tournamentPrizePool = Integer.parseInt(inputTournamentPrizePool.getText());
+            int tournamentIsBig = inputTournamentSizeYesNo.isSelected() ? 1 : 0;
 
-            ps.setString(1, tournamentName);
-            ps.setDate(2, Date.valueOf(startDate));
-            ps.setDate(3, Date.valueOf(endDate));
-            ps.setString(4, tournamentLocation);
-            ps.setInt(5, tournamentPrizePool);
-            ps.setInt(6, tournamentIsBig);
+            String sqlQuery = "INSERT INTO turniri(ime, datumpocetka, datumzavrsetka, mestoigranja, nagradnifond, veciturnir) VALUES (?, ?, ?, ?, ?, ?)";
 
-            int changedRows = ps.executeUpdate();
-
-            if (changedRows > 0)
+            try (Connection conn = DriverManager.getConnection(url, user, pass))
             {
-                clearTournamentForm();
-                showSuccessAlert();
+                PreparedStatement ps = conn.prepareStatement(sqlQuery);
+
+                ps.setString(1, tournamentName);
+                ps.setDate(2, Date.valueOf(startDate));
+                ps.setDate(3, Date.valueOf(endDate));
+                ps.setString(4, tournamentLocation);
+                ps.setInt(5, tournamentPrizePool);
+                ps.setInt(6, tournamentIsBig);
+
+                int changedRows = ps.executeUpdate();
+
+                if (changedRows > 0)
+                {
+                    clearTournamentForm();
+                    showSuccessAlert();
+                }
             }
         }
+        else { showWrongInputAlert(); }
     }
 
     @FXML
     public void sendCoachDataToDatabase() throws SQLException
     {
-        String coachName = inputCoachName.getText();
-        String coachNick = inputCoachNick.getText();
-        String coachSurname = inputCoachSurname.getText();
-        int coachTeamID = getTeamIDFromName(inputCoachTeamName.getText());
-
-        String sqlQuery = "INSERT INTO treneri(Ime, Nadimak, Prezime, IDTima) VALUES (?, ?, ?, ?)";
-
-        try (Connection conn = DriverManager.getConnection(url, user, pass))
+        if (!inputCoachNameValidator.containsErrors() && inputCoachSurnameValidator.containsErrors())
         {
-            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            String coachName = inputCoachName.getText();
+            String coachNick = inputCoachNick.getText();
+            String coachSurname = inputCoachSurname.getText();
+            int coachTeamID = getTeamIDFromName(inputCoachTeamName.getText());
 
-            ps.setString(1, coachName);
-            ps.setString(2, coachNick);
-            ps.setString(3, coachSurname);
-            ps.setInt(4, coachTeamID);
+            String sqlQuery = "INSERT INTO treneri(Ime, Nadimak, Prezime, IDTima) VALUES (?, ?, ?, ?)";
 
-            int changedRows = ps.executeUpdate();
-
-            if (changedRows > 0)
+            try (Connection conn = DriverManager.getConnection(url, user, pass))
             {
-                clearCoachForm();
-                showSuccessAlert();
+                PreparedStatement ps = conn.prepareStatement(sqlQuery);
+
+                ps.setString(1, coachName);
+                ps.setString(2, coachNick);
+                ps.setString(3, coachSurname);
+                ps.setInt(4, coachTeamID);
+
+                int changedRows = ps.executeUpdate();
+
+                if (changedRows > 0)
+                {
+                    clearCoachForm();
+                    showSuccessAlert();
+                }
             }
         }
+        else { showWrongInputAlert(); }
     }
 
     @FXML
@@ -517,5 +568,157 @@ public class AddController implements Initializable
     public void initialize(URL location, ResourceBundle resources)
     {
         readConfig();
+
+        inputAuthorNameValidator.createCheck()
+            .dependsOn("name", inputAuthorName.textProperty())
+            .withMethod(c -> {
+                String name = c.get("name");
+                if (name.matches(".*\\d.*")) { c.error("Brojevi se ne smeju pojavljivati u imenima."); }
+                if (name.length() > 45) { c.error("Predugačko ime."); }
+            })
+            .decorates(inputAuthorName)
+            .immediate();
+
+        inputAuthorSurnameValidator.createCheck()
+            .dependsOn("surname", inputAuthorSurname.textProperty())
+            .withMethod(c -> {
+                String surname = c.get("surname");
+                if (surname.matches(".*\\d.*")) { c.error("Brojevi se ne smeju pojavljivati u prezimenima."); }
+                if (surname.length() > 45) { c.error("Predugačko prezime."); }
+            })
+            .decorates(inputAuthorSurname)
+            .immediate();
+
+        inputPlayerNameValidator.createCheck()
+            .dependsOn("name", inputPlayerName.textProperty())
+            .withMethod(c -> {
+                String name = c.get("name");
+                if (name.matches(".*\\d.*")) { c.error("Brojevi se ne smeju pojavljivati u imenima."); }
+                if (name.length() > 45) { c.error("Predugačko ime"); }
+            })
+            .decorates(inputPlayerName)
+            .immediate();
+
+        inputPlayerSurnameValidator.createCheck()
+            .dependsOn("surname", inputPlayerSurname.textProperty())
+            .withMethod(c -> {
+                String surname = c.get("surname");
+                if (surname.matches(".*\\d.*")) { c.error("Brojevi se ne smeju pojavljivati u prezimenima."); }
+                if (surname.length() > 45) { c.error("Predugačko prezime."); }
+            })
+            .decorates(inputPlayerSurname)
+            .immediate();
+
+        inputPlayerNationalityValidator.createCheck()
+            .dependsOn("nationality", inputPlayerNationality.textProperty())
+            .withMethod(c -> {
+                String nationality = c.get("nationality");
+                if (nationality.matches(".*\\d.*")) { c.error("Brojevi se ne smeju pojavljivati u imenu države"); }
+                if (nationality.length() > 45) { c.error("Predugačko ime države."); }
+            })
+            .decorates(inputPlayerNationality)
+            .immediate();
+
+        inputPlayerRatingValidator.createCheck()
+            .dependsOn("rating", inputPlayerRating.textProperty())
+            .withMethod(c -> {
+                Double rating = tryParseDouble(c.get("rating"));
+                if (rating == null) { c.error("Nepravilno unet rejting."); }
+            })
+            .decorates(inputPlayerRating)
+            .immediate();
+
+        inputPlayerMajorTrophiesValidator.createCheck()
+            .dependsOn("majorTrophies", inputPlayerMajorTrophies.textProperty())
+            .withMethod(c -> {
+                Integer majorTrophies = tryParseInt(c.get("majorTrophies"));
+                if (majorTrophies == null) { c.error("Nepravilno unet broj major trofeja."); }
+            })
+            .decorates(inputPlayerMajorTrophies)
+            .immediate();
+
+        inputPlayerMajorMVPsValidator.createCheck()
+            .dependsOn("majorMVPs", inputPlayerMajorMVPs.textProperty())
+            .withMethod(c -> {
+                Integer majorMVPs = tryParseInt(c.get("majorMVPs"));
+                if (majorMVPs == null) { c.error("Nepravilno unet broj major MVP medalja."); }
+            })
+            .decorates(inputPlayerMajorMVPs)
+            .immediate();
+
+        inputMatchNumMapsValidator.createCheck()
+            .dependsOn("numMaps", inputMatchNumMaps.textProperty())
+            .withMethod(c -> {
+                Integer numMaps = tryParseInt(c.get("numMaps"));
+                if (numMaps == null) { c.error("Nepravilno unet broj mapa."); }
+            })
+            .decorates(inputMatchNumMaps)
+            .immediate();
+
+        inputMatchScoreValidator.createCheck()
+            .dependsOn("score", inputMatchScore.textProperty())
+            .withMethod(c -> {
+                String score = c.get("score");
+                if (!score.matches("\\d:\\d")) { c.error("Nepravilno unet rezultat."); }
+            })
+            .decorates(inputMatchScore)
+            .immediate();
+
+        inputTeamRankingValidator.createCheck()
+            .dependsOn("ranking", inputTeamRanking.textProperty())
+            .withMethod(c -> {
+                Integer ranking = tryParseInt(c.get("ranking"));
+                if (ranking == null) { c.error("Nepravilno uneta rang pozicija."); }
+            })
+            .decorates(inputTeamRanking)
+            .immediate();
+
+        inputTeamMajorTrophiesValidator.createCheck()
+            .dependsOn("majorTrophies", inputTeamMajorTrophies.textProperty())
+            .withMethod(c -> {
+                Integer majorTrophies = tryParseInt(c.get("majorTrophies"));
+                if (majorTrophies == null) { c.error("Nepravilno unet broj major trofeja."); }
+            })
+            .decorates(inputTeamMajorTrophies)
+            .immediate();
+
+        inputCoachNameValidator.createCheck()
+            .dependsOn("name", inputCoachName.textProperty())
+            .withMethod(c -> {
+                String name = c.get("name");
+                if (name.matches(".*\\d.*")) { c.error("Brojevi se ne smeju pojavljivati u imenu."); }
+                if (name.length() > 45) { c.error("Predugačko ime."); }
+            })
+            .decorates(inputCoachName)
+            .immediate();
+
+        inputCoachSurnameValidator.createCheck()
+            .dependsOn("surname", inputCoachSurname.textProperty())
+            .withMethod(c -> {
+                String surname = c.get("surname");
+                if (surname.matches(".*\\d.*")) { c.error("Brojevi se ne smeju pojavljivati u prezimenu."); }
+                if (surname.length() > 45) { c.error("Predugačko prezime."); }
+            })
+            .decorates(inputCoachSurname)
+            .immediate();
+
+        inputTournamentLocationValidator.createCheck()
+            .dependsOn("tournamentLocation", inputTournamentLocation.textProperty())
+            .withMethod(c -> {
+                String tournamentLocation = c.get("tournamentLocation");
+                if (tournamentLocation.matches(".*\\d.*")) { c.error("Brojevi se ne smeju pojavljivati u lokaciji."); }
+                if (tournamentLocation.length() > 45) { c.error("Predugačka lokacija."); }
+            })
+            .decorates(inputTournamentLocation)
+            .immediate();
+
+        inputTournamentPrizePoolValidator.createCheck()
+            .dependsOn("prizePool", inputTournamentPrizePool.textProperty())
+            .withMethod(c -> {
+                Integer prizePool = tryParseInt(c.get("prizePool"));
+                if (prizePool == null) { c.error("Nepravilno unet nagradni fond."); }
+            })
+            .decorates(inputTournamentPrizePool)
+            .immediate();
     }
 }
