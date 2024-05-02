@@ -9,20 +9,6 @@
     -fx-background-radius: 0px;
 }
 
-.table-button
-{
-    -fx-effect: dropshadow(three-pass-box, black, 5, 0.1, 0, 0);
-    -fx-font-size: 24px;
-    -fx-pref-width: 750px;
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
-}
-
-.table-background
-{
-    -fx-background-color: #fff;
-}
-
 .input-form-label
 {
     -fx-font-size: 16px;
@@ -40,15 +26,11 @@
     -fx-background-color: #335c67;
 }
 
-.table-background
-{
-    -fx-background-color: #eaf2e3;
-}
-
 .tab-button
 {
     -fx-background-color: #335c67;
     -fx-background-radius: 0px;
+    -fx-background-insets: 0, 0 0 0 0;
     -fx-text-fill: #fff;
     -fx-focus-color: #4a8696;
     -fx-faint-focus-color: #4a8696;
@@ -81,11 +63,51 @@
     -fx-border-width: 0px;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+    -fx-pref-height: 32px;
+}
+
+.date-picker .text-field
+{
+    -fx-background-insets: 0, 0 0 0 0;
+}
+
+.date-picker .arrow-button
+{
+    -fx-background-color: #335c67;
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-pref-width: 320px;
+}
+
+.date-picker .arrow-button .arrow
+{
+    -fx-background-color: #fff;
+}
+
+.date-picker .month-year-pane
+{
+    -fx-background-color: #335c67;
+}
+
+.date-picker .month-year-pane .label
+{
+    -fx-text-fill: #fff;
+}
+
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow
+{
+    -fx-background-color: #fff;
+}
+
+.date-picker-popup .spinner .button:hover .left-arrow,
+.date-picker-popup .spinner .button:hover .right-arrow
+{
+    -fx-background-color: transparent;
 }
 
 .tab-pane
 {
-    -fx-effect: dropshadow(gaussian, #000, 0.5, 0.1, 1, 10);
+    -fx-background-color: #eaf2e3;
 }
 
 .checkbox-field .box
@@ -103,4 +125,11 @@
 .checkbox-field:selected .mark
 {
     -fx-background-color: #fff;
+}
+
+.choice-box
+{
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-background-color: #fff;
+    -fx-pref-height: 32px;
 }

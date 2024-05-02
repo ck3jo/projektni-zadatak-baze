@@ -15,12 +15,12 @@
 
     <Button onAction="#returnToMain" styleClass="exit-button">
         <graphic>
-            <FontIcon iconLiteral="mdsal-exit_to_app:24:BLACK"/>
+            <FontIcon iconLiteral="mdsal-exit_to_app:24:WHITE"/>
         </graphic>
     </Button>
 
     <TabPane styleClass="tab-pane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-        <Tab text="Autori">
+        <Tab text="Autori" styleClass="tab-button">
             <TableView fx:id="tableViewAuthors" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="413"
@@ -56,7 +56,7 @@
             </TableView>
         </Tab>
 
-        <Tab text="Igrači">
+        <Tab text="Igrači" styleClass="tab-button">
             <TableView fx:id="tableViewPlayers" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="138"
@@ -158,7 +158,7 @@
             </TableView>
         </Tab>
 
-        <Tab text="Mečevi">
+        <Tab text="Mečevi" styleClass="tab-button">
             <TableView fx:id="tableViewMatches" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="206"
@@ -230,7 +230,7 @@
             </TableView>
         </Tab>
 
-        <Tab text="Timovi">
+        <Tab text="Timovi" styleClass="tab-button">
             <TableView fx:id="tableViewTeams" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="310"
@@ -276,7 +276,7 @@
             </TableView>
         </Tab>
 
-        <Tab text="Transferi">
+        <Tab text="Transferi" styleClass="tab-button">
             <TableView fx:id="tableViewTransfers" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="310"
@@ -329,7 +329,7 @@
             </TableView>
         </Tab>
 
-        <Tab text="Treneri">
+        <Tab text="Treneri" styleClass="tab-button">
             <TableView fx:id="tableViewCoaches" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="310"
@@ -375,7 +375,7 @@
             </TableView>
         </Tab>
 
-        <Tab text="Turniri">
+        <Tab text="Turniri" styleClass="tab-button">
             <TableView fx:id="tableViewTournaments" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="206"
@@ -453,7 +453,7 @@
             </TableView>
         </Tab>
 
-        <Tab text="Vesti">
+        <Tab text="Vesti" styleClass="tab-button">
             <TableView fx:id="tableViewNews" VBox.vgrow="ALWAYS" editable="true">
                 <columns>
                     <TableColumn minWidth="413"
