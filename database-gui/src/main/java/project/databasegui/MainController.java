@@ -11,17 +11,18 @@ public class MainController
 {
     public boolean validateConfig() throws FileNotFoundException
     {
-        Scanner readConfig = new Scanner(new File("app.config"));
+        File config = new File("app.config");
+        Scanner readConfig = new Scanner(config);
         String url = readConfig.nextLine();
         String user = readConfig.nextLine();
 
-        if (url.equals("url: ") || user.equals("user: "))
+        if (!config.exists() || (config.exists() && (url.equals("url: ") || user.equals("user: "))))
         {
             showErrorAlert("Postavite podešavanja prvo!");
             return false;
         }
 
-        if(!url.substring(5).startsWith("jdbc:mysql://"))
+        if(!config.exists() || (config.exists() && !url.substring(5).startsWith("jdbc:mysql://")))
         {
             showErrorAlert("Nepravilan protokol URL-a.");
             return false;

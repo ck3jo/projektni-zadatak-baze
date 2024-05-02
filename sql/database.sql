@@ -326,7 +326,7 @@ INSERT INTO treneri(Ime, Nadimak, Prezime, IDTima) VALUES
 ("Renato", "nak", "Nakano", 30);
 
 INSERT INTO Mecevi(PrviTim, DrugiTim, IDTurnira, BrojMapa, Rezultat, DatumMeca) VALUES
-(),
+(14, 17, 1, 3, "1:2", '2024-04-30'),
 (),
 (),
 (),

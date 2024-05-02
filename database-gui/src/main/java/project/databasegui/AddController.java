@@ -150,9 +150,9 @@ public class AddController implements Initializable
         alert.showAndWait();
     }
 
-    private int getTeamIDFromName(String teamName) throws SQLException
+    private Integer getTeamIDFromName(String teamName) throws SQLException
     {
-        int teamID;
+        Integer teamID = null;
         String sqlQuery = "SELECT IDTima FROM timovi WHERE ImeTima = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -160,15 +160,15 @@ public class AddController implements Initializable
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, teamName);
             ResultSet rs = ps.executeQuery();
-            teamID = rs.getInt("IDTima");
+            while (rs.next()) { teamID = rs.getInt("IDTima"); }
         }
 
         return teamID;
     }
 
-    private int getTournamentIDFromName(String tournamentName) throws SQLException
+    private Integer getTournamentIDFromName(String tournamentName) throws SQLException
     {
-        int tournamentID;
+        Integer tournamentID = null;
         String sqlQuery = "SELECT IDTurnira FROM turniri WHERE Ime = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -176,7 +176,7 @@ public class AddController implements Initializable
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, tournamentName);
             ResultSet rs = ps.executeQuery();
-            tournamentID = rs.getInt("IDTurnira");
+            while (rs.next()) { tournamentID = rs.getInt("IDTurnira"); }
         }
 
         return tournamentID;
