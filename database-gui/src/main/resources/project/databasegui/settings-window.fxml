@@ -38,7 +38,7 @@
 
     <Region VBox.vgrow="ALWAYS"/>
 
-    <Button onAction="#writeConfig" text="Sačuvajte podešavanja">
+    <Button styleClass="write-button" onAction="#writeConfig" text="Sačuvajte podešavanja">
         <graphic>
             <FontIcon iconLiteral="mdmz-save:24:BLACK"/>
         </graphic>

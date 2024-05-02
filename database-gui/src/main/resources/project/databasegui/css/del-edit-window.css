@@ -1,3 +1,18 @@
+@font-face
+{
+    src: url("../fonts/OpenSans-Regular.ttf");
+}
+
+@font-face
+{
+    src: url("../fonts/OpenSans-Bold.ttf");
+}
+
+.root
+{
+    -fx-font-family: "Comic Sans MS";
+}
+
 #main-window
 {
     -fx-background-image: url("https://cdn2.steamgriddb.com/hero/2b1ec9ecde3fcfa54840a68765c3f647.png");

@@ -16,7 +16,8 @@
       fx:controller="project.databasegui.MainController"
       id="main-window">
 
-    <Label text="Aplikacija za evidentiranje profesionalnih CS2 mečeva" styleClass="main-label"/>
+    <Label text="FakeHLTV.org" styleClass="main-label"/>
+    <Label text="Aplikacija za evidentiranje profesionalnih CS2 mečeva" styleClass="sub-label"/>
 
     <HBox alignment="CENTER"
           spacing="20.0"
@@ -39,7 +40,7 @@
                 onAction="#goToSettings"
                 styleClass="settings-button">
             <graphic>
-                <FontIcon iconLiteral="mdmz-settings:24:BLACK" />
+                <FontIcon iconLiteral="mdmz-settings:24:WHITE" />
             </graphic>
         </Button>
 
@@ -49,7 +50,7 @@
                 onAction="#exitApp"
                 styleClass="exit-button">
             <graphic>
-                <FontIcon iconLiteral="mdsal-exit_to_app:24:BLACK"/>
+                <FontIcon iconLiteral="mdsal-exit_to_app:24:WHITE"/>
             </graphic>
         </Button>
     </HBox>

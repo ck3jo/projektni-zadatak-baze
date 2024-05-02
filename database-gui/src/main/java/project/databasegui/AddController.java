@@ -622,8 +622,9 @@ public class AddController implements Initializable
         inputPlayerRatingValidator.createCheck()
             .dependsOn("rating", inputPlayerRating.textProperty())
             .withMethod(c -> {
-                Double rating = tryParseDouble(c.get("rating"));
-                if (rating == null) { c.error("Nepravilno unet rejting."); }
+                String input = c.get("rating");
+                Double rating = tryParseDouble(input);
+                if (rating == null && !input.isEmpty()) { c.error("Nepravilno unet rejting."); }
             })
             .decorates(inputPlayerRating)
             .immediate();
@@ -631,8 +632,9 @@ public class AddController implements Initializable
         inputPlayerMajorTrophiesValidator.createCheck()
             .dependsOn("majorTrophies", inputPlayerMajorTrophies.textProperty())
             .withMethod(c -> {
-                Integer majorTrophies = tryParseInt(c.get("majorTrophies"));
-                if (majorTrophies == null) { c.error("Nepravilno unet broj major trofeja."); }
+                String input = c.get("majorTrophies");
+                Integer majorTrophies = tryParseInt(input);
+                if (majorTrophies == null && !input.isEmpty()) { c.error("Nepravilno unet broj major trofeja."); }
             })
             .decorates(inputPlayerMajorTrophies)
             .immediate();
@@ -640,8 +642,9 @@ public class AddController implements Initializable
         inputPlayerMajorMVPsValidator.createCheck()
             .dependsOn("majorMVPs", inputPlayerMajorMVPs.textProperty())
             .withMethod(c -> {
-                Integer majorMVPs = tryParseInt(c.get("majorMVPs"));
-                if (majorMVPs == null) { c.error("Nepravilno unet broj major MVP medalja."); }
+                String input = c.get("majorMVPs");
+                Integer majorMVPs = tryParseInt(input);
+                if (majorMVPs == null && !input.isEmpty()) { c.error("Nepravilno unet broj major MVP medalja."); }
             })
             .decorates(inputPlayerMajorMVPs)
             .immediate();
@@ -649,8 +652,9 @@ public class AddController implements Initializable
         inputMatchNumMapsValidator.createCheck()
             .dependsOn("numMaps", inputMatchNumMaps.textProperty())
             .withMethod(c -> {
-                Integer numMaps = tryParseInt(c.get("numMaps"));
-                if (numMaps == null) { c.error("Nepravilno unet broj mapa."); }
+                String input = c.get("numMaps");
+                Integer numMaps = tryParseInt(input);
+                if (numMaps == null && !input.isEmpty()) { c.error("Nepravilno unet broj mapa."); }
             })
             .decorates(inputMatchNumMaps)
             .immediate();
@@ -659,7 +663,7 @@ public class AddController implements Initializable
             .dependsOn("score", inputMatchScore.textProperty())
             .withMethod(c -> {
                 String score = c.get("score");
-                if (!score.matches("\\d:\\d")) { c.error("Nepravilno unet rezultat."); }
+                if (!score.matches("\\d:\\d") && !score.isEmpty()) { c.error("Nepravilno unet rezultat."); }
             })
             .decorates(inputMatchScore)
             .immediate();
@@ -667,8 +671,9 @@ public class AddController implements Initializable
         inputTeamRankingValidator.createCheck()
             .dependsOn("ranking", inputTeamRanking.textProperty())
             .withMethod(c -> {
-                Integer ranking = tryParseInt(c.get("ranking"));
-                if (ranking == null) { c.error("Nepravilno uneta rang pozicija."); }
+                String input = c.get("ranking");
+                Integer ranking = tryParseInt(input);
+                if (ranking == null && !input.isEmpty()) { c.error("Nepravilno uneta rang pozicija."); }
             })
             .decorates(inputTeamRanking)
             .immediate();
@@ -676,8 +681,9 @@ public class AddController implements Initializable
         inputTeamMajorTrophiesValidator.createCheck()
             .dependsOn("majorTrophies", inputTeamMajorTrophies.textProperty())
             .withMethod(c -> {
-                Integer majorTrophies = tryParseInt(c.get("majorTrophies"));
-                if (majorTrophies == null) { c.error("Nepravilno unet broj major trofeja."); }
+                String input = c.get("majorTrophies");
+                Integer majorTrophies = tryParseInt(input);
+                if (majorTrophies == null && !input.isEmpty()) { c.error("Nepravilno unet broj major trofeja."); }
             })
             .decorates(inputTeamMajorTrophies)
             .immediate();
@@ -715,8 +721,9 @@ public class AddController implements Initializable
         inputTournamentPrizePoolValidator.createCheck()
             .dependsOn("prizePool", inputTournamentPrizePool.textProperty())
             .withMethod(c -> {
-                Integer prizePool = tryParseInt(c.get("prizePool"));
-                if (prizePool == null) { c.error("Nepravilno unet nagradni fond."); }
+                String input = c.get("prizePool");
+                Integer prizePool = tryParseInt(input);
+                if (prizePool == null && !input.isEmpty()) { c.error("Nepravilno unet nagradni fond."); }
             })
             .decorates(inputTournamentPrizePool)
             .immediate();

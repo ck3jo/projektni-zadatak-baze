@@ -1,17 +1,12 @@
 #main-window
 {
-    -fx-background-image: url("https://cdn2.steamgriddb.com/hero/2b1ec9ecde3fcfa54840a68765c3f647.png");
-    -fx-background-repeat: stretch;
-    -fx-background-size: auto;
-    -fx-background-position: center center;
-    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+    -fx-background-color: #b7d39c;
 }
 
 .exit-button
 {
-    -fx-effect: dropshadow(three-pass-box, black, 5, 0.1, 0, 0);
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
+    -fx-background-color: #335c67;
+    -fx-background-radius: 0px;
 }
 
 .table-button
@@ -28,22 +23,84 @@
     -fx-background-color: #fff;
 }
 
-.field-label
+.input-form-label
 {
     -fx-font-size: 16px;
 }
 
 .input-field
 {
-
+    -fx-background-radius: 0px;
+    -fx-text-box-border: transparent;
+    -fx-pref-height: 32px;
 }
 
-.date-input
+.tab-header-background
 {
-
+    -fx-background-color: #335c67;
 }
 
-.separator
+.table-background
 {
-    -fx-padding: 5 0 0 0;
+    -fx-background-color: #eaf2e3;
+}
+
+.tab-button
+{
+    -fx-background-color: #335c67;
+    -fx-background-radius: 0px;
+    -fx-text-fill: #fff;
+    -fx-focus-color: #4a8696;
+    -fx-faint-focus-color: #4a8696;
+}
+
+.tab-button:selected
+{
+    -fx-font-weight: bold;
+    -fx-background-color: #4a8696;
+}
+
+.tab-label
+{
+    -fx-text-fill: #fff;
+}
+
+.submit-button
+{
+    -fx-background-color: #335c67;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 0px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.date-picker
+{
+    -fx-background-radius: 0px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab-pane
+{
+    -fx-effect: dropshadow(gaussian, #000, 0.5, 0.1, 1, 10);
+}
+
+.checkbox-field .box
+{
+    -fx-background-color: #fff;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0px;
+}
+
+.checkbox-field:selected .box
+{
+    -fx-background-color: #335c67;
+}
+
+.checkbox-field:selected .mark
+{
+    -fx-background-color: #fff;
 }
