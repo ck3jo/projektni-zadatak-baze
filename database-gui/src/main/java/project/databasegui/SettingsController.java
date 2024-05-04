@@ -13,7 +13,7 @@ public class SettingsController
     public TextField inputDatabaseURL;
     public TextField inputDatabaseUsername;
     public TextField inputDatabasePassword;
-    private final String fileName = "app.config";
+    private final String fileName = "fakehltv.config";
     private final File config = new File(fileName);
 
     public void createConfig() throws IOException

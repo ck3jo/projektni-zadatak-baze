@@ -17,7 +17,7 @@
 
     <Button onAction="#returnToMain" styleClass="exit-button">
         <graphic>
-            <FontIcon iconLiteral="mdsal-exit_to_app:24:BLACK" />
+            <FontIcon iconLiteral="mdsal-exit_to_app:24:WHITE" />
         </graphic>
     </Button>
 

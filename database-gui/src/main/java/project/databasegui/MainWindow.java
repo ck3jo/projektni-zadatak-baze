@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
+import java.util.Objects;
 
 public class MainWindow extends Application
 {
@@ -17,21 +18,15 @@ public class MainWindow extends Application
     public void start(Stage stage) throws IOException
     {
         scene = new Scene(loadFXML("main-window"), 1280, 720);
+        
+        stage.getIcons().add(new Image(Objects.requireNonNull(MainWindow.class.getResourceAsStream("icons/512x512.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(MainWindow.class.getResourceAsStream("icons/256x256.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(MainWindow.class.getResourceAsStream("icons/128x128.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(MainWindow.class.getResourceAsStream("icons/64x64.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(MainWindow.class.getResourceAsStream("icons/32x32.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(MainWindow.class.getResourceAsStream("icons/16x16.png"))));
 
-        //512x512 icon
-        stage.getIcons().add(new Image("https://cdn2.steamgriddb.com/icon/e1bd06c3f8089e7552aa0552cb387c92/32/512x512.png"));
-        //256x256 icon
-        stage.getIcons().add(new Image("https://cdn2.steamgriddb.com/icon/e1bd06c3f8089e7552aa0552cb387c92/32/256x256.png"));
-        //128x128 icon
-        stage.getIcons().add(new Image("https://cdn2.steamgriddb.com/icon/e1bd06c3f8089e7552aa0552cb387c92/32/128x128.png"));
-        //64x64 icon
-        stage.getIcons().add(new Image("https://cdn2.steamgriddb.com/icon/e1bd06c3f8089e7552aa0552cb387c92/8/64x64.png"));
-        //32x32 icon
-        stage.getIcons().add(new Image("https://cdn2.steamgriddb.com/icon/e1bd06c3f8089e7552aa0552cb387c92/8/32x32.png"));
-        //16x16 icon
-        stage.getIcons().add(new Image("https://cdn2.steamgriddb.com/icon/e1bd06c3f8089e7552aa0552cb387c92/8/16x16.png"));
-
-        stage.setTitle("Aplikacija za evidentiranje profesionalnih CS2 meceva");
+        stage.setTitle("FakeHLTV.org");
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNIFIED);
         stage.setScene(scene);

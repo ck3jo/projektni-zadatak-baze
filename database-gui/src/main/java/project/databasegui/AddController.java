@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class AddController implements Initializable
 {
-    public Scanner config = new Scanner(new File("app.config"));
+    public Scanner config = new Scanner(new File("fakehltv.config"));
 
     //author inputs
     public TextField inputAuthorName;
@@ -182,9 +182,9 @@ public class AddController implements Initializable
         return tournamentID;
     }
 
-    private int getPlayerIDFromNick(String playerNick) throws SQLException
+    private Integer getPlayerIDFromNick(String playerNick) throws SQLException
     {
-        int playerID;
+        Integer playerID = null;
         String sqlQuery = "SELECT IDIgraca FROM igraci WHERE Nadimak = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -192,15 +192,15 @@ public class AddController implements Initializable
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, playerNick);
             ResultSet rs = ps.executeQuery();
-            playerID = rs.getInt("IDIgraca");
+            while (rs.next()) { playerID = rs.getInt("IDIgraca"); }
         }
 
         return playerID;
     }
 
-    private int getAuthorIDFromNick(String authorNick) throws SQLException
+    private Integer getAuthorIDFromNick(String authorNick) throws SQLException
     {
-        int authorID;
+        Integer authorID = null;
         String sqlQuery = "SELECT IDAutora from autori WHERE Nadimak = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -208,7 +208,7 @@ public class AddController implements Initializable
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, authorNick);
             ResultSet rs = ps.executeQuery();
-            authorID = rs.getInt("IDAutora");
+            while (rs.next()) { authorID = rs.getInt("IDAutora"); }
         }
 
         return authorID;
@@ -294,9 +294,9 @@ public class AddController implements Initializable
     {
         if (!inputAuthorNameValidator.containsErrors() && !inputAuthorSurnameValidator.containsErrors())
         {
-            String authorName = inputAuthorName.getText();
-            String authorNick = inputAuthorNick.getText();
-            String authorSurname = inputAuthorSurname.getText();
+            String authorName = inputAuthorName.getText().trim();
+            String authorNick = inputAuthorNick.getText().trim();
+            String authorSurname = inputAuthorSurname.getText().trim();
 
             String sqlQuery = "INSERT INTO autori(Ime, Nadimak, Prezime) VALUES(?, ?, ?)";
 
@@ -330,15 +330,15 @@ public class AddController implements Initializable
             !inputPlayerMajorTrophiesValidator.containsErrors() &&
             !inputPlayerMajorMVPsValidator.containsErrors())
         {
-            String playerName = inputPlayerName.getText();
-            String playerNick = inputPlayerNick.getText();
-            String playerSurname = inputPlayerSurname.getText();
+            String playerName = inputPlayerName.getText().trim();
+            String playerNick = inputPlayerNick.getText().trim();
+            String playerSurname = inputPlayerSurname.getText().trim();
             LocalDate playerBirthDate = Date.valueOf(inputPlayerBirthDate.getValue()).toLocalDate();
-            String playerNationality = inputPlayerNationality.getText();
-            int playerTeamID = getTeamIDFromName(inputPlayerTeamName.getText());
-            double playerRating = Double.parseDouble(inputPlayerRating.getText());
-            int playerMajorTrophies = Integer.parseInt(inputPlayerMajorTrophies.getText());
-            int playerMajorMVPs = Integer.parseInt(inputPlayerMajorMVPs.getText());
+            String playerNationality = inputPlayerNationality.getText().trim();
+            int playerTeamID = getTeamIDFromName(inputPlayerTeamName.getText().trim());
+            double playerRating = Double.parseDouble(inputPlayerRating.getText().trim());
+            int playerMajorTrophies = Integer.parseInt(inputPlayerMajorTrophies.getText().trim());
+            int playerMajorMVPs = Integer.parseInt(inputPlayerMajorMVPs.getText().trim());
 
             String sqlQuery = "INSERT INTO igraci(Ime, Nadimak, Prezime, DatumRodjenja, Nacionalnost, IDTima, Rejting, MajorTrofeji, MajorMVP) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -373,11 +373,11 @@ public class AddController implements Initializable
     {
         if (!inputMatchNumMapsValidator.containsErrors() && !inputMatchScoreValidator.containsErrors())
         {
-            int matchFirstTeamID = getTeamIDFromName(inputMatchFirstTeamName.getText());
-            int matchSecondTeamID = getTeamIDFromName(inputMatchSecondTeamName.getText());
-            int matchTournamentID = getTournamentIDFromName(inputMatchTournamentName.getText());
-            int matchNumberOfMaps = Integer.parseInt(inputMatchNumMaps.getText());
-            String matchScore = inputMatchScore.getText();
+            int matchFirstTeamID = getTeamIDFromName(inputMatchFirstTeamName.getText().trim());
+            int matchSecondTeamID = getTeamIDFromName(inputMatchSecondTeamName.getText().trim());
+            int matchTournamentID = getTournamentIDFromName(inputMatchTournamentName.getText().trim());
+            int matchNumberOfMaps = Integer.parseInt(inputMatchNumMaps.getText().trim());
+            String matchScore = inputMatchScore.getText().trim();
             LocalDate matchDate = Date.valueOf(inputMatchDate.getValue()).toLocalDate();
 
             String sqlQuery = "INSERT INTO mecevi(PrviTim, DrugiTim, IDTurnira, BrojMapa, Rezultat, DatumMeca) VALUES (?, ?, ?, ?, ?, ?)";
@@ -410,9 +410,9 @@ public class AddController implements Initializable
     {
         if (!inputTeamRankingValidator.containsErrors() && !inputTeamMajorTrophiesValidator.containsErrors())
         {
-            String teamName = inputTeamName.getText();
-            int teamRanking = Integer.parseInt(inputTeamRanking.getText());
-            int teamMajorTrophies = Integer.parseInt(inputTeamMajorTrophies.getText());
+            String teamName = inputTeamName.getText().trim();
+            int teamRanking = Integer.parseInt(inputTeamRanking.getText().trim());
+            int teamMajorTrophies = Integer.parseInt(inputTeamMajorTrophies.getText().trim());
             String teamRegion = inputTeamRegion.getValue();
 
             String sqlQuery = "INSERT INTO timovi(ImeTima, RangPozicija, MajorTrofeji, Region) VALUES (?, ?, ?, ?)";
@@ -441,9 +441,9 @@ public class AddController implements Initializable
     @FXML
     public void sendTransferDataToDatabase() throws SQLException
     {
-        int playerID = getPlayerIDFromNick(inputTransferPlayerNick.getText());
-        int oldTeamID = getTeamIDFromName(inputTransferOldTeamName.getText());
-        int newTeamID = getTeamIDFromName(inputTransferNewTeamName.getText());
+        int playerID = getPlayerIDFromNick(inputTransferPlayerNick.getText().trim());
+        int oldTeamID = getTeamIDFromName(inputTransferOldTeamName.getText().trim());
+        int newTeamID = getTeamIDFromName(inputTransferNewTeamName.getText().trim());
         LocalDate transferDate = Date.valueOf(inputTransferDate.getValue()).toLocalDate();
 
         String sqlQuery = "INSERT INTO transferi(IDIgraca, IDStarogTima, IDNovogTima, DatumTransfera) VALUES (?, ?, ?, ?)";
@@ -472,11 +472,11 @@ public class AddController implements Initializable
     {
         if (!inputTournamentLocationValidator.containsErrors() && inputTournamentPrizePoolValidator.containsErrors())
         {
-            String tournamentName = inputTournamentName.getText();
+            String tournamentName = inputTournamentName.getText().trim();
             LocalDate startDate = Date.valueOf(inputTournamentStartDate.getValue()).toLocalDate();
             LocalDate endDate = Date.valueOf(inputTournamentEndDate.getValue()).toLocalDate();
-            String tournamentLocation = inputTournamentLocation.getText();
-            int tournamentPrizePool = Integer.parseInt(inputTournamentPrizePool.getText());
+            String tournamentLocation = inputTournamentLocation.getText().trim();
+            int tournamentPrizePool = Integer.parseInt(inputTournamentPrizePool.getText().trim());
             int tournamentIsBig = inputTournamentSizeYesNo.isSelected() ? 1 : 0;
 
             String sqlQuery = "INSERT INTO turniri(ime, datumpocetka, datumzavrsetka, mestoigranja, nagradnifond, veciturnir) VALUES (?, ?, ?, ?, ?, ?)";
@@ -509,10 +509,10 @@ public class AddController implements Initializable
     {
         if (!inputCoachNameValidator.containsErrors() && inputCoachSurnameValidator.containsErrors())
         {
-            String coachName = inputCoachName.getText();
-            String coachNick = inputCoachNick.getText();
-            String coachSurname = inputCoachSurname.getText();
-            int coachTeamID = getTeamIDFromName(inputCoachTeamName.getText());
+            String coachName = inputCoachName.getText().trim();
+            String coachNick = inputCoachNick.getText().trim();
+            String coachSurname = inputCoachSurname.getText().trim();
+            int coachTeamID = getTeamIDFromName(inputCoachTeamName.getText().trim());
 
             String sqlQuery = "INSERT INTO treneri(Ime, Nadimak, Prezime, IDTima) VALUES (?, ?, ?, ?)";
 
@@ -540,9 +540,9 @@ public class AddController implements Initializable
     @FXML
     public void sendNewsDataToDatabase() throws SQLException
     {
-        String newsTitle = inputNewsTitle.getText();
+        String newsTitle = inputNewsTitle.getText().trim();
         LocalDate newsDate = Date.valueOf(inputNewsDate.getValue()).toLocalDate();
-        int newsAuthorID = getAuthorIDFromNick(inputNewsAuthorName.getText());
+        int newsAuthorID = getAuthorIDFromNick(inputNewsAuthorName.getText().trim());
 
         String sqlQuery = "INSERT INTO vesti(Naslov, DatumObjavljivanja, IDAutora) VALUES (?, ?, ?)";
 

@@ -11,7 +11,7 @@ public class MainController
 {
     public boolean validateConfig() throws FileNotFoundException
     {
-        File config = new File("app.config");
+        File config = new File("fakehltv.config");
         Scanner readConfig = new Scanner(config);
         String url = readConfig.nextLine();
         String user = readConfig.nextLine();

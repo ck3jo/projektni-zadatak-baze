@@ -18,7 +18,12 @@
 
 .exit-button
 {
-
+    -fx-background-color: #335c67;
+    -fx-background-radius: 0px;
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-focus-color: transparent;
+    -fx-text-fill: #fff;
+    -fx-faint-focus-color: transparent;
 }
 
 #main-window

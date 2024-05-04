@@ -23,7 +23,7 @@ import java.util.Scanner;
 
 public class DeleteController implements Initializable
 {
-    public Scanner config = new Scanner(new File("app.config"));
+    public Scanner config = new Scanner(new File("fakehltv.config"));
 
     public int selectedRow;
 
@@ -585,10 +585,10 @@ public class DeleteController implements Initializable
                 Match currMatch = new Match(
                         getTeamNameFromID(rs.getInt(2)),
                         getTeamNameFromID(rs.getInt(3)),
-                        getTournamentNameFromID(rs.getInt(3)),
-                        rs.getInt(4),
-                        rs.getString(5),
-                        rs.getDate(6).toLocalDate()
+                        getTournamentNameFromID(rs.getInt(4)),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getDate(7).toLocalDate()
                 );
                 allMatches.add(currMatch);
             }

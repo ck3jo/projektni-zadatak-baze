@@ -26,7 +26,7 @@ import project.databasegui.tableitems.*;
 
 public class EditController implements Initializable
 {
-    public Scanner config = new Scanner(new File("app.config"));
+    public Scanner config = new Scanner(new File("fakehltv.config"));
 
     public ObservableList<Author> allAuthors = FXCollections.observableArrayList();
     public ObservableList<Player> allPlayers = FXCollections.observableArrayList();
@@ -153,9 +153,9 @@ public class EditController implements Initializable
         alert.showAndWait();
     }
 
-    private int getTeamIDFromName(String teamName) throws SQLException
+    private Integer getTeamIDFromName(String teamName) throws SQLException
     {
-        int teamID;
+        Integer teamID = null;
         String sqlQuery = "SELECT IDTima FROM timovi WHERE ImeTima = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -163,15 +163,15 @@ public class EditController implements Initializable
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, teamName);
             ResultSet rs = ps.executeQuery();
-            teamID = rs.getInt("IDTima");
+            while (rs.next()) { teamID = rs.getInt("IDTima"); }
         }
 
         return teamID;
     }
 
-    private int getTournamentIDFromName(String tournamentName) throws SQLException
+    private Integer getTournamentIDFromName(String tournamentName) throws SQLException
     {
-        int tournamentID;
+        Integer tournamentID = null;
         String sqlQuery = "SELECT IDTurnira FROM turniri WHERE Ime = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -179,15 +179,15 @@ public class EditController implements Initializable
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, tournamentName);
             ResultSet rs = ps.executeQuery();
-            tournamentID = rs.getInt("IDTurnira");
+            while (rs.next()) { tournamentID = rs.getInt("IDTurnira"); }
         }
 
         return tournamentID;
     }
 
-    private int getPlayerIDFromNick(String playerNick) throws SQLException
+    private Integer getPlayerIDFromNick(String playerNick) throws SQLException
     {
-        int playerID;
+        Integer playerID = null;
         String sqlQuery = "SELECT IDIgraca FROM igraci WHERE Nadimak = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -195,15 +195,15 @@ public class EditController implements Initializable
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, playerNick);
             ResultSet rs = ps.executeQuery();
-            playerID = rs.getInt("IDIgraca");
+            while (rs.next()) { playerID = rs.getInt("IDIgraca"); }
         }
 
         return playerID;
     }
 
-    private int getAuthorIDFromNick(String authorNick) throws SQLException
+    private Integer getAuthorIDFromNick(String authorNick) throws SQLException
     {
-        int authorID;
+        Integer authorID = null;
         String sqlQuery = "SELECT IDAutora from autori WHERE Nadimak = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
@@ -211,7 +211,7 @@ public class EditController implements Initializable
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, authorNick);
             ResultSet rs = ps.executeQuery();
-            authorID = rs.getInt("IDAutora");
+            while (rs.next()) { authorID = rs.getInt("IDAutora"); }
         }
 
         return authorID;
@@ -443,7 +443,7 @@ public class EditController implements Initializable
                         !textFieldAuthorNameValidator.containsErrors() &&
                         !textFieldAuthorSurnameValidator.containsErrors())
                     {
-                        Author newAuthor = new Author(textFieldAuthorName.getText(), textFieldAuthorNick.getText(), textFieldAuthorSurname.getText());
+                        Author newAuthor = new Author(textFieldAuthorName.getText().trim(), textFieldAuthorNick.getText().trim(), textFieldAuthorSurname.getText().trim());
                         confirmAuthorEdit(rowToEdit, newAuthor.getName(), newAuthor.getNick(), newAuthor.getSurname());
                         return newAuthor;
                     }
@@ -578,15 +578,15 @@ public class EditController implements Initializable
                         !textFieldPlayerMajorMVPsValidator.containsErrors())
                     {
                         Player newPlayer = new Player(
-                                textFieldPlayerName.getText(),
-                                textFieldPlayerNick.getText(),
-                                textFieldPlayerSurname.getText(),
+                                textFieldPlayerName.getText().trim(),
+                                textFieldPlayerNick.getText().trim(),
+                                textFieldPlayerSurname.getText().trim(),
                                 datePickerPlayerBirthDate.getValue(),
-                                textFieldPlayerNationality.getText(),
-                                textFieldPlayerTeamName.getText(),
-                                Double.parseDouble(textFieldPlayerRating.getText()),
-                                Integer.parseInt(textFieldPlayerMajorTrophies.getText()),
-                                Integer.parseInt(textFieldPlayerMajorMVPs.getText())
+                                textFieldPlayerNationality.getText().trim(),
+                                textFieldPlayerTeamName.getText().trim(),
+                                Double.parseDouble(textFieldPlayerRating.getText().trim()),
+                                Integer.parseInt(textFieldPlayerMajorTrophies.getText().trim()),
+                                Integer.parseInt(textFieldPlayerMajorMVPs.getText().trim())
                         );
                         try
                         {
@@ -689,11 +689,11 @@ public class EditController implements Initializable
                         !textFieldScoreValidator.containsErrors())
                     {
                         Match newMatch = new Match(
-                                textFieldFirstTeamName.getText(),
-                                textFieldSecondTeamName.getText(),
-                                textFieldTournamentName.getText(),
-                                Integer.parseInt(textFieldNumberOfMaps.getText()),
-                                textFieldScore.getText(),
+                                textFieldFirstTeamName.getText().trim(),
+                                textFieldSecondTeamName.getText().trim(),
+                                textFieldTournamentName.getText().trim(),
+                                Integer.parseInt(textFieldNumberOfMaps.getText().trim()),
+                                textFieldScore.getText().trim(),
                                 datePickerMatchDate.getValue()
                         );
                         try
@@ -792,9 +792,9 @@ public class EditController implements Initializable
                         !textFieldMajorTrophiesValidator.containsErrors())
                     {
                         Team newTeam = new Team(
-                                textFieldTeamName.getText(),
-                                Integer.parseInt(textFieldTeamRanking.getText()),
-                                Integer.parseInt(textFieldMajorTrophies.getText()),
+                                textFieldTeamName.getText().trim(),
+                                Integer.parseInt(textFieldTeamRanking.getText().trim()),
+                                Integer.parseInt(textFieldMajorTrophies.getText().trim()),
                                 choiceBoxRegion.getValue()
                         );
                         confirmTeamEdit(
@@ -859,9 +859,9 @@ public class EditController implements Initializable
                     if (button == ButtonType.YES)
                     {
                         Transfer newTransfer = new Transfer(
-                                textFieldTransferPlayerName.getText(),
-                                textFieldTransferOldTeamName.getText(),
-                                textFieldTransferNewTeamName.getText(),
+                                textFieldTransferPlayerName.getText().trim(),
+                                textFieldTransferOldTeamName.getText().trim(),
+                                textFieldTransferNewTeamName.getText().trim(),
                                 datePickerTransferDate.getValue()
                         );
                         try
@@ -956,10 +956,10 @@ public class EditController implements Initializable
                         !textFieldCoachSurnameValidator.containsErrors())
                     {
                         Coach newCoach = new Coach(
-                                textFieldCoachName.getText(),
-                                textFieldCoachNick.getText(),
-                                textFieldCoachSurname.getText(),
-                                textFieldCoachTeamName.getText()
+                                textFieldCoachName.getText().trim(),
+                                textFieldCoachNick.getText().trim(),
+                                textFieldCoachSurname.getText().trim(),
+                                textFieldCoachTeamName.getText().trim()
                         );
                         try
                         {
@@ -1059,11 +1059,11 @@ public class EditController implements Initializable
                         !textFieldTournamentPrizePoolValidator.containsErrors())
                     {
                         Tournament newTournament = new Tournament(
-                                textFieldTournamentName.getText(),
+                                textFieldTournamentName.getText().trim(),
                                 datePickerTournamentStartDate.getValue(),
                                 datePickerTournamentEndDate.getValue(),
-                                textFieldTournamentLocation.getText(),
-                                Integer.parseInt(textFieldTournamentPrizePool.getText()),
+                                textFieldTournamentLocation.getText().trim(),
+                                Integer.parseInt(textFieldTournamentPrizePool.getText().trim()),
                                 checkBoxTournamentIsBig.isSelected()
                         );
                         confirmTournamentEdit(
@@ -1125,8 +1125,8 @@ public class EditController implements Initializable
                     if (button == ButtonType.YES)
                     {
                         News newNews = new News(
-                                textFieldNewsTitle.getText(),
-                                textFieldAuthorName.getText(),
+                                textFieldNewsTitle.getText().trim(),
+                                textFieldAuthorName.getText().trim(),
                                 datePickerPublishDate.getValue()
                         );
                         try
@@ -1298,10 +1298,10 @@ public class EditController implements Initializable
                 Match currMatch = new Match(
                         getTeamNameFromID(rs.getInt(2)),
                         getTeamNameFromID(rs.getInt(3)),
-                        getTournamentNameFromID(rs.getInt(3)),
-                        rs.getInt(4),
-                        rs.getString(5),
-                        rs.getDate(6).toLocalDate()
+                        getTournamentNameFromID(rs.getInt(4)),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getDate(7).toLocalDate()
                 );
                 allMatches.add(currMatch);
             }
