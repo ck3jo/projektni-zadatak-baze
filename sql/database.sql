@@ -325,19 +325,15 @@ INSERT INTO treneri(Ime, Nadimak, Prezime, IDTima) VALUES
 ("Andrey", "Xoma", "Mironenko", 29),
 ("Renato", "nak", "Nakano", 30);
 
-INSERT INTO Mecevi(PrviTim, DrugiTim, IDTurnira, BrojMapa, Rezultat, DatumMeca) VALUES
-(14, 17, 1, 3, "1:2", '2024-04-30'),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-();
+INSERT INTO mecevi(IDMeca, PrviTim, DrugiTim, IDTurnira, BrojMapa, Rezultat, DatumMeca) VALUES
+(1, 15, 25, 1, 2, '0:2', '2024-05-03'),
+(2, 13, 9, 1, 3, '2:1', '2024-05-02'),
+(3, 14, 17, 1, 3, '1:2', '2024-04-30'),
+(4, 12, 5, 1, 3, '1:2', '2024-04-27'),
+(5, 1, 7, 1, 3, '2:1', '2024-04-26'),
+(6, 10, 1, 1, 2, '0:2', '2024-04-25'),
+(7, 7, 18, 1, 3, '2:1', '2024-04-24'),
+(8, 11, 1, 1, 2, '2:0', '2024-04-24');
 
 INSERT INTO Autori(Ime, Nadimak, Prezime) VALUES
 ("Arron", "KingDempz", "Dempsey"),
@@ -373,10 +369,12 @@ INSERT INTO Vesti(Naslov, DatumObjavljivanja, IDAutora) VALUES
 ("B1ad3: 'Nismo očekivali da ćemo osvojiti Major ovoliko brzo'", '2024-04-18', 8),
 ("OG promovisao Lamberta na poziciju glavnog trenera", '2024-04-18', 6);
 
-INSERT INTO Transferi(IDIgraca, IDStarogTima, IDNovogTima, DatumTransfera) VALUES
-(),
-(),
-(),
-(),
-(),
-();
+INSERT INTO Transferi (IDTransfera, IDIgraca, IDStarogTima, IDNovogTima, DatumTransfera) VALUES
+(1, 3, 3, 1, '2023-12-04'),
+(2, 46, 8, 10, '2024-04-15'),
+(3, 53, 27, 11, '2024-02-28'),
+(4, 45, 23, 9, '2023-12-21'),
+(5, 17, 8, 4, '2023-12-17'),
+(6, 59, 15, 12, '2023-12-16'),
+(7, 60, 15, 12, '2023-12-16'),
+(8, 81, 9, 17, '2023-12-06');
