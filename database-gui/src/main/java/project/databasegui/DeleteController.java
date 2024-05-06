@@ -483,7 +483,7 @@ public class DeleteController implements Initializable
     private String getPlayerNameFromID(int playerID) throws SQLException
     {
         String playerName = "";
-        String sqlQuery = "SELECT Ime FROM igraci WHERE IDIgraca = ?";
+        String sqlQuery = "SELECT Nadimak FROM igraci WHERE IDIgraca = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass))
         {
@@ -491,7 +491,7 @@ public class DeleteController implements Initializable
             ps.setInt(1, playerID);
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) { playerName = rs.getString("Ime"); }
+            while(rs.next()) { playerName = rs.getString("Nadimak"); }
         }
 
         return playerName;
