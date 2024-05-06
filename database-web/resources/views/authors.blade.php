@@ -15,7 +15,8 @@
     </head>
     <body class="pattern-dots pattern-slate-800 pattern-bg-slate-900 pattern-opacity-100 pattern-size-4">
         <div class="h-screen">
-            <livewire:show-authors />
+            <livewire:navbar />
+            <livewire:authors-table />
         </div>
     </body>
 </html>

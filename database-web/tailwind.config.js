@@ -33,6 +33,11 @@ export default {
           20: "5rem",
           24: "6rem",
           32: "8rem",
+          64: "16rem",
+          128: "32rem",
+          256: "64rem",
+          512: "128rem",
+          1024: "256rem"
       }
     },
     extend: {

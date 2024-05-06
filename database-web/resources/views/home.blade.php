@@ -14,9 +14,9 @@
         @vite('resources/css/app.css')
     </head>
     <body class="pattern-dots pattern-slate-800 pattern-bg-slate-900 pattern-opacity-100 pattern-size-4">  
-        <div class="h-screen">
+        <div>
             <livewire:navbar />
-            <div class="pt-80">
+            <div class="pt-10">
                 <h1 class="py-3 text-white drop-shadow-lg font-bold text-8xl font-sans text-center">FakeHLTV.org</h1>
                 <h3 class="pt-3 text-white drop-shadow-lg text-2xl font-sans text-center"> Aplikacija za evidentiranje profesionalnih CS2 mečeva</h3>
                 <p class="py-4 text-white drop-shadow-lg text-base font-sans text-center">Željenu tabelu možete izabrati putem navigacionog menija na vrhu ekrana. <br> Napravljeno uz pomoć Laravela, Livewirea i PHP-a. <3</p>
