@@ -4,10 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class ShowAuthors extends Component
+class Navbar extends Component
 {
     public function render()
     {
-        return view('livewire.show-authors');
+        return view('livewire.navbar');
     }
 }
