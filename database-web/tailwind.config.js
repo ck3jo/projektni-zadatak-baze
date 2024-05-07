@@ -47,7 +47,7 @@ export default {
     },
   },
   plugins: [
-    require('tailwindcss-bg-patterns')
+    require('tailwindcss-bg-patterns'),
   ],
 }
 

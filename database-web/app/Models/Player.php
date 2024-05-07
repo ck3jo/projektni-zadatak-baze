@@ -27,12 +27,8 @@ class Player extends Model
       "MajorMVP"  
     ];
 
-    protected $casts = [
-        "IDTima" => "integer"
-    ];
-
-    public function team(): BelongsTo
+    public function team() : BelongsTo
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(Team::class, "IDTima");
     }
 }

@@ -14,5 +14,6 @@
     </head>
     <body class="pattern-dots pattern-slate-800 pattern-bg-slate-900 pattern-opacity-100 pattern-size-4">
         <livewire:navbar />
+        <livewire:coaches-table />
     </body>
 </html>

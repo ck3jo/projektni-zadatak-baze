@@ -10,6 +10,6 @@ class PlayersTable extends Component
 {
     public function render()
     {
-        return view('livewire.players-table', ['players' => Player::all(), 'teams' => Team::all()]);
+        return view('livewire.players-table', ['players' => Player::all()]);
     }
 }
