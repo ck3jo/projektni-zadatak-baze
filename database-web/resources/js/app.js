@@ -1,5 +1,4 @@
 import './bootstrap';
 
-import.meta.glob([
-    '../img/**',
-]);
+import jQuery from 'jquery';
+window.$ = jQuery;

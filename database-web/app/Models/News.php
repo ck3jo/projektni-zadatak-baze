@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
 
 class News extends Model
 {
@@ -19,6 +20,11 @@ class News extends Model
         "DatumObjavljivanja",
         "IDAutora"
     ];
+
+    public function getFormattedDate()
+    {
+      return Carbon::parse($this->DatumObjavljivanja)->toFormattedDateString();
+    }
 
     public function author() : BelongsTo
     {

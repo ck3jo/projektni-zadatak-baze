@@ -9,7 +9,7 @@
             @foreach ($newsarr as $news)
                 <tr class="text-white text-center">
                     <td class="py-2">{{ $news->Naslov }}</td>
-                    <td class="py-2">{{ $news->DatumObjavljivanja }}</td>
+                    <td class="py-2">{{ $news->getFormattedDate() }}</td>
                     <td class="py-2">{{ $news->author->Nadimak }}</td>
                 </tr>
             @endforeach

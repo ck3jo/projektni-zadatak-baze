@@ -16,7 +16,7 @@
                     <td class="py-2">{{ $match->getTournamentName() }}</td>
                     <td class="py-2">{{ $match->BrojMapa }}</td>
                     <td class="py-2">{{ $match->Rezultat }}</td>
-                    <td class="py-2">{{ $match->DatumMeca }}</td>
+                    <td class="py-2">{{ $match->getFormattedDate() }}</td>
                 </tr>
             @endforeach
         </tbody>

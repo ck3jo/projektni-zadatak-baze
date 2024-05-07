@@ -12,7 +12,7 @@
                     <td class="py-2">{{ $transfer->getPlayerName() }}</td>
                     <td class="py-2">{{ $transfer->getOldTeamName() }}</td>
                     <td class="py-2">{{ $transfer->getNewTeamName() }}</td>
-                    <td class="py-2">{{ $transfer->DatumTransfera }}</td>
+                    <td class="py-2">{{ $transfer->getFormattedDate() }}</td>
                 </tr>
             @endforeach
         </tbody>

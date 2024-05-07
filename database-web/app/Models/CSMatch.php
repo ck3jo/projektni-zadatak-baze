@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CSMatch extends Model
 {
@@ -22,6 +23,11 @@ class CSMatch extends Model
         "Rezultat",
         "DatumMeca",
     ];
+
+    public function getFormattedDate()
+    {
+        return Carbon::parse($this->DatumMeca)->toFormattedDateString();
+    }
 
     public function getFirstTeamName()
     {

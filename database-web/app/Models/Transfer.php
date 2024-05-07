@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany; 
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class Transfer extends Model
 {
@@ -20,6 +21,11 @@ class Transfer extends Model
         "IDNovogTima",
         "DatumTransfera"
     ];
+
+    public function getFormattedDate()
+    {
+        return Carbon::parse($this->DatumTransfera)->toFormattedDateString();
+    }
 
     public function getPlayerName()
     {
