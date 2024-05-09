@@ -7,15 +7,25 @@
         <input wire:model.live.debounce.150ms="nameSearch" class="placeholder:text-center rounded-full px-2 py-1 text-white bg-gray-700" type="text" placeholder="Ime igrača">
         <input wire:model.live.debounce.150ms="nickSearch" class="placeholder:text-center rounded-full px-2 py-1 text-white bg-gray-700" type="text" placeholder="Nadimak igrača">
         <input wire:model.live.debounce.150ms="surnameSearch" class="placeholder:text-center rounded-full px-2 py-1 text-white bg-gray-700" type="text" placeholder="Prezime igrača">
-        <div class="block">
+        <div class="flex flex-row gap-x-4 items-center">
             <label for="lowerDatePicker">Donja granica datuma rođenja</label>
-            <input wire:model.live.debounce.150ms="lowerDateSearch" class="rounded-full px-2 py-1 bg-gray-700" id="lowerDatePicker" type="date" placeholder="Donja granica datuma">
+            <input wire:model.blur="lowerDateSearch" class="rounded-full px-2 py-1 bg-gray-700" id="lowerDatePicker" type="date" placeholder="Donja granica datuma">
         </div>
-        <div class="block">
+        <div class="flex flex-row gap-x-4 items-center">
             <label for="upperDatePicker">Gornja granica datuma rođenja</label>
-            <input wire:model.live.debounce.150ms="upperDateSearch" class="rounded-full px-2 py-1 bg-gray-700" id="upperDatePicker" type="date" placeholder="Gornja granica datuma">
+            <input wire:model.blur="upperDateSearch" class="rounded-full px-2 py-1 bg-gray-700" id="upperDatePicker" type="date" placeholder="Gornja granica datuma">
         </div>
         <input wire:model.live.debounce.150ms="nationalitySearch" class="placeholder:text-center rounded-full px-2 py-1 text-white bg-gray-700" type="text" placeholder="Nacionalnost igrača">
+        <div class="flex flex-row gap-x-4 items-center">
+            <label for="teamSelect">Izabran tim</label>
+            <select wire:model.live="teamNameSearch" class="rounded-full px-2 py-1 bg-gray-700" id="teamSelect" selected="Nijedan tim">
+                <option selected value="">Nijedan tim</option>
+                <option value="no-team">Nije u timu</option>
+                @foreach ($teams as $team)
+                    <option value="{{ $team->ImeTima }}">{{ $team->ImeTima }}</option>
+                @endforeach
+            </select>
+        </div>
     </div>
     <div class="flex justify-center py-2 rounded-t-lg overflow-hidden">
         <table class="px-5 pt-10 w-full rounded-t-lg">
@@ -30,7 +40,7 @@
                 <th class="py-3 font-bold text-white">Major trofeji</th>
                 <th class="rounded-tr-xl py-3 font-bold text-white">Major MVP</th>
             </thead>
-            <tbody class="[&>*:nth-child(odd)]:bg-gray-700 [&>*:nth-child(even)]:bg-gray-600">
+            <tbody class="[&>*:nth-child(odd)]:bg-gray-700 [&>*:nth-child(even)]:bg-gray-600 [&>*:last-child]:rounded-b-xl">
                 @foreach ($players as $player)
                     <tr class="text-white text-center">
                         <td class="py-2">{{ $player->Ime }}</td>

@@ -91,7 +91,7 @@
 
     CREATE TABLE Vesti (
         IDVesti INT PRIMARY KEY AUTO_INCREMENT,
-        Naslov VARCHAR(45),
+        Naslov VARCHAR(130),
         DatumObjavljivanja DATE,
         IDAutora INT,
         FOREIGN KEY (IDAutora) REFERENCES Autori(IDAutora)
