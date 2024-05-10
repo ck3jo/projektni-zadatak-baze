@@ -163,7 +163,7 @@
                         @endif
                     </button>  
                 </th>
-                <th wire:click="MajorMVP" class="rounded-tr-xl py-3 font-bold text-white text-wrap">
+                <th wire:click="setSortBy('MajorMVP')" class="rounded-tr-xl py-3 font-bold text-white text-wrap">
                     Major MVP medalje
                     <button>
                         @if ($sortBy !== "MajorMVP")

@@ -1,5 +1,5 @@
 <div class="block mx-10">
-    <div class="rounded-xl flex flex-row flex-wrap mt-8 py-6 mx-auto w-5/6 gap-x-10 gap-y-5 text-white bg-gray-800 justify-center items-center">
+    <div class="rounded-xl flex flex-row flex-wrap mt-8 py-6 mx-auto w-3/4 gap-x-10 gap-y-5 text-white bg-gray-800 justify-center items-center">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
             <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
         </svg> 
@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    <div class="flex justify-center py-10 rounded-t-lg overflow-hidden">
+    <div class="flex justify-center py-2 rounded-t-lg overflow-hidden">
         <table class="px-5 pt-10 w-3/4 rounded-t-lg">
             <thead class="bg-gray-800">
                 <th class="rounded-tl-xl py-3 font-bold text-white">Ime igrača</th>

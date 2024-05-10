@@ -6,13 +6,17 @@
 
         <input wire:model.live="titleSearch" class="bg-gray-700 rounded-full py-2 px-1 placeholder:text-center" type="text" placeholder="Naslov">
         <div class="flex flex-row gap-x-4 items-center">
-            <label for="lowerDatePicker">Donja granica datuma objavljivanja</label>
-            <input wire:model.blur="lowerDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerDatePicker">
+            <p>Granice za datum vesti</p>
+            <div class="flex flex-col gap-y-0">
+                <input wire:model.blur="lowerDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerDatePicker">
+                <p class="font-2xs text-center">Donja</p>
+            </div>
+            <div class="flex flex-col gap-y-0">
+                <input wire:model.blur="upperDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="upperDatePicker">
+                <p class="font-2xs text-center">Gornja</p>
+            </div>
         </div>
-        <div class="flex flex-row gap-x-4 items-center">
-            <label for="upperDatePicker">Gornja granica datuma objavljivanja</label>
-            <input wire:model.blur="upperDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="upperDatePickerr">
-        </div>
+
         <div class="flex flex-row gap-x-4 items-center">
             <label for="">Ime autora</label>
             <select wire:model.live="authorSearch" class="rounded-full px-2 py-1 bg-gray-700" id="authorSelect">

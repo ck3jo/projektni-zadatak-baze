@@ -34,7 +34,7 @@
             <option value="1">Jeste</option>
         </select>
     </div>
-    <div class="flex justify-center py-10 rounded-t-lg overflow-hidden">
+    <div class="flex justify-center py-2 rounded-t-lg overflow-hidden">
         <table class="px-5 pt-10 w-5/6 rounded-t-lg">
             <thead class="bg-gray-800">
                 <th class="rounded-tl-xl py-3 font-bold text-white">Ime turnira</th>
