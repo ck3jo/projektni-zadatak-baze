@@ -11,7 +11,7 @@
             <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
             <title>Pregled timova</title>
-            @vite('resources/css/app.cs')
+            @vite(['resources/css/app.cs', 'resources/js/app.js'])
     </head>
     <body class="pattern-dots pattern-slate-800 pattern-bg-slate-900 pattern-opacity-100 pattern-size-4">
         <livewire:navbar />

@@ -13,18 +13,20 @@ class MatchesTable extends Component
     public $firstTeamSearch = "";
     public $secondTeamSearch = "";
     public $tournamentSearch = "";
+    public $lowerDateSearch = "";
+    public $upperDateSearch = "";
+
+    public function triggerAlert() { if ($this->firstTeamSearch === $this->secondTeamSearch) { $this->firstTeamSearch = ""; }}
 
     public function getFirstTeamID()
     {
-        if ($this->firstTeamSearch === "no-first-team")
-        {
-
-        }
+        $this->triggerAlert();
         return DB::scalar("SELECT IDTima FROM timovi WHERE ImeTima = ". "'". $this->firstTeamSearch ."'");
     }
 
     public function getSecondTeamID()
     {
+        $this->triggerAlert();
         return DB::scalar("SELECT IDTima FROM timovi WHERE ImeTima = ". "'". $this->secondTeamSearch ."'");
     }
 
@@ -46,13 +48,22 @@ class MatchesTable extends Component
                                           ->orWhere("DrugiTim","=", $this->getFirstTeamID());
                                 })
                                 ->when($this->firstTeamSearch !== "" && $this->secondTeamSearch !== "", function ($query) {
-                                    $query->where("PrviTim", "=", $this->getFirstTeamID())
+                                    $query->orWhere("PrviTim", "=", $this->getFirstTeamID())
                                           ->where("DrugiTim", "=", $this->getSecondTeamID())
                                           ->orWhere("DrugiTim", "=", $this->getSecondTeamID())
                                           ->where("PrviTim", "=", $this->getFirstTeamID());
                                 })
                                 ->when($this->tournamentSearch !== "", function ($query) {
                                     $query->where("IDTurnira", "=", $this->getTournamentID());
+                                })
+                                ->when($this->lowerDateSearch !== "" && $this->upperDateSearch === "", function ($query) {
+                                    $query->whereDate("DatumMeca", ">", $this->lowerDateSearch);
+                                })
+                                ->when($this->upperDateSearch !== "" && $this->lowerDateSearch === "", function ($query) {
+                                    $query->whereDate("DatumMeca", "<", $this->upperDateSearch);
+                                })
+                                ->when($this->lowerDateSearch !== "" && $this->upperDateSearch !== "", function ($query) {
+                                    $query->whereBetween("DatumMeca", [$this->lowerDateSearch, $this->upperDateSearch]);
                                 })
                                 ->get(),
             "teams" => Team::all(),

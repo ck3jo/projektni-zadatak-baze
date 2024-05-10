@@ -4,12 +4,14 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Coach;
+use App\Models\Team;
 
 class CoachesTable extends Component
 {
     public $nameSearch = "";
     public $nickSearch = "";
     public $surnameSearch = "";
+    public $teamSearch = "";
 
     public function render()
     {
@@ -21,8 +23,8 @@ class CoachesTable extends Component
                               ->when($this->surnameSearch, function ($query) {
                                     $query->where("Prezime","like", "%". $this->surnameSearch ."%");
                               })
-                              ->get()
-                
+                              ->get(),
+            "teams" => Team::all()
         ]);
     }
 }

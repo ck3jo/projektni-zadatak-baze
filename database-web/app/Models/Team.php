@@ -28,8 +28,8 @@ class Team extends Model
       return Carbon::parse($this->DatumRodjenja)->toFormattedDateString();
     }
 
-    public function player(): HasMany
+    public function players(): HasMany
     {
-        return $this->hasMany(Player::class, "IDIgraca");
+        return $this->hasMany(Player::class, "IDIgraca", "IDTima");
     }
 }

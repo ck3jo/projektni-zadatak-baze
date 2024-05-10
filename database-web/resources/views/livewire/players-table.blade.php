@@ -8,12 +8,15 @@
         <input wire:model.live.debounce.150ms="nickSearch" class="placeholder:text-center rounded-full px-2 py-1 text-white bg-gray-700" type="text" placeholder="Nadimak igrača">
         <input wire:model.live.debounce.150ms="surnameSearch" class="placeholder:text-center rounded-full px-2 py-1 text-white bg-gray-700" type="text" placeholder="Prezime igrača">
         <div class="flex flex-row gap-x-4 items-center">
-            <label for="lowerDatePicker">Donja granica datuma rođenja</label>
-            <input wire:model.blur="lowerDateSearch" class="rounded-full px-2 py-1 bg-gray-700" id="lowerDatePicker" type="date" placeholder="Donja granica datuma">
-        </div>
-        <div class="flex flex-row gap-x-4 items-center">
-            <label for="upperDatePicker">Gornja granica datuma rođenja</label>
-            <input wire:model.blur="upperDateSearch" class="rounded-full px-2 py-1 bg-gray-700" id="upperDatePicker" type="date" placeholder="Gornja granica datuma">
+            <p>Granice za datum rođenja</p>
+            <div class="flex flex-col gap-x-0">
+                <input wire:model.blur="lowerDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerDateSelect">
+                <p class="font-2xs text-center">Donja</p>
+            </div>
+            <div class="flex flex-col gap-x-0">
+                <input wire:model.blur="upperDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerDateSelect">
+                <p class="font-2xs text-center">Gornja</p>
+            </div>
         </div>
         <input wire:model.live.debounce.150ms="nationalitySearch" class="placeholder:text-center rounded-full px-2 py-1 text-white bg-gray-700" type="text" placeholder="Nacionalnost igrača">
         <div class="flex flex-row gap-x-4 items-center">
@@ -30,15 +33,154 @@
     <div class="flex justify-center py-2 rounded-t-lg overflow-hidden">
         <table class="px-5 pt-10 w-full rounded-t-lg">
             <thead class="bg-gray-800">
-                <th class="rounded-tl-xl py-3 font-bold text-white">Ime</th>
-                <th class="py-3 font-bold text-white">Nadimak</th>
-                <th class="py-3 font-bold text-white">Prezime</th>
-                <th class="py-3 font-bold text-white">Datum rođenja</th>
-                <th class="py-3 font-bold text-white">Nacionalnost</th>
-                <th class="py-3 font-bold text-white">Ime tima</th>
-                <th class="py-3 font-bold text-white">Rejting</th>
-                <th class="py-3 font-bold text-white">Major trofeji</th>
-                <th class="rounded-tr-xl py-3 font-bold text-white">Major MVP</th>
+                <th wire:click="setSortBy('Ime')" class="rounded-tl-xl py-3 font-bold text-white">
+                    Ime
+                    <button>
+                        @if ($sortBy !== "Ime")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                            </svg>
+                        @elseif ($sortDir === "ASC")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                            </svg>
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        @endif
+                    </button>  
+                </th>
+                <th wire:click="setSortBy('Nadimak')" class="py-3 font-bold text-white">
+                    Nadimak
+                    <button>
+                        @if ($sortBy !== "Nadimak")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                            </svg>
+                        @elseif ($sortDir === "ASC")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                            </svg>
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        @endif
+                    </button>  
+                </th>
+                <th wire:click="setSortBy('Prezime')" class="py-3 font-bold text-white">
+                    Prezime
+                    <button>
+                        @if ($sortBy !== "Prezime")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                            </svg>
+                        @elseif ($sortDir === "ASC")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                            </svg>
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        @endif
+                    </button>  
+                </th>
+                <th wire:click="setSortBy('DatumRodjenja')" class="py-3 font-bold text-white">
+                    Datum rođenja
+                    <button>
+                        @if ($sortBy !== "DatumRodjenja")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                            </svg>
+                        @elseif ($sortDir === "ASC")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                            </svg>
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        @endif
+                    </button>  
+                </th>
+                <th wire:click="setSortBy('Nacionalnost')" class="py-3 font-bold text-white">
+                    Nacionalnost
+                    <button>
+                        @if ($sortBy !== "Nacionalnost")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                            </svg>
+                        @elseif ($sortDir === "ASC")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                            </svg>
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        @endif
+                    </button>  
+                </th>
+                <th class="py-3 font-bold text-white">
+                    Ime tima
+                    <!-- todo later -->
+                </th>
+                <th wire:click="setSortBy('Rejting')" class="py-3 font-bold text-white">
+                    Rejting
+                    <button>
+                        @if ($sortBy !== "Rejting")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                            </svg>
+                        @elseif ($sortDir === "ASC")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                            </svg>
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        @endif
+                    </button>  
+                </th>
+                <th wire:click="setSortBy('MajorTrofeji')" class="py-3 font-bold text-white">
+                    Major trofeji
+                    <button>
+                        @if ($sortBy !== "MajorTrofeji")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                            </svg>
+                        @elseif ($sortDir === "ASC")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                            </svg>
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        @endif
+                    </button>  
+                </th>
+                <th wire:click="MajorMVP" class="rounded-tr-xl py-3 font-bold text-white text-wrap">
+                    Major MVP medalje
+                    <button>
+                        @if ($sortBy !== "MajorMVP")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                            </svg>
+                        @elseif ($sortDir === "ASC")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                            </svg>
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        @endif
+                    </button>  
+                </th>
             </thead>
             <tbody class="[&>*:nth-child(odd)]:bg-gray-700 [&>*:nth-child(even)]:bg-gray-600 [&>*:last-child]:rounded-b-xl">
                 @foreach ($players as $player)

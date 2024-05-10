@@ -16,6 +16,22 @@ class PlayersTable extends Component
      public $upperDateSearch = "";
      public $nationalitySearch = "";
      public $teamNameSearch = "";
+     public $sortBy = "";
+     public $sortDir = "";
+
+     public function setSortBy($sortCol)
+    {
+        if ($this->sortBy == $sortCol) 
+        { 
+            $this->sortDir = ($this->sortDir == "ASC") ? "DESC" : "ASC"; 
+            return;
+        }
+        else
+        {
+            $this->sortBy = $sortCol;  
+            $this->sortDir = "ASC";
+        }
+    }
 
      public function getTeamID()
      {
@@ -49,6 +65,9 @@ class PlayersTable extends Component
                                    })
                                    ->when($this->teamNameSearch !== "", function($query) {
                                         $query->where("IDTima", "=", $this->getTeamID());
+                                   })
+                                   ->when($this->sortBy !== "" && $this->sortDir !== "", function ($query) {
+                                        $query->orderBy($this->sortBy, $this->sortDir);
                                    })
                                    ->get(),
                'teams' => Team::all()

@@ -7,6 +7,12 @@
         <input wire:model.live.debounce.150ms="nameSearch" class="placeholder:text-center rounded-full px-2 py-1 text-white bg-gray-700" type="text" placeholder="Ime trenera">
         <input wire:model.live.debounce.150ms="nickSearch" class="placeholder:text-center rounded-full px-2 py-1 text-white bg-gray-700" type="text" placeholder="Nadimak trenera">
         <input wire:model.live.debounce.150ms="surnameSearch" class="placeholder:text-center rounded-full px-2 py-1 text-white bg-gray-700" type="text" placeholder="Prezime trenera">
+        <select wire:model.live="teamSearch" class="rounded-full py-2 px-2 bg-gray-700" id="firstTeamSelect">
+            @foreach ($teams as $team)
+                <option value="{{ $team->ImeTima }}">{{ $team->ImeTima }}</option>
+            @endforeach
+            <option selected value="" class="text-gray-500">Ime tima</option>
+        </select>
     </div>
     <div class="flex justify-center py-2 rounded-t-lg overflow-hidden">
         <table class="px-5 pt-10 w-3/4 rounded-t-lg">

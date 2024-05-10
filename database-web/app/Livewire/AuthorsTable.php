@@ -10,6 +10,22 @@ class AuthorsTable extends Component
     public $nameSearch = "";
     public $nickSearch = "";
     public $surnameSearch = "";
+    public $sortBy = "";
+    public $sortDir = "";
+
+    public function setSortBy($sortCol)
+    {
+        if ($this->sortBy == $sortCol) 
+        { 
+            $this->sortDir = ($this->sortDir == "ASC") ? "DESC" : "ASC"; 
+            return;
+        }
+        else
+        {
+            $this->sortBy = $sortCol;  
+        $this->sortDir = "ASC";
+        }
+    }
 
     public function render()
     {
@@ -20,6 +36,9 @@ class AuthorsTable extends Component
                                })
                                ->when($this->surnameSearch != "", function ($query) {
                                     $query->where("Prezime", "like", "%". $this->surnameSearch ."%");
+                               })
+                               ->when($this->sortBy !== "" && $this->sortDir !== "", function ($query) {
+                                    $query->orderBy($this->sortBy, $this->sortDir);
                                })
                                ->get()
         ]);

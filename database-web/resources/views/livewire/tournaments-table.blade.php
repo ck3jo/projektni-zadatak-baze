@@ -6,20 +6,26 @@
 
         <input wire:model.live.debounce.150ms="nameSearch" class="placeholder:text-center rounded-full px-2 py-1 text-white bg-gray-700" type="text" placeholder="Ime turnira">
         <div class="flex flex-row gap-x-4 items-center">
-            <label for="lowerStartDatePicker">Donja granica početka</label>
-            <input wire:model.live="lowerStartDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerStartDatePicker">
+            <p>Granice za datum početka</p>
+            <div class="flex flex-col gap-x-0">
+                <input wire:model.blur="lowerStartDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerDateSelect">
+                <p class="font-2xs text-center">Donja</p>
+            </div>
+            <div class="flex flex-col gap-x-0">
+                <input wire:model.blur="upperStartDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerDateSelect">
+                <p class="font-2xs text-center">Gornja</p>
+            </div>
         </div>
         <div class="flex flex-row gap-x-4 items-center">
-            <label for="upperStartDatePicker">Gornja granica početka</label>
-            <input wire:model.live="upperStartDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="upperStartDatePicker">
-        </div>
-        <div class="flex flex-row gap-x-4 items-center">
-            <label for="lowerEndDatePicker">Donja granica završetka</label>
-            <input wire:model.live="lowerEndDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerEndDatePicker">
-        </div>
-        <div class="flex flex-row gap-x-4 items-center">
-            <label for="upperEndDatePicker">Gornja granica završetka</label>
-            <input wire:model.live="upperEndDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="upperEndDatePicker">
+            <p>Granice za datum završetka</p>
+            <div class="flex flex-col gap-x-0">
+                <input wire:model.blur="lowerEndDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerDateSelect">
+                <p class="font-2xs text-center">Donja</p>
+            </div>
+            <div class="flex flex-col gap-x-0">
+                <input wire:model.blur="upperEndDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerDateSelect">
+                <p class="font-2xs text-center">Gornja</p>
+            </div>
         </div>
         <input wire:model.live.debounce.150ms="locationSearch" type="text" class="placeholder:text-center rounded-full px-2 py-1 bg-gray-700" placeholder="Lokacija">
         <select wire:model.live="bigTournamentSearch" class="rounded-full px-2 py-1 bg-gray-700" id="bigTournamentBox">

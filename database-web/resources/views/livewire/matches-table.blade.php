@@ -22,6 +22,17 @@
             @endforeach
             <option selected value="" class="text-gray-500">Ime turnira</option>
         </select>
+        <div class="flex flex-row gap-x-4 items-center">
+            <p>Granice za datum meča</p>
+            <div class="flex flex-col gap-x-0">
+                <input wire:model.blur="lowerDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerDateSelect">
+                <p class="font-2xs text-center">Donja</p>
+            </div>
+            <div class="flex flex-col gap-x-0">
+                <input wire:model.blur="upperDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerDateSelect">
+                <p class="font-2xs text-center">Gornja</p>
+            </div>
+        </div>
     </div>
     <div class="flex justify-center py-2 rounded-t-lg overflow-hidden">
         <table class="px-5 pt-2 w-5/6 rounded-t-lg">
