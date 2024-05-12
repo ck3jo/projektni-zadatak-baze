@@ -14,6 +14,9 @@ class CSMatch extends Model
     protected $table = "mecevi";
     protected $primaryKey = "IDMeca";
     public $timestamps = false;
+    public $firstTeamName = "";
+    public $secondTeamName = "";
+    public $tournamentName = "";
 
     protected $fillable = [
         "PrviTim",
@@ -23,6 +26,19 @@ class CSMatch extends Model
         "Rezultat",
         "DatumMeca",
     ];
+
+    protected $attributes = [
+        "ImePrvogTima" => "",
+        "ImeDrugogTima" => "",
+        "ImeTurnira" => ""
+    ];
+
+    public function boot()
+    {
+        $this->ImePrvogTima = "'". $this->getFirstTeamName() ."'";
+        $this->ImeDrugogTima = "'". $this->getSecondTeamName() ."'";
+        $this->ImeTurnira = "'". $this->getTournamentName() ."'";
+    }
 
     public function getFormattedDate()
     {

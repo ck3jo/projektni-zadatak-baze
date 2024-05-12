@@ -28,11 +28,37 @@
             </div>
         </div>
         <input wire:model.live.debounce.150ms="locationSearch" type="text" class="placeholder:text-center rounded-full px-2 py-1 bg-gray-700" placeholder="Lokacija">
+        <div class="flex flex-row gap-x-4 items-center">
+            <p>Granice za nagradni fond</p>
+            <div class="flex flex-col gap-y-0">
+                <p class="text-xs text-center">
+                    @if ($this->minPrizePool == "1000")
+                        Nema
+                    @else
+                        {{ $this->getFormattedMinPrizePool() }}
+                    @endif
+                </p>
+                <input wire:model.live="minPrizePool" class="bg-fuchsia-950" value="500" min="1000" max="10000000" step="1000" type="range">
+                <p class="text-xs text-center">Minimum</p>
+            </div>
+            <div class="flex flex-col gap-y-0">
+                <p class="text-xs text-center">
+                    @if ($this->maxPrizePool == "10000000")
+                        Nema
+                    @else
+                        {{ $this->getFormattedMaxPrizePool() }}
+                    @endif
+                </p>
+                <input wire:model.live="maxPrizePool" value="10000000" min="1000" max="10000000" step="1000" type="range">
+                <p class="text-xs text-center">Maksimum</p>
+            </div>
+        </div>
         <select wire:model.live="bigTournamentSearch" class="rounded-full px-2 py-1 bg-gray-700" id="bigTournamentBox">
             <option class="text-gray-500" value="">Veliki turnir?</option>
             <option value="0">Nije</option>
             <option value="1">Jeste</option>
         </select>
+        <button wire:click="resetFilters()" class="rounded-full px-2 py-1 bg-gray-700">Resetuj filtere</button>
     </div>
     <div class="flex justify-center py-2 rounded-t-lg overflow-hidden">
         <table class="px-5 pt-10 w-5/6 rounded-t-lg">

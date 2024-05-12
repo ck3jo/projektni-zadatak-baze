@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Number;
 use App\Models\Tournament;
 
 class TournamentsTable extends Component
@@ -14,6 +15,33 @@ class TournamentsTable extends Component
     public $upperEndDateSearch = "";
     public $locationSearch = "";
     public $bigTournamentSearch = "";
+    public $minPrizePool = 1000;
+    public $maxPrizePool = 10000000;
+    public $sortBy = "";
+    public $sortDir = "";
+
+    public function resetFilters()
+    {
+        $this->nameSearch = "";
+        $this->lowerStartDateSearch = "";
+        $this->lowerEndDateSearch = "";
+        $this->upperStartDateSearch = "";
+        $this->upperEndDateSearch = "";
+        $this->locationSearch = "";
+        $this->bigTournamentSearch = "";
+        $this->minPrizePool = 1000;
+        $this->maxPrizePool = 10000000;
+    }
+
+    public function getFormattedMinPrizePool()
+    {
+        return Number::currency($this->minPrizePool, "USD");
+    }
+
+    public function getFormattedMaxPrizePool()
+    {
+        return Number::currency($this->maxPrizePool, "USD");
+    }
 
     public function render()
     {
@@ -42,6 +70,15 @@ class TournamentsTable extends Component
                                         })
                                         ->when($this->bigTournamentSearch !== "", function($query) {
                                             $query->where("VeciTurnir", "=", $this->bigTournamentSearch );
+                                        })
+                                        ->when($this->minPrizePool !== 1000 && $this->maxPrizePool === 10000000, function ($query) {
+                                            $query->where("NagradniFond", ">=", $this->minPrizePool);
+                                        })
+                                        ->when($this->maxPrizePool !== 10000000 && $this->minPrizePool === 1000, function ($query) {
+                                            $query->where("NagradniFond", "<=", $this->maxPrizePool);
+                                        })
+                                        ->when($this->minPrizePool !== 1000 && $this->maxPrizePool !== 10000000, function ($query) {
+                                            $query->whereBetween("NagradniFond", [$this->minPrizePool, $this->maxPrizePool]);
                                         })
                                         ->get()
         ]);

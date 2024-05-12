@@ -1,5 +1,5 @@
 <div class="block mx-10">
-    <div class="rounded-xl flex flex-row flex-wrap mt-8 py-6 w-full gap-x-10 gap-y-5 text-white bg-gray-800 justify-center items-center">
+    <div class="rounded-xl flex flex-row flex-wrap mt-8 py-6 w-full px-4 gap-x-10 gap-y-5 text-white bg-gray-800 justify-center items-center">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
             <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
         </svg> 
@@ -9,11 +9,11 @@
         <input wire:model.live.debounce.150ms="surnameSearch" class="placeholder:text-center rounded-full px-2 py-1 text-white bg-gray-700" type="text" placeholder="Prezime igrača">
         <div class="flex flex-row gap-x-4 items-center">
             <p>Granice za datum rođenja</p>
-            <div class="flex flex-col gap-x-0">
+            <div class="flex flex-col gap-y-0">
                 <input wire:model.blur="lowerDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerDateSelect">
                 <p class="font-2xs text-center">Donja</p>
             </div>
-            <div class="flex flex-col gap-x-0">
+            <div class="flex flex-col gap-y-0">
                 <input wire:model.blur="upperDateSearch" class="rounded-full px-2 py-1 bg-gray-700" type="date" id="lowerDateSelect">
                 <p class="font-2xs text-center">Gornja</p>
             </div>
@@ -29,6 +29,82 @@
                 @endforeach
             </select>
         </div>
+        <div class="flex flex-row gap-x-4 items-center">
+            <p>Granice za rejting</p>
+            <div class="flex flex-col gap-y-0">
+                <p class="text-xs text-center">
+                    @if ($this->minRating === "0")
+                        Nema
+                    @else
+                        {{ $this->minRating }}
+                    @endif
+                </p>
+                <input wire:model.live="minRating" class="bg-fuchsia-950" value="0" min="0" max="3" step="0.1" type="range">
+                <p class="text-xs text-center">Minimum</p>
+            </div>
+            <div class="flex flex-col gap-y-0">
+                <p class="text-xs text-center">
+                    @if ($this->maxRating === "3")
+                        Nema
+                    @else
+                        {{ $this->maxRating }}
+                    @endif
+                </p>
+                <input wire:model.live="maxRating" value="3" min="0.8" max="3" step="0.1" type="range">
+                <p class="text-xs text-center">Maksimum</p>
+            </div>
+        </div>
+        <div class="flex flex-row gap-x-4 items-center">
+            <p>Granice za Major trofeje</p>
+            <div class="flex flex-col gap-y-0">
+                <p class="text-xs text-center">
+                    @if ($this->minMajorTrophies === "0")
+                        Nema
+                    @else
+                        {{ $this->minMajorTrophies }}
+                    @endif
+                </p>
+                <input wire:model.live="minMajorTrophies" class="bg-fuchsia-950" value="0" min="0" max="10" step="1" type="range">
+                <p class="text-xs text-center">Minimum</p>
+            </div>
+            <div class="flex flex-col gap-y-0">
+                <p class="text-xs text-center">
+                    @if ($this->maxMajorTrophies === "10")
+                        Nema
+                    @else
+                        {{ $this->maxMajorTrophies }}
+                    @endif
+                </p>
+                <input wire:model.live="maxMajorTrophies" value="10" min="1" max="10" step="1" type="range">
+                <p class="text-xs text-center">Maksimum</p>
+            </div>
+        </div>
+        <div class="flex flex-row gap-x-4 items-center">
+            <p>Granice za Major MVP medalje</p>
+            <div class="flex flex-col gap-y-0">
+                <p class="text-xs text-center">
+                    @if ($this->minMajorMVPs === "0")
+                        Nema
+                    @else
+                        {{ $this->minMajorMVPs }}
+                    @endif
+                </p>
+                <input wire:model.live="minMajorMVPs" class="bg-fuchsia-950" value="0" min="0" max="5" step="1" type="range">
+                <p class="text-xs text-center">Minimum</p>
+            </div>
+            <div class="flex flex-col gap-y-0">
+                <p class="text-xs text-center">
+                    @if ($this->maxMajorMVPs === "5")
+                        Nema
+                    @else
+                        {{ $this->maxMajorMVPs }}
+                    @endif
+                </p>
+                <input wire:model.live="maxMajorMVPs" value="5" min="1" max="5" step="1" type="range">
+                <p class="text-xs text-center">Maksimum</p>
+            </div>
+        </div>
+        <button wire:click="resetFilters()" class="bg-gray-700 rounded-full px-2 py-1 text-white text-center">Resetuj filtere</button>
     </div>
     <div class="flex justify-center py-2 rounded-t-lg overflow-hidden">
         <table class="px-5 pt-10 w-full rounded-t-lg">
