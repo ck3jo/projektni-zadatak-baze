@@ -23,7 +23,7 @@ class AuthorsTable extends Component
         else
         {
             $this->sortBy = $sortCol;  
-        $this->sortDir = "ASC";
+            $this->sortDir = "ASC";
         }
     }
 

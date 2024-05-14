@@ -14,6 +14,8 @@ class TransfersTable extends Component
     public $newTeamSearch = "";
     public $lowerDateSearch = "";
     public $upperDateSearch = "";
+    public $sortBy = "";
+    public $sortDir = "";
 
     public function getPlayerID()
     {
@@ -29,6 +31,20 @@ class TransfersTable extends Component
         else if ($oldNew === "new")
         {
             return DB::scalar("SELECT IDTima FROM timovi WHERE ImeTima = ". "'". $this->newTeamSearch ."'");
+        }
+    }
+    
+    public function setSortBy($sortCol)
+    {
+        if ($this->sortBy == $sortCol) 
+        { 
+            $this->sortDir = ($this->sortDir == "ASC") ? "DESC" : "ASC"; 
+            return;
+        }
+        else
+        {
+            $this->sortBy = $sortCol;  
+            $this->sortDir = "ASC";
         }
     }
 
@@ -53,6 +69,9 @@ class TransfersTable extends Component
                                     })
                                     ->when($this->lowerDateSearch !== "" && $this->upperDateSearch !== "", function ($query) {
                                         $query->whereBetween("DatumTransfera", [$this->lowerDateSearch, $this->upperDateSearch]);
+                                    })
+                                    ->when($this->sortBy !== "" && $this->sortDir !== "", function ($query) {
+                                        $query->orderBy($this->sortBy, $this->sortDir);
                                     })
                                     ->get(),
             "teams" => Team::all(),
