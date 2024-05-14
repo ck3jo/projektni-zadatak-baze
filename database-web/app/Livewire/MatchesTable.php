@@ -15,6 +15,37 @@ class MatchesTable extends Component
     public $tournamentSearch = "";
     public $lowerDateSearch = "";
     public $upperDateSearch = "";
+    public $minNumMaps = "1";
+    public $maxNumMaps = "6";
+    public $scoreSearch = "";
+    public $sortBy = "";
+    public $sortDir = "";
+
+    public function resetFilters()
+    {
+        $this->firstTeamSearch = "";
+        $this->secondTeamSearch = "";
+        $this->lowerDateSearch = "";
+        $this->upperDateSearch = "";
+        $this->minNumMaps = "1";
+        $this->maxNumMaps = "6";
+        $this->sortBy = "";
+        $this->sortDir = "";
+    }
+
+    public function setSortBy($sortCol)
+    {
+        if ($this->sortBy == $sortCol) 
+        { 
+            $this->sortDir = ($this->sortDir == "ASC") ? "DESC" : "ASC"; 
+            return;
+        }
+        else
+        {
+            $this->sortBy = $sortCol;  
+            $this->sortDir = "ASC";
+        }
+    }
 
     public function triggerAlert() { if ($this->firstTeamSearch === $this->secondTeamSearch) { $this->firstTeamSearch = ""; }}
 
@@ -64,6 +95,22 @@ class MatchesTable extends Component
                                 })
                                 ->when($this->lowerDateSearch !== "" && $this->upperDateSearch !== "", function ($query) {
                                     $query->whereBetween("DatumMeca", [$this->lowerDateSearch, $this->upperDateSearch]);
+                                })
+                                ->when($this->minNumMaps !== "0" && $this->maxNumMaps === "6", function ($query) {
+                                    $query->where("BrojMapa", ">=", $this->minNumMaps);
+                                })
+                                ->when($this->maxNumMaps !== "0" && $this->minNumMaps === "0", function ($query) {
+                                    $query->where("BrojMapa", "<=", $this->maxNumMaps);
+                                })
+                                ->when($this->minNumMaps !== "0" && $this->maxNumMaps !== "6", function ($query) {
+                                    $query->whereBetween("BrojMapa", [$this->minNumMaps, $this->maxNumMaps]);
+                                })
+                                ->when($this->scoreSearch !== "", function ($query) {
+                                    $query->where("Rezultat", "=", $this->scoreSearch)
+                                          ->orWhere("Rezultat", "=", strrev($this->scoreSearch));
+                                })
+                                ->when($this->sortBy !== "" && $this->sortDir !== "", function ($query) {
+                                    $query->orderBy($this->sortBy, $this->sortDir);
                                 })
                                 ->get(),
             "teams" => Team::all(),

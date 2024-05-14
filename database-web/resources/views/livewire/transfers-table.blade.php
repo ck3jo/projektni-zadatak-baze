@@ -46,6 +46,7 @@
                 <p class="font-2xs text-center">Gornja</p>
             </div>
         </div>
+        <button wire:click="resetFilters()" class="rounded-full px-2 py-1 bg-gray-700">Resetuj filtere</button>
     </div>
     <div class="flex justify-center py-2 rounded-t-lg overflow-hidden">
         <table class="px-5 pt-10 w-3/4 rounded-t-lg">

@@ -17,6 +17,15 @@ class TransfersTable extends Component
     public $sortBy = "";
     public $sortDir = "";
 
+    public function resetFilters()
+    {
+        $this->playerSearch = "";
+        $this->oldTeamSearch = "";
+        $this->newTeamSearch = "";
+        $this->lowerDateSearch = "";
+        $this->upperDateSearch = "";
+    }
+
     public function getPlayerID()
     {
         return DB::scalar("SELECT IDIgraca FROM igraci WHERE Nadimak = ". "'". $this->playerSearch ."'");

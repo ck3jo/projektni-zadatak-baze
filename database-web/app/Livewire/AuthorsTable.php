@@ -13,6 +13,15 @@ class AuthorsTable extends Component
     public $sortBy = "";
     public $sortDir = "";
 
+    public function resetFilters()
+    {
+        $this->nameSearch = "";
+        $this->nickSearch = "";
+        $this->surnameSearch = "";
+        $this->sortBy = "";
+        $this->sortDir = "";
+    }
+
     public function setSortBy($sortCol)
     {
         if ($this->sortBy == $sortCol) 
