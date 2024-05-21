@@ -13,6 +13,8 @@ class TeamsTable extends Component
     public $minMajorTrophies = "0";
     public $maxMajorTrophies = "10";
     public $regionSearch = "";
+    public $sortBy = "";
+    public $sortDir = "";
 
     public function resetFilters()
     {
@@ -22,6 +24,22 @@ class TeamsTable extends Component
         $this->minMajorTrophies = "0";
         $this->maxMajorTrophies = "10";
         $this->regionSearch = "";
+        $this->sortBy = "";
+        $this->sortDir = "";
+    }
+
+    public function setSortBy($sortCol)
+    {
+        if ($this->sortBy == $sortCol) 
+        { 
+            $this->sortDir = ($this->sortDir == "ASC") ? "DESC" : "ASC"; 
+            return;
+        }
+        else
+        {
+            $this->sortBy = $sortCol;  
+            $this->sortDir = "ASC";
+        }
     }
 
     public function render()
@@ -48,6 +66,9 @@ class TeamsTable extends Component
                             })
                             ->when($this->regionSearch !== "", function ($query) {
                                 $query->where("Region", "=", $this->regionSearch);
+                            })
+                            ->when($this->sortBy !== "" && $this->sortDir !== "", function ($query) {
+                                $query->orderBy($this->sortBy, $this->sortDir);
                             })
                             ->get()
         ]);

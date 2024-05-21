@@ -31,6 +31,22 @@ class TournamentsTable extends Component
         $this->bigTournamentSearch = "";
         $this->minPrizePool = 1000;
         $this->maxPrizePool = 10000000;
+        $this->sortBy = "";
+        $this->sortDir = "";
+    }
+
+    public function setSortBy($sortCol)
+    {
+        if ($this->sortBy == $sortCol) 
+        { 
+            $this->sortDir = ($this->sortDir == "ASC") ? "DESC" : "ASC"; 
+            return;
+        }
+        else
+        {
+            $this->sortBy = $sortCol;  
+            $this->sortDir = "ASC";
+        }
     }
 
     public function getFormattedMinPrizePool()
@@ -79,6 +95,9 @@ class TournamentsTable extends Component
                                         })
                                         ->when($this->minPrizePool !== 1000 && $this->maxPrizePool !== 10000000, function ($query) {
                                             $query->whereBetween("NagradniFond", [$this->minPrizePool, $this->maxPrizePool]);
+                                        })
+                                        ->when($this->sortBy !== "" && $this->sortDir !== "", function ($query) {
+                                            $query->orderBy($this->sortBy, $this->sortDir);
                                         })
                                         ->get()
         ]);

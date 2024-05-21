@@ -26,12 +26,47 @@
                 <option value="">Ime autora</option>
             </select>
         </div>
+        <button wire:click="resetFilters()" class="px-2 py-1 rounded-full bg-gray-700">Resetuj filtere</button>
     </div>
     <div class="flex justify-center py-2 rounded-t-lg overflow-hidden">
         <table class="px-5 pt-10 w-5/6 rounded-t-lg table-auto">
             <thead class="bg-gray-800">
-                <th class="rounded-tl-xl py-3 font-bold text-white">Naslov</th>
-                <th class="py-3 font-bold text-white">Datum objavljivanja</th>
+                <th wire:click="setSortBy('Naslov')" class="rounded-tl-xl py-3 font-bold text-white">
+                    Naslov
+                    <button>
+                        @if ($sortBy !== "Naslov")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                            </svg>
+                        @elseif ($sortDir === "ASC")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                            </svg>
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        @endif
+                    </button>   
+                </th>
+                <th wire:click="setSortBy('DatumObjavljivanja')" class="py-3 font-bold text-white">
+                    Datum objavljivanja
+                    <button>
+                        @if ($sortBy !== "DatumObjavljivanja")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                            </svg>
+                        @elseif ($sortDir === "ASC")
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                            </svg>
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pt-2 w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        @endif
+                    </button>   
+                </th>
                 <th class="rounded-tr-xl py-3 font-bold text-white">Ime autora</th>
             </thead>
             <tbody class="table-auto [&>*:nth-child(odd)]:bg-gray-700 [&>*:nth-child(even)]:bg-gray-600">

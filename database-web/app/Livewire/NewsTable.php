@@ -10,9 +10,35 @@ use App\Models\Author;
 class NewsTable extends Component
 {
     public $titleSearch = "";
-    public $lowerDateSearch = null;
-    public $upperDateSearch = null;
+    public $lowerDateSearch = "";
+    public $upperDateSearch = "";
     public $authorSearch = "";
+    public $sortBy = "";
+    public $sortDir = "";
+
+    public function resetFilters()
+    {
+        $this->titleSearch = "";
+        $this->lowerDateSearch = "";
+        $this->upperDateSearch = "";
+        $this->authorSearch = "";
+        $this->sortBy = "";
+        $this->sortDir = "";
+    }
+
+    public function setSortBy($sortCol)
+    {
+        if ($this->sortBy == $sortCol) 
+        { 
+            $this->sortDir = ($this->sortDir == "ASC") ? "DESC" : "ASC"; 
+            return;
+        }
+        else
+        {
+            $this->sortBy = $sortCol;  
+            $this->sortDir = "ASC";
+        }
+    }
 
     public function getAuthorID()
     {
@@ -23,17 +49,20 @@ class NewsTable extends Component
     {
         return view('livewire.news-table', [
             'newsarr' => News::where("Naslov", "LIKE", "%".$this->titleSearch."%")
-                             ->when($this->lowerDateSearch !== null && $this->upperDateSearch === null, function ($query) {
+                             ->when($this->lowerDateSearch !== "" && $this->upperDateSearch === "", function ($query) {
                                 $query->whereDate("DatumObjavljivanja", ">=", $this->lowerDateSearch);
                              })
-                             ->when($this->upperDateSearch !== null && $this->lowerDateSearch !== null, function ($query) {
+                             ->when($this->upperDateSearch !== "" && $this->lowerDateSearch !== "", function ($query) {
                                 $query->whereDate("DatumObjavljivanja", "<=", $this->upperDateSearch);
                              })
-                             ->when($this->lowerDateSearch !== null && $this->upperDateSearch !== null, function ($query) {
+                             ->when($this->lowerDateSearch !== "" && $this->upperDateSearch !== "", function ($query) {
                                 $query->whereBetween("DatumObjavljivanja", [ $this->lowerDateSearch, $this->upperDateSearch ]);
                              })
                              ->when($this->authorSearch !== "", function ($query) {
                                 $query->where("IDAutora", "=", $this->getAuthorID());
+                             })
+                             ->when($this->sortBy !== "" && $this->sortDir !== "", function ($query) {
+                                $query->orderBy($this->sortBy, $this->sortDir);
                              })
                              ->get(),
             'authors' => Author::all()

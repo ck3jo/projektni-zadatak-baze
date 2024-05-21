@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Tournament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -27,19 +29,6 @@ class CSMatch extends Model
         "DatumMeca",
     ];
 
-    protected $attributes = [
-        "ImePrvogTima" => "",
-        "ImeDrugogTima" => "",
-        "ImeTurnira" => ""
-    ];
-
-    public function boot()
-    {
-        $this->ImePrvogTima = "'". $this->getFirstTeamName() ."'";
-        $this->ImeDrugogTima = "'". $this->getSecondTeamName() ."'";
-        $this->ImeTurnira = "'". $this->getTournamentName() ."'";
-    }
-
     public function getFormattedDate()
     {
         return Carbon::parse($this->DatumMeca)->toFormattedDateString();
@@ -58,5 +47,10 @@ class CSMatch extends Model
     public function getTournamentName()
     {
         return DB::scalar("SELECT Ime FROM turniri WHERE IDTurnira = ". $this->IDTurnira);
+    }
+
+    public function tournament(): BelongsTo
+    {
+        return $this->belongsTo(Tournament::class, "IDTurnira");
     }
 }

@@ -53,7 +53,7 @@
             <option value="3:0">3:0</option>
             <option value="3:1">3:1</option>
             <option value="3:2">3:2</option>
-            <option selected value="">Rezultat</option>
+            <option selected value="" class="text-gray-500">Rezultat</option>
         </select>
         <div class="flex flex-row gap-x-4 items-center">
             <p>Granice za datum meča</p>
@@ -185,7 +185,7 @@
                     <tr class="text-white text-center">
                         <td class="py-2">{{ $match->getFirstTeamName() }}</td>
                         <td class="py-2">{{ $match->getSecondTeamName() }}</td>
-                        <td class="py-2">{{ $match->getTournamentName() }}</td>
+                        <td class="py-2">{{ $match->tournament->Ime }}</td>
                         <td class="py-2">{{ $match->BrojMapa }}</td>
                         <td class="py-2">{{ $match->Rezultat }}</td>
                         <td class="py-2">{{ $match->getFormattedDate() }}</td>

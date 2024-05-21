@@ -13,6 +13,8 @@ class CoachesTable extends Component
     public $nickSearch = "";
     public $surnameSearch = "";
     public $teamSearch = "";
+    public $sortBy = "";
+    public $sortDir = "";
 
     public function resetFilters()
     {
@@ -20,6 +22,22 @@ class CoachesTable extends Component
         $this->nickSearch = "";
         $this->surnameSearch = "";
         $this->teamSearch = "";
+        $this->sortBy = "";
+        $this->sortDir = "";
+    }
+
+    public function setSortBy($sortCol)
+    {
+        if ($this->sortBy == $sortCol) 
+        { 
+            $this->sortDir = ($this->sortDir == "ASC") ? "DESC" : "ASC"; 
+            return;
+        }
+        else
+        {
+            $this->sortBy = $sortCol;  
+            $this->sortDir = "ASC";
+        }
     }
 
     public function getTeamID()
@@ -39,6 +57,9 @@ class CoachesTable extends Component
                               })
                               ->when($this->teamSearch !== "", function ($query) {
                                     $query->where("IDTima", "=", $this->getTeamID());
+                              })
+                              ->when($this->sortBy && $this->sortDir, function ($query) {
+                                    $query->orderBy($this->sortBy, $this->sortDir);
                               })
                               ->get(),
             "teams" => Team::all()
