@@ -38,3 +38,7 @@ Route::get('/tournaments', function() {
 Route::get('/news', function() {
     return view('news');
 });
+
+Route::get('/avg-age-teams', function() {
+    return view('avg-age-teams');
+});
