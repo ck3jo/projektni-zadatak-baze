@@ -30,6 +30,6 @@ class Team extends Model
 
     public function players(): HasMany
     {
-        return $this->hasMany(Player::class, "IDIgraca", "IDTima");
+        return $this->hasMany(Player::class, "IDTima");
     }
 }

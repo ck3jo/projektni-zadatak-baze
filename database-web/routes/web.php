@@ -39,6 +39,6 @@ Route::get('/news', function() {
     return view('news');
 });
 
-Route::get('/avg-age-teams', function() {
-    return view('avg-age-teams');
+Route::get('/teams-average-age', function() {
+    return view('teams-average-age');
 });

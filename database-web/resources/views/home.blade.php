@@ -21,10 +21,10 @@
                 <h3 class="pt-3 text-white drop-shadow-lg text-2xl font-sans text-center"> Aplikacija za evidentiranje profesionalnih CS2 mečeva</h3>
                 <p class="py-4 text-white drop-shadow-lg text-base font-sans text-center">Željenu tabelu možete izabrati putem navigacionog menija na vrhu ekrana. <br> Napravljeno uz pomoć Laravela, Livewirea i PHP-a. <3</p>
             </div>
-            <div class="py-20 flex flex-col flex-wrap mx-auto w-1/2 gap-x-5 gap-y-4 items-center justify-center">
+            <hr class="my-10 mx-auto opacity-85 rounded-xl h-2 border-gray-800 bg-gray-800 w-5/6">
+            <div class="py-5 flex flex-col flex-wrap mx-auto w-1/2 gap-x-5 gap-y-4 items-center justify-center">
                 <p class="text-center text-white font-bold text-xl">Funkcije i detaljniji upiti</p>
-                <button wire:navigate href="/avg-age-teams" class="bg-fuchsia-950 hover:bg-fuchsia-700 rounded-lg px-8 py-6 text-white text-center text-lg">Prosečne godine igrača po timovima</button>
-                <button wire:navigate href="/avg-age-teams" class="bg-fuchsia-950 hover:bg-fuchsia-700 rounded-lg px-8 py-6 text-white text-center text-lg">Svi mečevi po turniru</button>
+                <button wire:navigate href="/teams-average-age" class="bg-fuchsia-950 hover:bg-fuchsia-700 rounded-lg px-8 py-6 text-white text-center font-bold text-lg">Prosečne godine igrača po timovima</button>          
             </div>
         </div>
     </body>
